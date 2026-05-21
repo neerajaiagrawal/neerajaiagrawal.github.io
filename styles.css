@@ -616,6 +616,107 @@ ul { list-style: none; }
   gap: 10px;
 }
 
+/* ===== CERT STATS ===== */
+.cert-stats {
+  display: flex;
+  gap: 0;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 32px;
+  overflow: hidden;
+}
+.cert-stat {
+  flex: 1;
+  padding: 24px 20px;
+  text-align: center;
+  border-right: 1px solid var(--border);
+}
+.cert-stat:last-child { border-right: none; }
+.cert-stat-num {
+  display: block;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--ms-blue);
+  line-height: 1;
+}
+.cert-stat-label {
+  display: block;
+  font-size: .78rem;
+  color: var(--text-muted);
+  margin-top: 6px;
+}
+
+.cert-section-label {
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+}
+
+/* cert badge variants */
+.cert-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  font-size: .82rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  transition: var(--transition);
+  text-decoration: none;
+}
+.cert-badge:hover { background: var(--ms-blue-pale); border-color: var(--ms-blue-light); color: var(--ms-blue); }
+.cert-year {
+  font-size: .7rem;
+  color: var(--text-muted);
+  margin-left: 4px;
+}
+.cert-badge--ai { border-color: rgba(0,188,242,.3); }
+.cert-badge--ai:hover { background: rgba(0,188,242,.08); border-color: rgba(0,188,242,.6); color: #007A99; }
+.cert-badge--power { border-color: rgba(116,66,200,.25); }
+.cert-badge--power:hover { background: rgba(116,66,200,.06); border-color: rgba(116,66,200,.5); color: #7442C8; }
+.cert-badge--azure { border-color: rgba(0,120,212,.25); }
+.cert-badge--dynamics { border-color: rgba(0,120,212,.2); }
+
+/* ===== EXAMS GRID ===== */
+.exams-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+.exam-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: .83rem;
+}
+.exam-code {
+  font-weight: 700;
+  color: var(--ms-blue);
+  font-size: .78rem;
+  min-width: 52px;
+  font-family: monospace;
+}
+.exam-name {
+  flex: 1;
+  color: var(--text-secondary);
+}
+.exam-year {
+  font-size: .72rem;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
 /* ===== RECOGNITION ===== */
 .recognition-grid {
   display: grid;
