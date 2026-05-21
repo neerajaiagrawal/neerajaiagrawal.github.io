@@ -798,6 +798,113 @@ ul { list-style: none; }
 /* ===== CERT BADGES LINKS ===== */
 a.cert-badge { cursor: pointer; }
 
+/* ===== EDUCATION ===== */
+.education-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.edu-card {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 24px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  transition: box-shadow var(--transition), transform var(--transition), border-color var(--transition);
+  opacity: 0;
+  transform: translateY(16px);
+}
+.edu-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity .5s ease, transform .5s ease, box-shadow var(--transition), border-color var(--transition);
+}
+.edu-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+  border-color: var(--ms-blue-light);
+}
+.edu-card:first-child {
+  border-color: var(--ms-blue-light);
+  background: linear-gradient(145deg, #FAFCFF, var(--bg));
+}
+
+.edu-year {
+  font-size: .82rem;
+  font-weight: 700;
+  color: var(--ms-blue);
+  padding-top: 4px;
+  line-height: 1.4;
+}
+
+.edu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.edu-body h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.edu-school {
+  font-size: .85rem;
+  color: var(--text-muted);
+}
+
+.edu-grade {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--ms-blue);
+  background: var(--ms-blue-pale);
+  border: 1px solid rgba(0,120,212,.15);
+  border-radius: 8px;
+  padding: 6px 14px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.edu-grade--gold {
+  background: #FFF8E7;
+  border-color: #F0C040;
+  font-size: 1.4rem;
+  padding: 4px 10px;
+}
+
+.edu-desc {
+  font-size: .88rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 14px;
+}
+
+.edu-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.edu-tags span {
+  padding: 3px 10px;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  font-size: .75rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+@media (max-width: 600px) {
+  .edu-card { grid-template-columns: 1fr; gap: 8px; }
+  .edu-year { padding-top: 0; }
+}
+
 /* ===== FOOTER ===== */
 footer {
   background: var(--text-primary);
