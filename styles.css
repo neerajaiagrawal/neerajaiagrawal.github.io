@@ -329,7 +329,7 @@ ul { list-style: none; }
 }
 
 .profile-avatar {
-  width: 80px; height: 80px;
+  width: 100px; height: 100px;
   border-radius: 50%;
   background: linear-gradient(135deg, var(--ms-blue), var(--ms-teal));
   color: #fff;
@@ -339,6 +339,29 @@ ul { list-style: none; }
   align-items: center;
   justify-content: center;
   box-shadow: 0 8px 24px rgba(0,120,212,.3);
+  overflow: hidden;
+  border: 3px solid var(--ms-blue-light);
+}
+.profile-avatar img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+/* Hero avatar */
+.hero-avatar {
+  width: 96px; height: 96px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid rgba(255,255,255,.6);
+  box-shadow: 0 8px 32px rgba(0,120,212,.25);
+  margin: 0 auto 20px;
+  animation: fadeUp .6s ease both;
+}
+.hero-avatar img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: top center;
 }
 
 .profile-name {
