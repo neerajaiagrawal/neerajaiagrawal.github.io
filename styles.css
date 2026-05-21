@@ -823,6 +823,40 @@ ul { list-style: none; }
   line-height: 1.6;
 }
 
+/* ===== AWARDS STRIP ===== */
+.awards-strip {
+  margin-top: 28px;
+  padding: 20px 24px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.awards-strip-label {
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+}
+.awards-strip-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.award-chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  font-size: .8rem;
+  color: var(--text-secondary);
+}
+.award-chip span { color: #F0A500; font-size: .85rem; }
+
 .community-strip {
   display: flex;
   align-items: center;
