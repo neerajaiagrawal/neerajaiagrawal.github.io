@@ -30,7 +30,7 @@ navLinksList.querySelectorAll('a').forEach(a => {
 });
 
 // Scroll-reveal: cards animate in when they enter the viewport
-const revealEls = document.querySelectorAll('.skill-card, .project-card, .recognition-card, .edu-card');
+const revealEls = document.querySelectorAll('.skill-card, .project-card, .recognition-card, .edu-card, .testimonial-card');
 
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
