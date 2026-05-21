@@ -8,6 +8,7 @@ steps:
   - checkout: self
     submodules: true
     persistCredentials: true
+    fetchDepth: 0
 
   # Step 1: Deploy to Azure Static Web Apps
   - task: AzureStaticWebApp@0
