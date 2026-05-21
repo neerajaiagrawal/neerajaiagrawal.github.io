@@ -721,6 +721,8 @@ ul { list-style: none; }
 .cert-badge--power:hover { background: rgba(116,66,200,.06); border-color: rgba(116,66,200,.5); color: #7442C8; }
 .cert-badge--azure { border-color: rgba(0,120,212,.25); }
 .cert-badge--dynamics { border-color: rgba(0,120,212,.2); }
+.cert-badge--scrum { border-color: rgba(0,150,80,.25); }
+.cert-badge--scrum:hover { background: rgba(0,150,80,.06); border-color: rgba(0,150,80,.5); color: #006633; }
 
 /* ===== EXAMS GRID ===== */
 .exams-grid {
