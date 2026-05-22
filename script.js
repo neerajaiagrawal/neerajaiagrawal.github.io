@@ -82,6 +82,18 @@ revealEls.forEach(el => observer.observe(el));
   counterEls.forEach(el => io.observe(el));
 })();
 
+// ===== EXAMS COLLAPSIBLE =====
+(function () {
+  const toggle = document.querySelector('.exams-toggle');
+  const grid   = document.getElementById('examsGrid');
+  if (!toggle || !grid) return;
+  toggle.addEventListener('click', () => {
+    const open = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', String(!open));
+    grid.classList.toggle('open', !open);
+  });
+})();
+
 // ===== HERO TYPED / CYCLING SUBTITLE =====
 (function () {
   const el = document.getElementById('heroTyped');

@@ -839,11 +839,37 @@ ul { list-style: none; }
 [data-counter] { transition: none; }
 
 /* ===== EXAMS GRID ===== */
+.exams-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-top: 32px;
+  margin-bottom: 14px;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-family: inherit;
+  transition: color .2s ease;
+}
+.exams-toggle:hover { color: var(--ms-blue); }
+.exams-chevron { transition: transform .3s ease; flex-shrink: 0; }
+.exams-toggle[aria-expanded="true"] .exams-chevron { transform: rotate(180deg); }
+
 .exams-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 8px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .35s ease;
 }
+.exams-grid.open { max-height: 800px; }
 .exam-item {
   display: flex;
   align-items: center;
