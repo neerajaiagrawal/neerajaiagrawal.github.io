@@ -44,6 +44,44 @@ const observer = new IntersectionObserver((entries) => {
 
 revealEls.forEach(el => observer.observe(el));
 
+// ===== ANIMATED COUNTERS =====
+(function () {
+  function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
+
+  function animateCounter(el) {
+    const target   = parseInt(el.dataset.counter, 10);
+    const start    = parseInt(el.dataset.start || 0, 10);
+    const suffix   = el.dataset.suffix || '';
+    const duration = parseInt(el.dataset.duration || 1400, 10);
+    const startTs  = performance.now();
+
+    function tick(now) {
+      const elapsed  = now - startTs;
+      const progress = Math.min(elapsed / duration, 1);
+      const value    = Math.floor(start + easeOutCubic(progress) * (target - start));
+      el.textContent = value + suffix;
+      if (progress < 1) requestAnimationFrame(tick);
+      else el.textContent = target + suffix;
+    }
+    requestAnimationFrame(tick);
+  }
+
+  const counterEls = document.querySelectorAll('[data-counter]');
+  if (!counterEls.length) return;
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !entry.target.dataset.done) {
+        entry.target.dataset.done = '1';
+        animateCounter(entry.target);
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.6 });
+
+  counterEls.forEach(el => io.observe(el));
+})();
+
 // Smooth scroll for all anchor links
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
