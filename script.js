@@ -190,6 +190,18 @@ revealEls.forEach(el => observer.observe(el));
   document.querySelectorAll('.carousel-container').forEach(initCarousel);
 })();
 
+// ===== BACK TO TOP =====
+(function () {
+  const btn = document.getElementById('backToTop');
+  if (!btn) return;
+  window.addEventListener('scroll', () => {
+    btn.classList.toggle('visible', window.scrollY > 400);
+  }, { passive: true });
+  btn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+})();
+
 // Smooth scroll for all anchor links
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
