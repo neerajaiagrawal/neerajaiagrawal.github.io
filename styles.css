@@ -794,52 +794,6 @@ ul { list-style: none; }
   gap: 8px;
 }
 
-/* ===== CLIENT LOGOS STRIP ===== */
-.client-strip {
-  background: var(--bg-alt);
-  border-bottom: 1px solid var(--border);
-  padding: 20px 0;
-}
-.client-strip-inner {
-  display: flex;
-  align-items: center;
-  gap: 28px;
-  flex-wrap: wrap;
-}
-.client-strip-label {
-  font-size: .7rem;
-  font-weight: 700;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-.client-logos {
-  display: flex;
-  align-items: center;
-  gap: 0;
-  flex-wrap: wrap;
-  row-gap: 8px;
-}
-.client-name {
-  font-size: .9rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  letter-spacing: .01em;
-  padding: 0 20px;
-  transition: color .2s ease;
-  white-space: nowrap;
-  opacity: .55;
-}
-.client-name:hover { color: var(--ms-blue); opacity: 1; }
-.client-sep {
-  color: var(--border);
-  font-size: 1.2rem;
-  line-height: 1;
-  flex-shrink: 0;
-}
-
 /* ===== CONTACT ===== */
 #contact.section { padding: 48px 0 52px; }
 #contact .section-desc { max-width: none; }
