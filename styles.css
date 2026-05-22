@@ -1136,6 +1136,12 @@ ul { list-style: none; }
 }
 .award-chip span { color: #F0A500; font-size: .85rem; }
 
+.community-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 .community-strip {
   display: flex;
   align-items: center;
