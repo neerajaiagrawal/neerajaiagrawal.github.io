@@ -570,15 +570,108 @@ ul { list-style: none; }
   flex-shrink: 0;
 }
 
-/* ===== PROJECTS ===== */
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
+/* ===== PROJECTS / CAROUSEL ===== */
+.carousel-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
-.project-card--wide {
-  grid-column: span 2;
+.carousel-viewport {
+  flex: 1;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform .45s cubic-bezier(.4,0,.2,1);
+  will-change: transform;
+}
+
+/* Each card is a full-width slide */
+.carousel-track .project-card {
+  flex: 0 0 100%;
+  width: 100%;
+  margin: 0;
+  opacity: 1 !important;
+  transform: none !important;
+  box-sizing: border-box;
+  max-height: 520px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--ms-blue-light) transparent;
+}
+
+.carousel-track .project-card--wide {
+  grid-column: unset;
+}
+
+.carousel-btn {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid var(--ms-blue);
+  background: transparent;
+  color: var(--ms-blue);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition), color var(--transition);
+}
+.carousel-btn:hover {
+  background: var(--ms-blue);
+  color: #fff;
+}
+.carousel-btn:disabled {
+  opacity: .3;
+  cursor: default;
+  pointer-events: none;
+}
+
+.carousel-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.carousel-dots {
+  display: flex;
+  gap: 7px;
+}
+
+.carousel-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  border: none;
+  background: var(--border);
+  cursor: pointer;
+  padding: 0;
+  transition: background var(--transition), transform var(--transition);
+}
+.carousel-dot.active {
+  background: var(--ms-blue);
+  transform: scale(1.4);
+}
+.carousel-dot:hover:not(.active) {
+  background: var(--ms-blue-light);
+}
+
+.carousel-counter {
+  font-size: .8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  min-width: 36px;
+}
+
+@media (max-width: 600px) {
+  .carousel-btn { width: 36px; height: 36px; }
+  .carousel-track .project-card { max-height: 70vh; }
 }
 
 .project-card {

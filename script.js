@@ -139,6 +139,54 @@ revealEls.forEach(el => observer.observe(el));
   tick();
 })();
 
+// ===== PROJECTS CAROUSEL =====
+(function () {
+  const track    = document.querySelector('.carousel-track');
+  const prevBtn  = document.querySelector('.carousel-prev');
+  const nextBtn  = document.querySelector('.carousel-next');
+  const dots     = document.querySelectorAll('.carousel-dot');
+  const counter  = document.querySelector('.carousel-counter');
+  if (!track || !prevBtn) return;
+
+  const cards = track.querySelectorAll('.project-card');
+  const total = cards.length;
+  let current = 0;
+
+  function goTo(idx) {
+    current = Math.max(0, Math.min(idx, total - 1));
+    track.style.transform = `translateX(-${current * 100}%)`;
+    dots.forEach((d, i) => d.classList.toggle('active', i === current));
+    if (counter) counter.textContent = `${current + 1} / ${total}`;
+    prevBtn.disabled = current === 0;
+    nextBtn.disabled = current === total - 1;
+    // Scroll card back to top on slide change
+    cards[current].scrollTop = 0;
+  }
+
+  prevBtn.addEventListener('click', () => goTo(current - 1));
+  nextBtn.addEventListener('click', () => goTo(current + 1));
+  dots.forEach((d, i) => d.addEventListener('click', () => goTo(i)));
+
+  // Touch / swipe
+  let touchStartX = 0;
+  track.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+  track.addEventListener('touchend',   e => {
+    const diff = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) goTo(diff > 0 ? current + 1 : current - 1);
+  });
+
+  // Keyboard (only when carousel is in view)
+  document.addEventListener('keydown', e => {
+    const rect = track.getBoundingClientRect();
+    const inView = rect.top < window.innerHeight && rect.bottom > 0;
+    if (!inView) return;
+    if (e.key === 'ArrowLeft')  { e.preventDefault(); goTo(current - 1); }
+    if (e.key === 'ArrowRight') { e.preventDefault(); goTo(current + 1); }
+  });
+
+  goTo(0);
+})();
+
 // Smooth scroll for all anchor links
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {

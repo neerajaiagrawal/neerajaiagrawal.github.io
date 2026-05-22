@@ -176,7 +176,7 @@
 
       <div class="skills-grid">
 
-        <div class="skill-card" data-delay="0">
+        <div class="skill-card">
           <div class="skill-icon">
             <img src="icons/CopilotStudio_scalable.svg" alt="Microsoft Copilot Studio" width="40" height="40" loading="lazy" onerror="this.outerHTML='🤖'" />
           </div>
@@ -190,7 +190,7 @@
           </ul>
         </div>
 
-        <div class="skill-card" data-delay="100">
+        <div class="skill-card">
           <div class="skill-icon">
             <img src="icons/PowerPlatform_scalable.svg" alt="Microsoft Power Platform" width="40" height="40" loading="lazy" onerror="this.outerHTML='⚡'" />
           </div>
@@ -204,7 +204,7 @@
           </ul>
         </div>
 
-        <div class="skill-card" data-delay="200">
+        <div class="skill-card">
           <div class="skill-icon">
             <img src="icons/CustomerService_scalable.svg" alt="Dynamics 365 Customer Service" width="40" height="40" loading="lazy" onerror="this.outerHTML='🏢'" />
           </div>
@@ -218,7 +218,7 @@
           </ul>
         </div>
 
-        <div class="skill-card" data-delay="300">
+        <div class="skill-card">
           <div class="skill-icon">&#127942;</div>
           <h3>Latest Certifications</h3>
           <ul>
@@ -386,9 +386,14 @@
       <h2>Featured Projects</h2>
       <p class="section-desc">A selection of enterprise transformation and AI automation work spanning multiple industries.</p>
 
-      <div class="projects-grid">
+      <div class="carousel-wrapper">
+        <button class="carousel-btn carousel-prev" aria-label="Previous project">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="carousel-viewport">
+          <div class="carousel-track">
 
-        <div class="project-card featured" data-delay="0">
+        <div class="project-card featured">
           <div class="project-tag">Financial Services · Northern Trust</div>
           <h3>Multi-Workstream D365 Transformation — Asset Servicing, CX &amp; Marketing Integration</h3>
           <p>
@@ -428,7 +433,7 @@
           </div>
         </div>
 
-        <div class="project-card" data-delay="100">
+        <div class="project-card">
           <div class="project-tag">Healthcare · Premera Blue Cross Blue Shield</div>
           <h3>D365 Customer Service &amp; Genesys CTI — Member Services Transformation</h3>
           <p>
@@ -460,7 +465,7 @@
           </div>
         </div>
 
-        <div class="project-card" data-delay="200">
+        <div class="project-card">
           <div class="project-tag">Financial Services · Bank of New York Mellon</div>
           <h3>Greenfield D365 Customer Service &amp; Avaya CTI Implementation</h3>
           <p>
@@ -493,7 +498,7 @@
           </div>
         </div>
 
-        <div class="project-card" data-delay="300">
+        <div class="project-card">
           <div class="project-tag">CRM Modernisation · Automotive Industry</div>
           <h3>Enterprise CRM Modernisation — D365, CPQ &amp; Salesforce Integration</h3>
           <p>
@@ -525,7 +530,7 @@
           </div>
         </div>
 
-        <div class="project-card project-card--wide" data-delay="400">
+        <div class="project-card project-card--wide">
           <div class="project-tag">Enterprise Loyalty · American Airlines</div>
           <h3>World's Largest Airline Siebel Loyalty Platform</h3>
           <p>
@@ -568,7 +573,7 @@
           </div>
         </div>
 
-        <div class="project-card" data-delay="500">
+        <div class="project-card">
           <div class="project-tag">Data Engineering · Airline Merger</div>
           <h3>US Airline Merger Loyalty Data Consolidation</h3>
           <p>
@@ -589,7 +594,7 @@
           </div>
         </div>
 
-        <div class="project-card project-card--wide" data-delay="600">
+        <div class="project-card project-card--wide">
           <div class="project-tag">Siebel CRM · Infosys</div>
           <h3>Multi-Industry Siebel CRM Implementations</h3>
           <p>
@@ -610,7 +615,7 @@
           </div>
         </div>
 
-        <div class="project-card" data-delay="700">
+        <div class="project-card">
           <div class="project-tag">Telecom · British Telecom · Tech Mahindra</div>
           <h3>Custom CRM Order Management — British Telecom</h3>
           <p>
@@ -634,7 +639,27 @@
           </div>
         </div>
 
+          </div><!-- /carousel-track -->
+        </div><!-- /carousel-viewport -->
+        <button class="carousel-btn carousel-next" aria-label="Next project">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div><!-- /carousel-wrapper -->
+
+      <div class="carousel-nav">
+        <div class="carousel-dots">
+          <button class="carousel-dot active" aria-label="Northern Trust"></button>
+          <button class="carousel-dot" aria-label="Premera BCBS"></button>
+          <button class="carousel-dot" aria-label="BNY Mellon"></button>
+          <button class="carousel-dot" aria-label="Automotive CRM"></button>
+          <button class="carousel-dot" aria-label="American Airlines"></button>
+          <button class="carousel-dot" aria-label="Airline Merger"></button>
+          <button class="carousel-dot" aria-label="Infosys Siebel"></button>
+          <button class="carousel-dot" aria-label="British Telecom"></button>
+        </div>
+        <span class="carousel-counter">1 / 8</span>
       </div>
+
     </div>
   </section>
 
@@ -647,19 +672,19 @@
 
       <div class="recognition-grid">
 
-        <div class="recognition-card recognition-card--featured" data-delay="0">
+        <div class="recognition-card recognition-card--featured">
           <div class="recognition-icon">&#127775;</div>
           <h3>Microsoft Power CAT Trainer</h3>
           <p>Authorized trainer for Microsoft's <strong>Copilot Acceleration Team (Power CAT)</strong> — delivering sessions on Agentic AI, Copilot, and Microsoft AI topics to enterprise clients as part of Cognizant's Microsoft trainer partnership.</p>
         </div>
 
-        <div class="recognition-card" data-delay="0">
+        <div class="recognition-card">
           <div class="recognition-icon">&#127351;</div>
           <h3>Ranked #1 — Global Top 30 Digital Leaders</h3>
           <p>Selected among <strong>Top 30 associates globally</strong> as a Future Digital Leader at Cognizant EAS — and <strong>ranked #1</strong> in the program. Personally mentored for 4 months by Cognizant's <strong>Ex Global CIO &amp; Ex Global Innovation Head</strong> — a single leader who held both roles — across Innovation, Leadership, Business Development, and Digital Transformation.</p>
         </div>
 
-        <div class="recognition-card" data-delay="100">
+        <div class="recognition-card">
           <div class="recognition-icon">&#129353;</div>
           <h3>Platinum Award — Cognizant</h3>
           <p>Awarded Cognizant's <strong>Platinum Award</strong> — the highest recognition tier — for continuous innovations in Delivery Transformation. Executed seamless <strong>Agile Transformation at American Airlines</strong> with faster time-to-market and efficient parallel deployments streamlined into a common repository.</p>
@@ -671,7 +696,7 @@
           <p>Awarded <strong>Manager of the Quarter</strong> for Siebel Open UI Innovation Pack 2015 at American Airlines — delivering UX innovations that resulted in a <strong>15% reduction in Average Handle Time (AHT)</strong> for the AAdvantage Call Center.</p>
         </div>
 
-        <div class="recognition-card" data-delay="200">
+        <div class="recognition-card">
           <div class="recognition-icon">&#127942;</div>
           <h3>Cognizant Emerging Leader</h3>
           <p>Recognized for completing the <strong>Leadership Curriculum at Cognizant Academy</strong> — demonstrating exemplary leadership skills and mentoring associates across the organization.</p>
@@ -683,7 +708,7 @@
           <p>Recognized by Cognizant Academy for mentoring <strong>30+ associates globally</strong> in Innovation, Pivots, Storytelling, and Business Development — helping them connect digital opportunities with Industry 4.0 technologies.</p>
         </div>
 
-        <div class="recognition-card" data-delay="300">
+        <div class="recognition-card">
           <div class="recognition-icon">&#127963;</div>
           <h3>Government Affairs Ambassador</h3>
           <p>Serves as Cognizant's Government Affairs Ambassador for the <strong>Dallas Metroplex</strong>, partnering with civic and business leaders to translate technology insights into community impact.</p>
@@ -729,7 +754,7 @@
 
       <div class="education-timeline">
 
-        <div class="edu-card" data-delay="0">
+        <div class="edu-card">
           <div class="edu-year">2007 – 2008</div>
           <div class="edu-body">
             <div class="edu-header">
@@ -744,7 +769,7 @@
           </div>
         </div>
 
-        <div class="edu-card" data-delay="100">
+        <div class="edu-card">
           <div class="edu-year">2000 – 2004</div>
           <div class="edu-body">
             <div class="edu-header">
@@ -759,7 +784,7 @@
           </div>
         </div>
 
-        <div class="edu-card" data-delay="200">
+        <div class="edu-card">
           <div class="edu-year">1998 – 2000</div>
           <div class="edu-body">
             <div class="edu-header">
@@ -785,7 +810,7 @@
 
       <div class="testimonials-grid">
 
-        <div class="testimonial-card testimonial-featured" data-delay="0">
+        <div class="testimonial-card testimonial-featured">
           <div class="testimonial-quote">&#8220;</div>
           <p class="testimonial-text">His innovations contributed to an <strong>11% reduction in average handle time</strong>. We presented the platform at the 2016 Oracle Open World conference. Neeraj is supremely affable and is a genuine pleasure to work with — any client will benefit from his skills and experience.</p>
           <div class="testimonial-author">
@@ -799,7 +824,7 @@
           <div class="testimonial-context">Worked together on Siebel Open UI &amp; AAdvantage Platform · 2016</div>
         </div>
 
-        <div class="testimonial-card" data-delay="100">
+        <div class="testimonial-card">
           <div class="testimonial-quote">&#8220;</div>
           <p class="testimonial-text">The one greatest asset that Neeraj brings is his <strong>collaborative spirit</strong>. He knows that success is best when everyone succeeds together, and he's made it a personal top priority to be sure that we are all on the same page, business and IT together, when landing our big wins. Neeraj, you're a gem.</p>
           <div class="testimonial-author">
@@ -827,7 +852,7 @@
           <div class="testimonial-context">Colleague · North American Airlines Loyalty Program · 2022</div>
         </div>
 
-        <div class="testimonial-card" data-delay="200">
+        <div class="testimonial-card">
           <div class="testimonial-quote">&#8220;</div>
           <p class="testimonial-text">His ability to <strong>seamlessly converse with business and technical teams</strong> wearing their respective hats was very much appreciated by all stakeholders — enabling all phases of these complex projects to be executed on time and to complete satisfaction of end users. A very level-headed person to lead the team.</p>
           <div class="testimonial-author">
