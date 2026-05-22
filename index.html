@@ -386,6 +386,7 @@
       <h2>Featured Projects</h2>
       <p class="section-desc">Enterprise transformation and AI automation work spanning 9 industries.</p>
 
+      <div class="carousel-container">
       <div class="carousel-wrapper">
         <button class="carousel-btn carousel-prev" aria-label="Previous project">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -659,6 +660,7 @@
         </div>
         <span class="carousel-counter">1 / 8</span>
       </div>
+      </div><!-- /carousel-container -->
 
     </div>
   </section>
@@ -753,52 +755,72 @@
       <h2>Academic Background</h2>
       <p class="section-desc">An engineering and CRM foundation that underpins 22+ years of enterprise technology leadership.</p>
 
-      <div class="education-timeline">
+      <div class="carousel-container">
+        <div class="carousel-wrapper">
+          <button class="carousel-btn carousel-prev" aria-label="Previous">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="carousel-viewport">
+            <div class="carousel-track">
 
-        <div class="edu-card">
-          <div class="edu-year">2007 – 2008</div>
-          <div class="edu-body">
-            <div class="edu-header">
-              <div>
-                <h3>Post Graduate Diploma in CRM</h3>
-                <p class="edu-school">Symbiosis Centre for Distance Learning</p>
+              <div class="edu-card">
+                <div class="edu-year">2007 – 2008</div>
+                <div class="edu-body">
+                  <div class="edu-header">
+                    <div>
+                      <h3>Post Graduate Diploma in CRM</h3>
+                      <p class="edu-school">Symbiosis Centre for Distance Learning</p>
+                    </div>
+                    <div class="edu-grade">A+</div>
+                  </div>
+                  <p class="edu-desc">Specialized postgraduate program in Customer Relationship Management. Capstone project: <em>MediCRM — A CRM Plan for Clinical Practice</em>, applying CRM strategy to the healthcare domain.</p>
+                  <div class="edu-tags"><span>CRM Strategy</span><span>Healthcare</span><span>Business Management</span></div>
+                </div>
               </div>
-              <div class="edu-grade">A+</div>
-            </div>
-            <p class="edu-desc">Specialized postgraduate program in Customer Relationship Management. Capstone project: <em>MediCRM — A CRM Plan for Clinical Practice</em>, applying CRM strategy to the healthcare domain.</p>
-            <div class="edu-tags"><span>CRM Strategy</span><span>Healthcare</span><span>Business Management</span></div>
-          </div>
-        </div>
 
-        <div class="edu-card">
-          <div class="edu-year">2000 – 2004</div>
-          <div class="edu-body">
-            <div class="edu-header">
-              <div>
-                <h3>Bachelor of Engineering — Computer Science</h3>
-                <p class="edu-school">Doctor Babasaheb Ambedkar Marathwada University</p>
+              <div class="edu-card">
+                <div class="edu-year">2000 – 2004</div>
+                <div class="edu-body">
+                  <div class="edu-header">
+                    <div>
+                      <h3>Bachelor of Engineering — Computer Science</h3>
+                      <p class="edu-school">Doctor Babasaheb Ambedkar Marathwada University</p>
+                    </div>
+                    <div class="edu-grade edu-grade--gold">&#127942;</div>
+                  </div>
+                  <p class="edu-desc"><strong>University Topper</strong> for the Computer Science &amp; Engineering stream. Also served as <strong>General Secretary of the Students Council</strong> for the Academic Year 2003–2004 — demonstrating leadership alongside academic excellence.</p>
+                  <div class="edu-tags"><span>University Topper</span><span>Computer Science</span><span>Student Leadership</span></div>
+                </div>
               </div>
-              <div class="edu-grade edu-grade--gold">&#127942;</div>
-            </div>
-            <p class="edu-desc"><strong>University Topper</strong> for the Computer Science &amp; Engineering stream. Also served as <strong>General Secretary of the Students Council</strong> for the Academic Year 2003–2004 — demonstrating leadership alongside academic excellence.</p>
-            <div class="edu-tags"><span>University Topper</span><span>Computer Science</span><span>Student Leadership</span></div>
-          </div>
-        </div>
 
-        <div class="edu-card">
-          <div class="edu-year">1998 – 2000</div>
-          <div class="edu-body">
-            <div class="edu-header">
-              <div>
-                <h3>Higher Secondary Certificate — Science</h3>
-                <p class="edu-school">Deogiri College, Chatrapati Sambhajinagar, Maharashtra</p>
+              <div class="edu-card">
+                <div class="edu-year">1998 – 2000</div>
+                <div class="edu-body">
+                  <div class="edu-header">
+                    <div>
+                      <h3>Higher Secondary Certificate — Science</h3>
+                      <p class="edu-school">Deogiri College, Chatrapati Sambhajinagar, Maharashtra</p>
+                    </div>
+                    <div class="edu-grade">82%</div>
+                  </div>
+                </div>
               </div>
-              <div class="edu-grade">82%</div>
-            </div>
-          </div>
-        </div>
 
-      </div>
+            </div><!-- /carousel-track -->
+          </div><!-- /carousel-viewport -->
+          <button class="carousel-btn carousel-next" aria-label="Next">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div><!-- /carousel-wrapper -->
+        <div class="carousel-nav">
+          <div class="carousel-dots">
+            <button class="carousel-dot active" aria-label="PG Diploma CRM"></button>
+            <button class="carousel-dot" aria-label="Bachelor of Engineering"></button>
+            <button class="carousel-dot" aria-label="Higher Secondary"></button>
+          </div>
+          <span class="carousel-counter">1 / 3</span>
+        </div>
+      </div><!-- /carousel-container -->
     </div>
   </section>
 
@@ -809,79 +831,101 @@
       <h2>Recommendations</h2>
       <p class="section-desc">Voices from clients, managers, and colleagues across 22 years of enterprise delivery.</p>
 
-      <div class="testimonials-grid">
+      <div class="carousel-container">
+        <div class="carousel-wrapper">
+          <button class="carousel-btn carousel-prev" aria-label="Previous recommendation">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="carousel-viewport">
+            <div class="carousel-track">
 
-        <div class="testimonial-card testimonial-featured">
-          <div class="testimonial-quote">&#8220;</div>
-          <p class="testimonial-text">His innovations contributed to an <strong>11% reduction in average handle time</strong>. We presented the platform at the 2016 Oracle Open World conference. Neeraj is supremely affable and is a genuine pleasure to work with — any client will benefit from his skills and experience.</p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar">JM</div>
-            <div>
-              <p class="testimonial-name">Jason MacZura</p>
-              <p class="testimonial-title">Senior Technical Delivery Manager, Partner Engagement</p>
-              <p class="testimonial-company">American Airlines</p>
-            </div>
+              <div class="testimonial-card testimonial-featured">
+                <div class="testimonial-quote">&#8220;</div>
+                <p class="testimonial-text">His innovations contributed to an <strong>11% reduction in average handle time</strong>. We presented the platform at the 2016 Oracle Open World conference. Neeraj is supremely affable and is a genuine pleasure to work with — any client will benefit from his skills and experience.</p>
+                <div class="testimonial-author">
+                  <div class="testimonial-avatar">JM</div>
+                  <div>
+                    <p class="testimonial-name">Jason MacZura</p>
+                    <p class="testimonial-title">Senior Technical Delivery Manager, Partner Engagement</p>
+                    <p class="testimonial-company">American Airlines</p>
+                  </div>
+                </div>
+                <div class="testimonial-context">Worked together on Siebel Open UI &amp; AAdvantage Platform · 2016</div>
+              </div>
+
+              <div class="testimonial-card">
+                <div class="testimonial-quote">&#8220;</div>
+                <p class="testimonial-text">The one greatest asset that Neeraj brings is his <strong>collaborative spirit</strong>. He knows that success is best when everyone succeeds together, and he's made it a personal top priority to be sure that we are all on the same page, business and IT together, when landing our big wins. Neeraj, you're a gem.</p>
+                <div class="testimonial-author">
+                  <div class="testimonial-avatar">EG</div>
+                  <div>
+                    <p class="testimonial-name">Elisa Fae Gonzalez, CSM, CSPO</p>
+                    <p class="testimonial-title">IT/Business Translator | Scrum Practitioner</p>
+                    <p class="testimonial-company">American Airlines (Ventana)</p>
+                  </div>
+                </div>
+                <div class="testimonial-context">Client · US Airways–AA Siebel Loyalty Integration · 2019</div>
+              </div>
+
+              <div class="testimonial-card">
+                <div class="testimonial-quote">&#8220;</div>
+                <p class="testimonial-text">If you are looking for a <strong>techno-functional, innovative CRM leader</strong>, Neeraj will never disappoint you. He has been recognized as one of the future digital leaders at Cognizant EAS. Clients appreciate his articulations for business insights and innovation. He accepts challenges with grace and always excels.</p>
+                <div class="testimonial-author">
+                  <div class="testimonial-avatar">SP</div>
+                  <div>
+                    <p class="testimonial-name">Santhosh Pillai</p>
+                    <p class="testimonial-title">Vice President &amp; Digital Sales Leader</p>
+                    <p class="testimonial-company">Coforge</p>
+                  </div>
+                </div>
+                <div class="testimonial-context">Colleague · North American Airlines Loyalty Program · 2022</div>
+              </div>
+
+              <div class="testimonial-card">
+                <div class="testimonial-quote">&#8220;</div>
+                <p class="testimonial-text">His ability to <strong>seamlessly converse with business and technical teams</strong> wearing their respective hats was very much appreciated by all stakeholders — enabling all phases of these complex projects to be executed on time and to complete satisfaction of end users. A very level-headed person to lead the team.</p>
+                <div class="testimonial-author">
+                  <div class="testimonial-avatar">CK</div>
+                  <div>
+                    <p class="testimonial-name">Chetan Kulkarni</p>
+                    <p class="testimonial-title">Senior CRM Consultant</p>
+                    <p class="testimonial-company">Direct Manager · 3+ Years</p>
+                  </div>
+                </div>
+                <div class="testimonial-context">Manager · High-visibility Call Center Projects · 2019</div>
+              </div>
+
+              <div class="testimonial-card">
+                <div class="testimonial-quote">&#8220;</div>
+                <p class="testimonial-text">Neeraj has a keen sense of understanding requirements and paid close attention to detail to make sure those requirements were implemented into the final product. He is a <strong>clear communicator</strong> and worked well independently as well as with our team. <strong>Given the opportunity, I would be happy to hire Neeraj again.</strong></p>
+                <div class="testimonial-author">
+                  <div class="testimonial-avatar">GK</div>
+                  <div>
+                    <p class="testimonial-name">Greg Kirkland, SPC6, PMP, CSM</p>
+                    <p class="testimonial-title">Senior Project Manager &amp; Agile Coach</p>
+                    <p class="testimonial-company">Roche</p>
+                  </div>
+                </div>
+                <div class="testimonial-context">Client · Global Siebel CRM Implementation · 2014</div>
+              </div>
+
+            </div><!-- /carousel-track -->
+          </div><!-- /carousel-viewport -->
+          <button class="carousel-btn carousel-next" aria-label="Next recommendation">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div><!-- /carousel-wrapper -->
+        <div class="carousel-nav">
+          <div class="carousel-dots">
+            <button class="carousel-dot active" aria-label="Jason MacZura"></button>
+            <button class="carousel-dot" aria-label="Elisa Gonzalez"></button>
+            <button class="carousel-dot" aria-label="Santhosh Pillai"></button>
+            <button class="carousel-dot" aria-label="Chetan Kulkarni"></button>
+            <button class="carousel-dot" aria-label="Greg Kirkland"></button>
           </div>
-          <div class="testimonial-context">Worked together on Siebel Open UI &amp; AAdvantage Platform · 2016</div>
+          <span class="carousel-counter">1 / 5</span>
         </div>
-
-        <div class="testimonial-card">
-          <div class="testimonial-quote">&#8220;</div>
-          <p class="testimonial-text">The one greatest asset that Neeraj brings is his <strong>collaborative spirit</strong>. He knows that success is best when everyone succeeds together, and he's made it a personal top priority to be sure that we are all on the same page, business and IT together, when landing our big wins. Neeraj, you're a gem.</p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar">EG</div>
-            <div>
-              <p class="testimonial-name">Elisa Fae Gonzalez, CSM, CSPO</p>
-              <p class="testimonial-title">IT/Business Translator | Scrum Practitioner</p>
-              <p class="testimonial-company">American Airlines (Ventana)</p>
-            </div>
-          </div>
-          <div class="testimonial-context">Client · US Airways–AA Siebel Loyalty Integration · 2019</div>
-        </div>
-
-        <div class="testimonial-card" data-delay="150">
-          <div class="testimonial-quote">&#8220;</div>
-          <p class="testimonial-text">If you are looking for a <strong>techno-functional, innovative CRM leader</strong>, Neeraj will never disappoint you. He has been recognized as one of the future digital leaders at Cognizant EAS. Clients appreciate his articulations for business insights and innovation. He accepts challenges with grace and always excels.</p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar">SP</div>
-            <div>
-              <p class="testimonial-name">Santhosh Pillai</p>
-              <p class="testimonial-title">Vice President &amp; Digital Sales Leader</p>
-              <p class="testimonial-company">Coforge</p>
-            </div>
-          </div>
-          <div class="testimonial-context">Colleague · North American Airlines Loyalty Program · 2022</div>
-        </div>
-
-        <div class="testimonial-card">
-          <div class="testimonial-quote">&#8220;</div>
-          <p class="testimonial-text">His ability to <strong>seamlessly converse with business and technical teams</strong> wearing their respective hats was very much appreciated by all stakeholders — enabling all phases of these complex projects to be executed on time and to complete satisfaction of end users. A very level-headed person to lead the team.</p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar">CK</div>
-            <div>
-              <p class="testimonial-name">Chetan Kulkarni</p>
-              <p class="testimonial-title">Senior CRM Consultant</p>
-              <p class="testimonial-company">Direct Manager · 3+ Years</p>
-            </div>
-          </div>
-          <div class="testimonial-context">Manager · High-visibility Call Center Projects · 2019</div>
-        </div>
-
-        <div class="testimonial-card" data-delay="250">
-          <div class="testimonial-quote">&#8220;</div>
-          <p class="testimonial-text">Neeraj has a keen sense of understanding requirements and paid close attention to detail to make sure those requirements were implemented into the final product. He is a <strong>clear communicator</strong> and worked well independently as well as with our team. <strong>Given the opportunity, I would be happy to hire Neeraj again.</strong></p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar">GK</div>
-            <div>
-              <p class="testimonial-name">Greg Kirkland, SPC6, PMP, CSM</p>
-              <p class="testimonial-title">Senior Project Manager &amp; Agile Coach</p>
-              <p class="testimonial-company">Roche</p>
-            </div>
-          </div>
-          <div class="testimonial-context">Client · Global Siebel CRM Implementation · 2014</div>
-        </div>
-
-      </div>
+      </div><!-- /carousel-container -->
 
       <div class="testimonial-cta">
         <a href="https://www.linkedin.com/in/neerajragrawal/details/recommendations/"

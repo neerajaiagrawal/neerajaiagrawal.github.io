@@ -607,6 +607,36 @@ ul { list-style: none; }
   grid-column: unset;
 }
 
+/* Education & Testimonial cards as carousel slides */
+.carousel-track .edu-card {
+  flex: 0 0 100%;
+  width: 100%;
+  margin: 0;
+  opacity: 1 !important;
+  transform: none !important;
+  box-sizing: border-box;
+  max-height: 340px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--ms-blue-light) transparent;
+}
+.carousel-track .testimonial-card {
+  flex: 0 0 100%;
+  width: 100%;
+  margin: 0;
+  opacity: 1 !important;
+  transform: none !important;
+  box-sizing: border-box;
+  max-height: 460px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--ms-blue-light) transparent;
+}
+/* Remove grid-column span in carousel context */
+.carousel-track .testimonial-featured {
+  grid-column: unset;
+}
+
 .carousel-btn {
   flex-shrink: 0;
   width: 44px;
