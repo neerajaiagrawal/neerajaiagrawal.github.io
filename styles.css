@@ -435,6 +435,16 @@ ul { list-style: none; }
 .skill-icon {
   font-size: 2rem;
   margin-bottom: 14px;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+}
+.skill-icon img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  display: block;
+  flex-shrink: 0;
 }
 
 .skill-card h3 {
@@ -486,7 +496,20 @@ ul { list-style: none; }
   border-color: var(--ms-blue-light);
   color: var(--ms-blue);
 }
-.badge-icon { color: var(--ms-blue); font-size: .7rem; }
+.badge-icon {
+  color: var(--ms-blue);
+  font-size: .7rem;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+.badge-icon img {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  display: block;
+  flex-shrink: 0;
+}
 
 /* ===== PROJECTS ===== */
 .projects-grid {
