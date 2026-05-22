@@ -1136,21 +1136,21 @@ ul { list-style: none; }
 }
 .award-chip span { color: #F0A500; font-size: .85rem; }
 
-.community-section {
+.community-strip {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 16px;
+  padding: 20px 32px 24px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
 }
 
-.community-strip {
+.community-items-row {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 24px;
-  padding: 24px 32px;
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
   flex-wrap: wrap;
 }
 
