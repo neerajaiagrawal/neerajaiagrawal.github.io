@@ -796,9 +796,9 @@ ul { list-style: none; }
 
 /* ===== CLIENT LOGOS STRIP ===== */
 .client-strip {
-  background: var(--bg);
+  background: var(--bg-alt);
   border-bottom: 1px solid var(--border);
-  padding: 18px 0;
+  padding: 20px 0;
 }
 .client-strip-inner {
   display: flex;
@@ -822,15 +822,16 @@ ul { list-style: none; }
   flex-wrap: wrap;
 }
 .client-name {
-  font-size: .88rem;
+  font-size: .9rem;
   font-weight: 700;
-  color: var(--text-secondary);
+  color: var(--text-primary);
   letter-spacing: .01em;
-  padding: 0 18px;
+  padding: 0 20px;
   transition: color .2s ease;
   white-space: nowrap;
+  opacity: .55;
 }
-.client-name:hover { color: var(--ms-blue); }
+.client-name:hover { color: var(--ms-blue); opacity: 1; }
 .client-sep {
   color: var(--border);
   font-size: 1.2rem;
