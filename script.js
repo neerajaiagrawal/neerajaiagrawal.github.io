@@ -101,9 +101,11 @@ revealEls.forEach(el => observer.observe(el));
 
   const phrases = [
     'Principal Architect',
+    'Agentic AI Solutions Architect',
     'Enterprise CRM Architect',
     'Techno Functional CRM Executive',
     'Power Platform Architect',
+    'AI Business Solutions Architect',
     'Power CAT Trainer',
     'AI Strategist',
     'Digital Transformation Lead',
