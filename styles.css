@@ -766,6 +766,7 @@ ul { list-style: none; }
 
 /* ===== CONTACT ===== */
 #contact.section { padding: 48px 0 52px; }
+#contact .section-desc { max-width: none; }
 
 .contact-grid {
   display: grid;
