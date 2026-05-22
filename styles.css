@@ -249,13 +249,14 @@ ul { list-style: none; }
 .btn-outline:hover { background: var(--ms-blue-pale); }
 
 .btn-download {
-  background: rgba(255,255,255,.12);
-  color: #fff;
-  border-color: rgba(255,255,255,.55);
+  background: var(--ms-blue-pale);
+  color: var(--ms-blue);
+  border-color: var(--ms-blue);
 }
 .btn-download:hover {
-  background: rgba(255,255,255,.22);
-  border-color: #fff;
+  background: #d0e8f8;
+  border-color: var(--ms-blue-dark);
+  color: var(--ms-blue-dark);
 }
 
 .hero-scroll-hint {
