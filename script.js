@@ -99,7 +99,15 @@ revealEls.forEach(el => observer.observe(el));
   const el = document.getElementById('heroTyped');
   if (!el) return;
 
-  const phrases = ['Principal Architect', 'Power CAT Trainer', 'AI Strategist'];
+  const phrases = [
+    'Principal Architect',
+    'Enterprise CRM Architect',
+    'Power Platform Architect',
+    'Power CAT Trainer',
+    'D365 Practice Lead',
+    'AI Strategist',
+    'Digital Transformation Lead',
+  ];
   let pIdx = 0, shown = 0, deleting = false;
 
   function tick() {
