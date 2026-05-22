@@ -1,3 +1,25 @@
+// ===== DARK MODE TOGGLE =====
+(function () {
+  const html = document.documentElement;
+  const btn  = document.getElementById('themeToggle');
+  if (!btn) return;
+
+  btn.addEventListener('click', () => {
+    // Brief transition class for smooth colour switch
+    html.classList.add('transitioning');
+    setTimeout(() => html.classList.remove('transitioning'), 300);
+
+    const isDark = html.getAttribute('data-theme') === 'dark';
+    if (isDark) {
+      html.removeAttribute('data-theme');
+      try { localStorage.setItem('theme', 'light'); } catch(e) {}
+    } else {
+      html.setAttribute('data-theme', 'dark');
+      try { localStorage.setItem('theme', 'dark'); } catch(e) {}
+    }
+  });
+})();
+
 // Nav scroll effect
 const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => {

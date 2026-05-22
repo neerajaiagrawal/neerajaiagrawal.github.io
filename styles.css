@@ -124,6 +124,91 @@ ul { list-style: none; }
   transition: var(--transition);
 }
 
+/* ===== THEME TOGGLE BUTTON ===== */
+.theme-toggle {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background var(--transition), color var(--transition), border-color var(--transition);
+}
+.theme-toggle:hover {
+  background: var(--ms-blue-pale);
+  color: var(--ms-blue);
+  border-color: var(--ms-blue-light);
+}
+.icon-sun  { display: none; }
+.icon-moon { display: block; }
+[data-theme="dark"] .icon-sun  { display: block; }
+[data-theme="dark"] .icon-moon { display: none; }
+
+/* ===== DARK MODE ===== */
+[data-theme="dark"] {
+  --ms-blue:        #58A6FF;
+  --ms-blue-dark:   #388BFD;
+  --ms-blue-light:  #79C0FF;
+  --ms-blue-pale:   rgba(88,166,255,.12);
+  --ms-teal:        #39D2F2;
+  --text-primary:   #E6EDF3;
+  --text-secondary: #8B949E;
+  --text-muted:     #6E7681;
+  --bg:             #0D1117;
+  --bg-alt:         #161B22;
+  --border:         #30363D;
+  --shadow-sm:      0 2px 8px rgba(0,0,0,.4);
+  --shadow-md:      0 6px 24px rgba(0,0,0,.5);
+  --shadow-lg:      0 16px 48px rgba(0,0,0,.6);
+}
+
+/* Smooth colour transition when toggling */
+html.transitioning, html.transitioning * {
+  transition: background-color .25s ease, color .25s ease,
+              border-color .25s ease, box-shadow .25s ease !important;
+}
+
+[data-theme="dark"] #navbar {
+  background: rgba(13,17,23,.95);
+}
+[data-theme="dark"] .nav-links {
+  background: #0D1117;
+  border-color: var(--border);
+}
+[data-theme="dark"] .hero-bg {
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(88,166,255,.08) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 40% at 80% 100%, rgba(0,188,242,.05) 0%, transparent 60%),
+    linear-gradient(160deg, #0D1117 0%, #0F1B2D 50%, #0D1117 100%);
+}
+[data-theme="dark"] .hero-bg::after {
+  background-image:
+    linear-gradient(rgba(88,166,255,.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(88,166,255,.05) 1px, transparent 1px);
+}
+[data-theme="dark"] .trust-strip { background: #0A2540; }
+[data-theme="dark"] .project-card.featured,
+[data-theme="dark"] .testimonial-featured,
+[data-theme="dark"] .edu-card:first-child {
+  background: linear-gradient(145deg, #161B22, var(--bg));
+}
+[data-theme="dark"] .form-group input,
+[data-theme="dark"] .form-group textarea {
+  background: var(--bg-alt);
+  color: var(--text-primary);
+}
+[data-theme="dark"] footer {
+  background: #010409;
+}
+[data-theme="dark"] .hamburger span {
+  background: var(--text-primary);
+}
+
 /* ===== HERO ===== */
 #hero {
   min-height: 100vh;
