@@ -202,8 +202,12 @@ html.transitioning, html.transitioning * {
   background: var(--bg-alt);
   color: var(--text-primary);
 }
+[data-theme="dark"] .section {
+  border-top: 1px solid var(--border);
+}
 [data-theme="dark"] footer {
   background: #010409;
+  border-top: 1px solid var(--border);
 }
 [data-theme="dark"] .hamburger span {
   background: var(--text-primary);
