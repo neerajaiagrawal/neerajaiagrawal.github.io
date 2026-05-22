@@ -212,6 +212,55 @@ revealEls.forEach(el => observer.observe(el));
   document.querySelectorAll('.carousel-container').forEach(initCarousel);
 })();
 
+// ===== CONTACT FORM — async submit with success state =====
+(function () {
+  const form = document.querySelector('.contact-form');
+  if (!form) return;
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = form.querySelector('button[type="submit"]');
+    const original = btn.innerHTML;
+    btn.innerHTML = 'Sending&nbsp;…';
+    btn.disabled = true;
+
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (res.ok) {
+        form.innerHTML = `
+          <div class="form-success">
+            <svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="var(--ms-blue)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <h3>Message sent!</h3>
+            <p>Thanks for reaching out — I'll get back to you shortly.</p>
+          </div>`;
+      } else {
+        btn.innerHTML = original;
+        btn.disabled = false;
+        showFormError(form, 'Something went wrong. Please email me directly at neeraj.agrawal@zohomail.com');
+      }
+    } catch (err) {
+      btn.innerHTML = original;
+      btn.disabled = false;
+      showFormError(form, 'Network error. Please try again or email me directly.');
+    }
+  });
+
+  function showFormError(form, msg) {
+    let el = form.querySelector('.form-error');
+    if (!el) {
+      el = document.createElement('p');
+      el.className = 'form-error';
+      form.appendChild(el);
+    }
+    el.textContent = msg;
+  }
+})();
+
 // ===== BACK TO TOP =====
 (function () {
   const btn = document.getElementById('backToTop');

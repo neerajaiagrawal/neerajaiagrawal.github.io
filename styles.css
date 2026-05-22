@@ -942,6 +942,29 @@ html.transitioning, html.transitioning * {
 }
 .contact-form .btn { align-self: flex-start; }
 
+.form-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  padding: 36px 20px;
+}
+.form-success h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.form-success p {
+  font-size: .9rem;
+  color: var(--text-secondary);
+}
+.form-error {
+  font-size: .83rem;
+  color: #d32f2f;
+  margin-top: 4px;
+}
+
 /* ===== BACK TO TOP ===== */
 .back-to-top {
   position: fixed;
