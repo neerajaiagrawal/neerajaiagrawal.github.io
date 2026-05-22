@@ -818,22 +818,24 @@ ul { list-style: none; }
 .client-logos {
   display: flex;
   align-items: center;
-  gap: 32px;
+  gap: 0;
   flex-wrap: wrap;
 }
-.client-logo { display: flex; align-items: center; }
-.client-logo img {
-  height: 26px;
-  width: auto;
-  object-fit: contain;
-  filter: grayscale(100%) opacity(0.45);
-  transition: filter .25s ease;
-}
-.client-logo img:hover { filter: grayscale(0%) opacity(1); }
-.client-logo-text {
-  font-size: .82rem;
+.client-name {
+  font-size: .88rem;
   font-weight: 700;
-  color: var(--text-muted);
+  color: var(--text-secondary);
+  letter-spacing: .01em;
+  padding: 0 18px;
+  transition: color .2s ease;
+  white-space: nowrap;
+}
+.client-name:hover { color: var(--ms-blue); }
+.client-sep {
+  color: var(--border);
+  font-size: 1.2rem;
+  line-height: 1;
+  flex-shrink: 0;
 }
 
 /* ===== CONTACT ===== */
