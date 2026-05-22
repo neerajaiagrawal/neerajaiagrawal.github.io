@@ -248,6 +248,16 @@ ul { list-style: none; }
 }
 .btn-outline:hover { background: var(--ms-blue-pale); }
 
+.btn-download {
+  background: rgba(255,255,255,.12);
+  color: #fff;
+  border-color: rgba(255,255,255,.55);
+}
+.btn-download:hover {
+  background: rgba(255,255,255,.22);
+  border-color: #fff;
+}
+
 .hero-scroll-hint {
   position: absolute;
   bottom: 36px;

@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Neeraj Agrawal — Resume</title>
+  <style>
+    /* ── RESET & BASE ── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --blue:       #0078D4;
+      --blue-dark:  #004E8C;
+      --blue-pale:  #EFF6FC;
+      --blue-border:#C8E0F5;
+      --text:       #1a1a2e;
+      --text-muted: #555;
+      --border:     #dde5ee;
+    }
+
+    body {
+      font-family: 'Segoe UI', Calibri, Arial, sans-serif;
+      font-size: 13.5px;
+      line-height: 1.55;
+      color: var(--text);
+      background: #eef2f7;
+    }
+
+    /* ── SAVE-AS-PDF BAR (hidden on print) ── */
+    .top-bar {
+      background: var(--blue);
+      padding: 10px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .top-bar-note {
+      font-size: 12px;
+      color: rgba(255,255,255,.8);
+    }
+    .save-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: #fff;
+      color: var(--blue);
+      border: none;
+      padding: 8px 20px;
+      border-radius: 5px;
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+      transition: background .15s;
+      text-decoration: none;
+    }
+    .save-btn:hover { background: #e8f4ff; }
+
+    /* ── PAGE WRAPPER ── */
+    .page {
+      max-width: 860px;
+      margin: 24px auto 48px;
+      background: #fff;
+      box-shadow: 0 4px 28px rgba(0,0,0,.13);
+    }
+
+    /* ── RESUME BODY ── */
+    .resume {
+      padding: 40px 48px 44px;
+    }
+
+    /* ── HEADER ── */
+    .r-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 24px;
+      padding-bottom: 18px;
+      border-bottom: 3px solid var(--blue);
+      margin-bottom: 22px;
+    }
+    .r-name {
+      font-size: 30px;
+      font-weight: 700;
+      color: var(--blue);
+      letter-spacing: -.02em;
+      line-height: 1.15;
+    }
+    .r-tagline {
+      font-size: 13.5px;
+      color: #333;
+      margin-top: 5px;
+    }
+    .r-contact {
+      text-align: right;
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.8;
+      flex-shrink: 0;
+    }
+    .r-contact a { color: var(--blue); text-decoration: none; }
+
+    /* ── SECTION ── */
+    .r-section { margin-bottom: 20px; }
+    .r-section-title {
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+      color: var(--blue);
+      border-bottom: 1px solid var(--blue-border);
+      padding-bottom: 4px;
+      margin-bottom: 12px;
+    }
+
+    /* ── SUMMARY ── */
+    .r-summary { color: #333; line-height: 1.65; }
+
+    /* ── SKILLS TABLE ── */
+    .r-skills {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5px 28px;
+    }
+    .r-skill {
+      display: flex;
+      gap: 6px;
+      font-size: 12.5px;
+    }
+    .sk-label {
+      font-weight: 700;
+      color: #111;
+      min-width: 120px;
+      flex-shrink: 0;
+    }
+    .sk-val { color: #444; }
+
+    /* ── EXPERIENCE ── */
+    .r-employer { margin-bottom: 16px; }
+    .r-employer-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+    .r-employer-name {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: #111;
+    }
+    .r-employer-dates {
+      font-size: 12px;
+      color: var(--text-muted);
+      flex-shrink: 0;
+    }
+    .r-employer-role {
+      font-size: 12.5px;
+      color: var(--blue);
+      font-weight: 600;
+      margin-bottom: 9px;
+    }
+
+    .r-project {
+      padding: 7px 0 7px 14px;
+      border-left: 2px solid var(--blue-border);
+      margin-bottom: 9px;
+    }
+    .r-project-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 4px;
+    }
+    .r-project-client {
+      font-weight: 700;
+      font-size: 13px;
+      color: #222;
+    }
+    .r-project-tag {
+      font-size: 11px;
+      color: #888;
+      flex-shrink: 0;
+      margin-left: 8px;
+    }
+    .r-bullets {
+      list-style: none;
+      padding: 0;
+    }
+    .r-bullets li {
+      font-size: 12.5px;
+      color: #333;
+      padding: 2px 0 2px 14px;
+      position: relative;
+      line-height: 1.5;
+    }
+    .r-bullets li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--blue);
+      font-size: 10px;
+      top: 4px;
+    }
+
+    /* ── CERTIFICATIONS ── */
+    .r-certs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .r-cert {
+      background: var(--blue-pale);
+      border: 1px solid var(--blue-border);
+      border-radius: 3px;
+      padding: 3px 9px;
+      font-size: 11.5px;
+      color: var(--blue-dark);
+    }
+    .r-cert b { color: var(--blue); }
+
+    /* ── RECOGNITION ── */
+    .r-rec { list-style: none; }
+    .r-rec li {
+      font-size: 12.5px;
+      color: #333;
+      padding: 3px 0 3px 16px;
+      position: relative;
+      line-height: 1.5;
+    }
+    .r-rec li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--blue);
+      font-size: 10px;
+      top: 5px;
+    }
+
+    /* ── EDUCATION ── */
+    .r-edu-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 7px;
+      gap: 16px;
+    }
+    .r-edu-degree { font-weight: 700; font-size: 13px; color: #111; }
+    .r-edu-school { font-size: 12px; color: var(--text-muted); margin-top: 1px; }
+    .r-edu-right { text-align: right; font-size: 12px; color: var(--text-muted); flex-shrink: 0; }
+
+    /* ── PRINT STYLES ── */
+    @media print {
+      * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+      body { background: #fff; font-size: 11pt; }
+      .top-bar { display: none !important; }
+      .page {
+        max-width: 100%;
+        margin: 0;
+        box-shadow: none;
+      }
+      .resume { padding: 16mm 18mm; }
+      .r-section { page-break-inside: avoid; margin-bottom: 14pt; }
+      .r-employer { page-break-inside: avoid; }
+      .r-project { page-break-inside: avoid; }
+      a { color: inherit !important; text-decoration: none !important; }
+    }
+
+    @page {
+      size: Letter;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SAVE BAR (hidden on print) -->
+  <div class="top-bar">
+    <span class="top-bar-note">Click "Save as PDF" → In the print dialog choose "Save as PDF" as destination</span>
+    <button class="save-btn" onclick="window.print()">
+      &#8659; &nbsp;Save as PDF
+    </button>
+  </div>
+
+  <div class="page">
+    <div class="resume">
+
+      <!-- ── HEADER ── -->
+      <header class="r-header">
+        <div>
+          <div class="r-name">Neeraj Agrawal</div>
+          <div class="r-tagline">Principal Architect &nbsp;·&nbsp; Microsoft Power CAT Trainer &nbsp;·&nbsp; AI Strategy &amp; Enterprise CRM</div>
+        </div>
+        <div class="r-contact">
+          Dallas, TX<br/>
+          <a href="mailto:neeraj.agrawal2@cognizant.com">neeraj.agrawal2@cognizant.com</a><br/>
+          <a href="https://neerajaiagrawal.github.io" target="_blank">neerajaiagrawal.github.io</a><br/>
+          <a href="https://www.linkedin.com/in/neerajragrawal/" target="_blank">linkedin.com/in/neerajragrawal</a>
+        </div>
+      </header>
+
+      <!-- ── SUMMARY ── -->
+      <section class="r-section">
+        <div class="r-section-title">Professional Summary</div>
+        <p class="r-summary">
+          Principal Architect and Microsoft Power CAT Trainer with 22+ years delivering enterprise CRM,
+          AI, and digital transformation across 9 industries. Deep specialist in Microsoft AI (Azure OpenAI,
+          Copilot Studio, Agentic AI), Dynamics 365, and Power Platform — with a proven record architecting
+          multi-million dollar solutions for Fortune 500 clients including Northern Trust, Bank of New York
+          Mellon, Premera Blue Cross Blue Shield, and American Airlines. Recognised as Cognizant's
+          <strong>#1 Global Digital Leader (Top 30 worldwide)</strong> and awarded the Cognizant Platinum Award.
+          Currently driving enterprise AI adoption as an authorised trainer for
+          <strong>Microsoft's Copilot Acceleration Team (Power CAT)</strong>.
+        </p>
+      </section>
+
+      <!-- ── CORE SKILLS ── -->
+      <section class="r-section">
+        <div class="r-section-title">Core Competencies</div>
+        <div class="r-skills">
+          <div class="r-skill"><span class="sk-label">Microsoft AI:</span><span class="sk-val">Azure OpenAI, AI Foundry, Copilot Studio, M365 Copilot, Agentic AI, AI Governance</span></div>
+          <div class="r-skill"><span class="sk-label">Power Platform:</span><span class="sk-val">Power Apps, Power Automate, Power BI, Power Pages, Dataverse, Custom Connectors</span></div>
+          <div class="r-skill"><span class="sk-label">Dynamics 365:</span><span class="sk-val">Customer Service, Sales, Asset Servicing, Omnichannel, Customer Insights, PCF</span></div>
+          <div class="r-skill"><span class="sk-label">CRM Platforms:</span><span class="sk-val">Microsoft Dynamics 365, Oracle Siebel CRM, Salesforce</span></div>
+          <div class="r-skill"><span class="sk-label">Azure Integration:</span><span class="sk-val">API Management, Service Bus, Logic Apps, Azure DevOps, CI/CD</span></div>
+          <div class="r-skill"><span class="sk-label">CTI / Telephony:</span><span class="sk-val">Avaya, Genesys Cloud CX (ISV Connector), Cisco CTI</span></div>
+          <div class="r-skill"><span class="sk-label">Marketing Tech:</span><span class="sk-val">Marketo Integration, D365 Customer Insights Journeys, CustomerVoice</span></div>
+          <div class="r-skill"><span class="sk-label">Leadership:</span><span class="sk-val">Solution Architecture, Technical Programme Management, Agile / Scrum (CSPO)</span></div>
+        </div>
+      </section>
+
+      <!-- ── EXPERIENCE ── -->
+      <section class="r-section">
+        <div class="r-section-title">Professional Experience</div>
+
+        <!-- COGNIZANT -->
+        <div class="r-employer">
+          <div class="r-employer-header">
+            <span class="r-employer-name">Cognizant Technology Solutions</span>
+            <span class="r-employer-dates">2014 – Present &nbsp;|&nbsp; Dallas, TX</span>
+          </div>
+          <div class="r-employer-role">Principal Technology Architect &nbsp;·&nbsp; Microsoft AI &amp; Power Platform Practice</div>
+
+          <div class="r-project">
+            <div class="r-project-header">
+              <span class="r-project-client">Northern Trust</span>
+              <span class="r-project-tag">Financial Services &nbsp;·&nbsp; $1.3T AUM &nbsp;·&nbsp; Principal Technology Architect</span>
+            </div>
+            <ul class="r-bullets">
+              <li>Led multi-workstream D365 transformation: onboarded <strong>700+ shared mailboxes</strong> into automated email-to-case routing, eliminating global manual triaging across service teams</li>
+              <li>Migrated Salesforce Global Foreign Exchange platform to D365 Asset Servicing — delivering <strong>$300K+ in annual Salesforce licence savings</strong></li>
+              <li>Built D365–Marketo integration via custom connectors for unified wealth management campaign targeting; <strong>600+ users onboarded</strong></li>
+              <li>Delivered Cisco CTI integration (screen-pop, click-to-dial, automatic call logging) for global contact centre</li>
+              <li>Provided strategic consulting to <strong>Microsoft</strong> on the design of a <strong>Global Sales Target Operating Model</strong></li>
+            </ul>
+          </div>
+
+          <div class="r-project">
+            <div class="r-project-header">
+              <span class="r-project-client">Bank of New York Mellon</span>
+              <span class="r-project-tag">Financial Services &nbsp;·&nbsp; Senior Technology Architect</span>
+            </div>
+            <ul class="r-bullets">
+              <li>Greenfield D365 Customer Service &amp; Avaya CTI implementation; <strong>500+ agents onboarded</strong></li>
+              <li>Delivered <strong>28% reduction in Average Handle Time (AHT)</strong> via CTI screen-pop; 3 minutes saved per call</li>
+              <li>Developed custom PCF controls for institutional banking UI/compliance requirements; achieved <strong>100% call-to-case traceability</strong></li>
+            </ul>
+          </div>
+
+          <div class="r-project">
+            <div class="r-project-header">
+              <span class="r-project-client">Premera Blue Cross Blue Shield</span>
+              <span class="r-project-tag">Healthcare &nbsp;·&nbsp; 2M+ Members &nbsp;·&nbsp; Senior Technology Architect</span>
+            </div>
+            <ul class="r-bullets">
+              <li>D365 Customer Service + Genesys Cloud CX CTI (ISV connector); <strong>400+ agents onboarded</strong></li>
+              <li>Achieved <strong>30% reduction in AHT</strong>; configured HIPAA-compliant audit trails and SLA breach alerting for state regulatory compliance</li>
+              <li>Built Power Automate flows for case escalation, member callback scheduling, and benefit inquiry routing</li>
+            </ul>
+          </div>
+
+          <div class="r-project">
+            <div class="r-project-header">
+              <span class="r-project-client">Global Automotive Technology Leader (Anonymised)</span>
+              <span class="r-project-tag">Automotive &nbsp;·&nbsp; 90+ Countries &nbsp;·&nbsp; Technology Architect</span>
+            </div>
+            <ul class="r-bullets">
+              <li>D365 Sales global rollout across <strong>12 countries</strong>, integrated with CPQ engine and Salesforce via Azure API Management &amp; Service Bus</li>
+              <li><strong>700+ users onboarded</strong>; <strong>60% reduction in quote-to-order cycle time</strong>; 30+ automated integration touchpoints</li>
+            </ul>
+          </div>
+
+          <div class="r-project">
+            <div class="r-project-header">
+              <span class="r-project-client">American Airlines (in collaboration with Deloitte Consulting)</span>
+              <span class="r-project-tag">Airlines &nbsp;·&nbsp; AAdvantage Loyalty &nbsp;·&nbsp; Technology Architect</span>
+            </div>
+            <ul class="r-bullets">
+              <li>Technology Architect on the world's most complex airline loyalty platform — <strong>AAdvantage</strong> — built on Oracle Siebel CRM</li>
+              <li>Independently architected three revenue applications: <strong>Winback</strong> (status-match acquisition), <strong>Retain</strong> (loyalty tier defence), and <strong>Proactive</strong> (mile-expiry prevention &amp; monetisation) — delivering <strong>multi-million dollar revenue impact</strong></li>
+              <li>Delivered <strong>15% reduction in Average Handle Time (AHT)</strong> for AAdvantage Call Center; Siebel Open UI showcased at <strong>Oracle Open World</strong></li>
+              <li>Led GDPR (Europe) and CCPA (California) compliance implementations</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- INFOSYS -->
+        <div class="r-employer">
+          <div class="r-employer-header">
+            <span class="r-employer-name">Infosys Limited</span>
+            <span class="r-employer-dates">2008 – 2014</span>
+          </div>
+          <div class="r-employer-role">Technology Lead &nbsp;·&nbsp; Oracle Siebel CRM Practice</div>
+          <ul class="r-bullets" style="padding-left:0;">
+            <li>Delivered multiple Oracle Siebel CRM implementations (greenfield and maintenance) across telecom, manufacturing, and enterprise services over 6+ years</li>
+            <li>Operated across roles: Technology Lead, Siebel Developer, Configurator, and Administrator — building the CRM platform depth that anchored senior architect roles at Cognizant</li>
+            <li>SPOT Awards: Siebel Open UI POC (2013), Offshore Delivery Lead (2011), Complex Siebel Customization (2010)</li>
+          </ul>
+        </div>
+
+        <!-- TECH MAHINDRA -->
+        <div class="r-employer">
+          <div class="r-employer-header">
+            <span class="r-employer-name">Tech Mahindra</span>
+            <span class="r-employer-dates">2004 – 2008</span>
+          </div>
+          <div class="r-employer-role">Software Developer &nbsp;·&nbsp; Telecom CRM</div>
+          <ul class="r-bullets" style="padding-left:0;">
+            <li>Developed bespoke Visual C++ CRM application for <strong>British Telecom</strong>'s Order Management module</li>
+            <li>Delivery Excellence Award (2008)</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ── CERTIFICATIONS ── -->
+      <section class="r-section">
+        <div class="r-section-title">Certifications &amp; Credentials &nbsp;·&nbsp; 8 Active &nbsp;|&nbsp; 16 Exams Passed &nbsp;|&nbsp; Certifying Since 2019</div>
+        <div class="r-certs">
+          <div class="r-cert"><b>AB-900</b> M365 Copilot &amp; Agent Admin Fundamentals · 2026</div>
+          <div class="r-cert"><b>AB-731</b> AI Transformation Leader · 2026</div>
+          <div class="r-cert"><b>AB-730</b> AI Business Professional · 2026</div>
+          <div class="r-cert"><b>PL-600</b> Power Platform Solution Architect Expert · 2024</div>
+          <div class="r-cert"><b>PL-900</b> Power Platform Fundamentals · 2025</div>
+          <div class="r-cert"><b>AZ-900</b> Azure Fundamentals · 2020</div>
+          <div class="r-cert"><b>MCSE</b> Business Applications · 2019</div>
+          <div class="r-cert"><b>MCSA</b> Dynamics 365 · 2019</div>
+          <div class="r-cert"><b>CSPO</b> Certified Scrum Product Owner · 2025–2027</div>
+        </div>
+      </section>
+
+      <!-- ── RECOGNITION ── -->
+      <section class="r-section">
+        <div class="r-section-title">Recognition &amp; Awards</div>
+        <ul class="r-rec">
+          <li><strong>Microsoft Power CAT Trainer</strong> — Authorised trainer for the Copilot Acceleration Team delivering Agentic AI, Copilot Studio, and M365 Copilot sessions to enterprise clients</li>
+          <li>Ranked <strong>#1 — Cognizant Global Top 30 Digital Leaders</strong>; personally mentored for 4 months by Cognizant's Ex Global CIO &amp; Innovation Head</li>
+          <li>Cognizant <strong>Platinum Award</strong> — highest recognition tier — for Agile Transformation delivery excellence at American Airlines</li>
+          <li><strong>Manager of the Quarter</strong> (2015) — Siebel Open UI Innovation Pack; 15% AHT reduction for AAdvantage Call Center</li>
+          <li>Cognizant <strong>Emerging Leader</strong> — completed Leadership Curriculum, Cognizant Academy</li>
+          <li><strong>Digital Transformation Senpai Mentor</strong> — mentored 30+ associates globally in Innovation, Storytelling, and Business Development</li>
+          <li>Government Affairs Ambassador, Dallas Metroplex — partnering with civic leaders to translate technology into community impact</li>
+        </ul>
+      </section>
+
+      <!-- ── EDUCATION ── -->
+      <section class="r-section">
+        <div class="r-section-title">Education</div>
+        <div class="r-edu-row">
+          <div>
+            <div class="r-edu-degree">Post Graduate Diploma in CRM</div>
+            <div class="r-edu-school">Symbiosis Centre for Distance Learning</div>
+          </div>
+          <div class="r-edu-right">2007 – 2008 &nbsp;·&nbsp; Grade A+</div>
+        </div>
+        <div class="r-edu-row">
+          <div>
+            <div class="r-edu-degree">Bachelor of Engineering — Computer Science</div>
+            <div class="r-edu-school">Dr. Babasaheb Ambedkar Marathwada University</div>
+          </div>
+          <div class="r-edu-right">2000 – 2004 &nbsp;·&nbsp; University Topper</div>
+        </div>
+      </section>
+
+    </div><!-- /resume -->
+  </div><!-- /page -->
+
+</body>
+</html>
