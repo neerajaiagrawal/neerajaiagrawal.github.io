@@ -82,6 +82,41 @@ revealEls.forEach(el => observer.observe(el));
   counterEls.forEach(el => io.observe(el));
 })();
 
+// ===== HERO TYPED / CYCLING SUBTITLE =====
+(function () {
+  const el = document.getElementById('heroTyped');
+  if (!el) return;
+
+  const phrases = ['Principal Architect', 'Power CAT Trainer', 'AI Strategist'];
+  let pIdx = 0, shown = 0, deleting = false;
+
+  function tick() {
+    const word = phrases[pIdx];
+    if (!deleting) {
+      shown++;
+      el.textContent = word.slice(0, shown);
+      if (shown === word.length) {
+        deleting = true;
+        setTimeout(tick, 2400);          // pause at end before erasing
+      } else {
+        setTimeout(tick, 75);            // typing speed
+      }
+    } else {
+      shown--;
+      el.textContent = word.slice(0, shown);
+      if (shown === 0) {
+        deleting = false;
+        pIdx = (pIdx + 1) % phrases.length;
+        setTimeout(tick, 420);           // pause before typing next
+      } else {
+        setTimeout(tick, 38);            // erasing speed (faster)
+      }
+    }
+  }
+
+  tick();
+})();
+
 // Smooth scroll for all anchor links
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
