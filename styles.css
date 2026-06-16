@@ -1814,3 +1814,34 @@ footer {
   .newsletter-grid { grid-template-columns: 1fr; }
   .newsletter-btn { align-self: stretch; text-align: center; }
 }
+
+/* ===== SPEAKING CARD ===== */
+.recognition-card--speaking {
+  border: 2px solid #7B2FBE;
+  background: linear-gradient(135deg, #F5EEFF 0%, #fff 60%);
+  grid-column: 1 / -1;
+}
+[data-theme="dark"] .recognition-card--speaking {
+  background: linear-gradient(135deg, rgba(123,47,190,.12) 0%, var(--bg) 60%);
+  border-color: #9B5FDE;
+}
+.speaking-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+.speaking-chip {
+  font-size: .78rem;
+  font-weight: 500;
+  padding: 4px 12px;
+  border-radius: 20px;
+  background: rgba(123,47,190,.1);
+  color: #7B2FBE;
+  border: 1px solid rgba(123,47,190,.25);
+}
+[data-theme="dark"] .speaking-chip {
+  background: rgba(123,47,190,.2);
+  color: #C49EF5;
+  border-color: rgba(123,47,190,.4);
+}
