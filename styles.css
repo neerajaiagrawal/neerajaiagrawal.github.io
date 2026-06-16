@@ -1871,3 +1871,18 @@ footer {
   .speaking-inner { flex-direction: column; }
   .speaking-flyer { width: 100%; max-width: 320px; margin: 0 auto; }
 }
+
+/* ===== SPEAKING CHIP LINK ===== */
+a.speaking-chip--link {
+  text-decoration: none;
+  cursor: pointer;
+  transition: background .15s, color .15s;
+}
+a.speaking-chip--link:hover {
+  background: rgba(123,47,190,.22);
+  color: #5a1a9e;
+}
+[data-theme="dark"] a.speaking-chip--link:hover {
+  background: rgba(123,47,190,.35);
+  color: #d4a8ff;
+}
