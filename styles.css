@@ -1845,3 +1845,29 @@ footer {
   color: #C49EF5;
   border-color: rgba(123,47,190,.4);
 }
+
+/* ===== SPEAKING CARD LAYOUT ===== */
+.speaking-inner {
+  display: flex;
+  gap: 28px;
+  align-items: flex-start;
+}
+.speaking-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.speaking-flyer {
+  flex-shrink: 0;
+  width: 200px;
+}
+.speaking-flyer img {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: var(--shadow-md);
+}
+@media (max-width: 700px) {
+  .speaking-inner { flex-direction: column; }
+  .speaking-flyer { width: 100%; max-width: 320px; margin: 0 auto; }
+}
