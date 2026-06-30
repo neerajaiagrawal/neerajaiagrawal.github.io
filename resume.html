@@ -262,21 +262,21 @@
     /* ── PRINT STYLES ── */
     @media print {
       * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
-      body { background: #fff; font-size: 10pt; }
+      body { background: #fff; font-size: 9.5pt; }
       .top-bar { display: none !important; }
       .page {
         max-width: 100%;
         margin: 0;
         box-shadow: none;
       }
-      .resume { padding: 8mm 14mm; }
-      .r-section { margin-bottom: 6pt; }
-      .r-section-title { margin-bottom: 5px; padding-bottom: 2px; }
-      .r-employer { margin-bottom: 10px; }
-      .r-employer-role { margin-bottom: 5px; }
-      .r-project { padding: 4px 0 4px 12px; margin-bottom: 6px; }
+      .resume { padding: 5mm 12mm; }
+      .r-section { margin-bottom: 4pt; }
+      .r-section-title { margin-bottom: 4px; padding-bottom: 2px; }
+      .r-employer { margin-bottom: 7px; }
+      .r-employer-role { margin-bottom: 4px; }
+      .r-project { padding: 3px 0 3px 10px; margin-bottom: 4px; }
       .r-project { page-break-inside: avoid; }
-      .r-header { padding-bottom: 10px; margin-bottom: 12px; }
+      .r-header { padding-bottom: 8px; margin-bottom: 10px; }
       .r-summary { line-height: 1.5; }
       a { color: #0078D4 !important; text-decoration: underline !important; }
     }
@@ -414,7 +414,7 @@
         </div>
 
         <!-- INFOSYS -->
-        <div class="r-employer">
+        <div class="r-employer" style="page-break-before: always; margin-top: 24px;">
           <div class="r-employer-header">
             <span class="r-employer-name">Infosys Limited</span>
             <span class="r-employer-dates">2008 – 2014</span>
