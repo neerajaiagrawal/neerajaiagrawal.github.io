@@ -301,6 +301,35 @@ html.transitioning, html.transitioning * {
 }
 .hero-subtitle strong { color: var(--ms-blue); }
 
+.hero-impact {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+  max-width: 620px;
+  margin: 0 auto 34px;
+  animation: fadeUp .6s .25s ease both;
+}
+.hero-impact-item {
+  font-size: .92rem;
+  color: var(--text-secondary);
+  letter-spacing: .01em;
+}
+.hero-impact-item strong { color: var(--ms-blue); font-weight: 700; }
+.hero-impact-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--ms-blue);
+  opacity: .5;
+  flex-shrink: 0;
+}
+@media (max-width: 560px) {
+  .hero-impact-dot { display: none; }
+  .hero-impact { gap: 6px 14px; }
+}
+
 .hero-cta {
   display: flex;
   gap: 14px;
