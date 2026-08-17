@@ -88,6 +88,7 @@
         <li><a href="#about">About</a></li>
         <li><a href="#skills">Skills</a></li>
         <li><a href="#projects">Projects</a></li>
+        <li><a href="#case-study">Case Study</a></li>
         <li><a href="#recognition">Recognition</a></li>
         <li><a href="#newsletters">Newsletters</a></li>
         <li><a href="#education">Education</a></li>
@@ -794,6 +795,53 @@
       </div>
       </div><!-- /carousel-container -->
 
+    </div>
+  </section>
+
+  <!-- FEATURED CASE STUDY: NORA -->
+  <section id="case-study" class="section">
+    <div class="container">
+      <div class="section-label">Featured Case Study</div>
+      <h2>Agentic AI for <span class="highlight">Regulated Financial Operations</span></h2>
+      <p class="section-desc">A working proof of concept that automates investor dealing-instruction processing — where an AI reads and explains, and a deterministic engine decides.</p>
+
+      <div class="project-card featured visible" style="max-width:960px;margin:0 auto;">
+        <div class="project-tag">Agentic AI · Financial Services — Transfer Agency (EMEA)</div>
+        <h3>NORA — Autonomous Dealing-Instruction Triage Agent</h3>
+        <p>
+          Designed and built an end-to-end <strong>agentic AI proof of concept</strong> for the
+          EMEA transfer-agency operations of a global financial services organisation
+          <em>(client confidential)</em>. NORA ingests investor <strong>dealing instructions</strong>
+          — typed forms, scanned faxes, handwritten letters and multi-deal tables — then automatically
+          <strong>extracts, validates, and routes</strong> each one to <strong>Auto-process, Review, or
+          Hold</strong>. The defining principle is <strong>&ldquo;accuracy over automation&rdquo;</strong>:
+          a generative AI model handles reading and explanation, but <strong>every routing decision is made
+          by a deterministic C# rules engine</strong> — so outcomes are reproducible, fully auditable, and
+          the model can never auto-approve something it misread. Built natively on the
+          <strong>Microsoft agent stack</strong> — SharePoint intake, Power Automate orchestration,
+          AI Builder + OCR extraction, a Dataverse plug-in for deterministic validation (ISIN check-digit,
+          fund-register cross-check, reconciliation, confidence banding), Teams approvals, and a
+          <strong>Copilot Studio</strong> agent for plain-English explanations. Passport and account numbers
+          are <strong>automatically redacted</strong> everywhere the agent displays or logs, and the system
+          handles real-world edge cases — misread identifiers caught by checksum, and non-dealing document
+          bundles it correctly refuses to act on.
+        </p>
+        <div class="project-tech">
+          <span>Copilot Studio</span>
+          <span>AI Builder</span>
+          <span>Power Automate</span>
+          <span>Dataverse (C# Plug-in)</span>
+          <span>Power Apps</span>
+          <span>SharePoint</span>
+          <span>Microsoft Teams</span>
+          <span>PCF Controls</span>
+          <span>Generative AI / LLM</span>
+          <span>OCR</span>
+        </div>
+        <div class="project-impact">
+          <span>&#128200;</span> Working end-to-end POC · deterministic, auditable decisioning · PII auto-redaction · human-in-the-loop Teams approvals · 71 automated tests on the rules engine
+        </div>
+      </div>
     </div>
   </section>
 
