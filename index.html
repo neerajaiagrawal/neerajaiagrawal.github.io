@@ -826,6 +826,16 @@
           handles real-world edge cases — misread identifiers caught by checksum, and non-dealing document
           bundles it correctly refuses to act on.
         </p>
+        <figure style="margin:8px 0 4px;">
+          <div style="border:1px solid var(--border);border-radius:12px;overflow:hidden;background:#fff;">
+            <img src="nora-architecture.svg" loading="lazy"
+                 alt="NORA end-to-end architecture: SharePoint intake, a Power Automate pickup flow, AI Builder extraction, a Copilot Studio agent (NORA) that orchestrates while calling deterministic C# validation and an LLM validator, routing to Auto, Review or Hold, with Teams approvals, a Dataverse audit trail, a model-driven queue app and Power BI oversight."
+                 style="display:block;width:100%;height:auto;" />
+          </div>
+          <figcaption style="font-size:.8rem;color:var(--text-secondary);text-align:center;margin-top:8px;">
+            End-to-end flow &amp; component responsibilities — the AI orchestrates and explains; deterministic code makes every decision.
+          </figcaption>
+        </figure>
         <div class="project-tech">
           <span>Copilot Studio</span>
           <span>AI Builder</span>
