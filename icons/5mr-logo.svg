@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200" role="img" aria-label="5MR – 5 Mins Read">
+  <defs>
+    <linearGradient id="ag5mr" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFC24B"/>
+      <stop offset="1" stop-color="#FF7A18"/>
+    </linearGradient>
+  </defs>
+  <rect width="200" height="200" rx="46" fill="#10151b"/>
+  <path d="M100 28 C106 80 120 94 172 100 C120 106 106 120 100 172 C94 120 80 106 28 100 C80 94 94 80 100 28 Z" fill="url(#ag5mr)"/>
+  <path d="M151 31 C153 45 158 50 171 48 C158 50 153 55 151 68 C149 55 144 50 131 48 C144 50 149 45 151 31 Z" fill="#FFB13C"/>
+</svg>
