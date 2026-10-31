@@ -1740,6 +1740,14 @@ footer {
   line-height: 1;
   flex-shrink: 0;
 }
+.newsletter-icon img {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  object-fit: cover;
+  display: block;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+}
 .newsletter-meta {
   display: flex;
   flex-direction: column;
