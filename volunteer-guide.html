@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#5A1046">
+<link rel="icon" type="image/png" href="hdfw-logo-192.png">
+<link rel="apple-touch-icon" href="hdfw-logo-192.png">
+<title>Volunteer Guide · Diwali Celebration – Sparkle of Joy</title>
+<style>
+  :root {
+    --accent: #B4380C; --accent-pale: #FFF0E0; --plum: #5A1046;
+    --ok: #107C10; --ok-bg: #DFF6DD; --warn: #8A5300; --warn-bg: #FFF4CE; --err: #A4262C; --err-bg: #FDE7E9;
+    --text: #23140F; --text-2: #5A463C; --muted: #7D6A60;
+    --bg: #FFF9F2; --card: #FFFFFF; --border: #F0DFCF;
+    --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --accent: #FFA45C; --accent-pale: #3A1E10; --ok: #6CCB5F; --ok-bg: #12351A; --warn: #FCE100; --warn-bg: #3A3000; --err: #F1707B; --err-bg: #3B1316;
+      --text: #FBF1E8; --text-2: #D9C6B8; --muted: #A8968A; --bg: #170C12; --card: #23151C; --border: #3D2A30;
+    }
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.5; -webkit-font-smoothing: antialiased; }
+  a { color: var(--accent); }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 0 16px; }
+
+  /* banner + logo */
+  .hero { position: relative; background: #2A0B3A url('diwali-banner.svg') center/cover no-repeat; color: #fff; text-align: center; padding: 34px 16px 26px; }
+  .hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(20,6,30,.2), rgba(20,6,30,.6)); }
+  .hero > * { position: relative; z-index: 1; }
+  .kicker { font-size: .8rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #FFD27A; text-shadow: 0 1px 6px rgba(0,0,0,.6); margin-top: 14px; }
+  .hero h1 { font-size: clamp(1.5rem, 5vw, 2.3rem); font-weight: 800; line-height: 1.15; text-shadow: 0 2px 12px rgba(0,0,0,.6); }
+  .ev-sub { color: #FFD27A; }
+  .ev-meta { font-size: .92rem; margin-top: 6px; text-shadow: 0 1px 6px rgba(0,0,0,.6); }
+  .logo-wrap { position: relative; display: inline-block; width: 100px; height: 100px; }
+  .logo-wrap img { position: relative; z-index: 2; width: 100%; height: 100%; border-radius: 50%; display: block; box-shadow: 0 4px 18px rgba(0,0,0,.45); animation: logoIn 1.2s cubic-bezier(.2,.9,.25,1) both; }
+  .logo-wrap::before { content: ''; position: absolute; inset: -22%; border-radius: 50%; background: radial-gradient(circle, rgba(255,200,90,.85) 0%, rgba(255,140,0,.35) 45%, transparent 70%); animation: halo 3.2s ease-in-out infinite; }
+  .logo-wrap::after { content: ''; position: absolute; inset: -9%; border-radius: 50%; z-index: 1; border: 2px dashed rgba(255,214,130,.85); animation: spin 22s linear infinite; }
+  @keyframes halo { 0%, 100% { opacity: .45; transform: scale(.94); } 50% { opacity: 1; transform: scale(1.08); } }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes logoIn { from { opacity: 0; transform: scale(.5) rotate(-140deg); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .logo-wrap *, .logo-wrap::before, .logo-wrap::after { animation: none !important; } }
+
+  section { margin-top: 18px; }
+  h2 { font-size: 1.15rem; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  h2 .num { display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: var(--accent); color: #fff; font-size: .85rem; }
+  @media (prefers-color-scheme: dark) { h2 .num { color: #1E0B12; } }
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 16px; }
+
+  /* links */
+  .links { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; }
+  .link { display: block; text-decoration: none; color: var(--text); background: var(--card); border: 1.5px solid var(--border); border-radius: 14px; padding: 14px 16px; }
+  .link:hover { border-color: var(--accent); }
+  .link .t { font-weight: 700; font-size: 1.02rem; color: var(--accent); display: flex; align-items: center; gap: 8px; }
+  .link .ico { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+  .link .d { font-size: .86rem; color: var(--text-2); margin-top: 2px; }
+  .link .u { font-size: .75rem; color: var(--muted); margin-top: 6px; word-break: break-all; }
+  .link.main { background: linear-gradient(135deg, #5A1046, #8E2A12); border: 0; color: #fff; }
+  .link.main .t { color: #FFD27A; } .link.main .d, .link.main .u { color: rgba(255,255,255,.85); }
+  .pin-note { margin-top: 10px; background: var(--warn-bg); color: var(--warn); border-radius: 12px; padding: 10px 14px; font-size: .92rem; }
+  .pin-note b { color: inherit; }
+
+  ol.steps { list-style: none; counter-reset: s; display: grid; gap: 10px; }
+  ol.steps li { counter-increment: s; display: grid; grid-template-columns: 34px 1fr; gap: 10px; align-items: start; }
+  ol.steps li::before { content: counter(s); display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--accent-pale); color: var(--accent); font-weight: 800; }
+  ol.steps b { color: var(--text); }
+  .muted { color: var(--muted); font-size: .88rem; }
+
+  /* situations */
+  .sit { display: grid; gap: 8px; }
+  .row { display: grid; grid-template-columns: minmax(150px, 34%) 1fr; gap: 12px; padding: 10px 12px; border-radius: 10px; background: var(--card); border: 1px solid var(--border); }
+  .row .k { font-weight: 700; }
+  .row .k small { display: block; font-weight: 400; color: var(--muted); font-size: .8rem; }
+  .chip { display: inline-block; font-size: .72rem; font-weight: 700; padding: 1px 7px; border-radius: 999px; vertical-align: middle; margin-left: 4px; }
+  .chip.g { background: var(--ok-bg); color: var(--ok); } .chip.a { background: var(--warn-bg); color: var(--warn); } .chip.r { background: var(--err-bg); color: var(--err); }
+  @media (max-width: 560px) { .row { grid-template-columns: 1fr; gap: 2px; } }
+
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 640px) { .two { grid-template-columns: 1fr; } }
+  ul.ticks { list-style: none; display: grid; gap: 6px; }
+  ul.ticks li { padding-left: 24px; position: relative; }
+  ul.ticks li::before { content: '✓'; position: absolute; left: 0; color: var(--ok); font-weight: 800; }
+  ul.cross li::before { content: '✕'; color: var(--err); }
+
+  .toolbar { display: flex; justify-content: flex-end; margin-top: 14px; }
+  .btn { display: inline-flex; gap: 6px; align-items: center; padding: 9px 14px; border-radius: 10px; font-weight: 600; font-size: .9rem; border: 1.5px solid var(--border); background: var(--card); color: var(--accent); cursor: pointer; font-family: inherit; }
+  footer { text-align: center; color: var(--muted); font-size: .85rem; padding: 26px 16px 34px; display: flex; gap: 8px; align-items: center; justify-content: center; }
+  footer img { width: 26px; height: 26px; border-radius: 50%; }
+
+  @media print {
+    :root { --bg: #fff; --card: #fff; --text: #000; --text-2: #333; --muted: #555; --border: #ddd; }
+    .hero, .link.main, .chip, h2 .num, ol.steps li::before { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .hero { padding: 16px; }
+    .logo-wrap { width: 70px; height: 70px; }
+    .logo-wrap::before, .logo-wrap::after { display: none; }
+    .toolbar { display: none; }
+    section { break-inside: avoid; margin-top: 12px; }
+    .link .u { color: #333; }
+    @page { margin: 10mm; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <span class="logo-wrap"><img src="hdfw-logo-192.webp" alt="Hindus of DFW logo" width="100" height="100"></span>
+  <div class="kicker">Volunteer Check-in Guide · Hindus of DFW</div>
+  <h1>Diwali Celebration – <span class="ev-sub">Sparkle of Joy</span></h1>
+  <div class="ev-meta">Wed, 18 Nov 2026 · 5:00 – 8:00 PM CST · 7750 LBJ Freeway, Dallas, TX 75251</div>
+</header>
+
+<main class="wrap">
+  <div class="toolbar"><button class="btn" type="button" onclick="window.print()">🖨 Print this guide</button></div>
+
+  <section>
+    <h2><span class="num">1</span> Your links</h2>
+    <div class="links">
+      <a class="link main" href="checkin.html">
+        <div class="t"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.7 2.7L16 9.8"/></svg>Guest Check-in</div>
+        <div class="d">Door volunteers: look up guests, check them in, see their seat</div>
+        <div class="u">neerajagrawal.org/checkin.html</div>
+      </a>
+      <a class="link" href="checkin-board.html">
+        <div class="t"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M8 20h8M12 16v4"/></svg>Live Arrivals Board</div>
+        <div class="d">Big screen / help desk: who has arrived, updates every second</div>
+        <div class="u">neerajagrawal.org/checkin-board.html</div>
+      </a>
+      <a class="link" href="attendance-report.html">
+        <div class="t"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h6a1 1 0 0 1 1 1v1h2a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h2V4a1 1 0 0 1 1-1z"/><path d="M9 3.5v2.5h6V3.5"/><path d="M9 17v-3M12 17v-6M15 17v-4"/></svg>Attendance Report</div>
+        <div class="d">Coordinators: totals, charts, who hasn't arrived, CSV / PDF</div>
+        <div class="u">neerajagrawal.org/attendance-report.html</div>
+      </a>
+    </div>
+    <div class="pin-note">🔒 All three need the <b>6-digit event PIN</b>, which your coordinator sends you separately.
+      Never post the PIN in a group chat with guests, and don't write it on anything guests can see.</div>
+  </section>
+
+  <section>
+    <h2><span class="num">2</span> Before doors open (4:45 PM)</h2>
+    <div class="card">
+      <ol class="steps">
+        <li><div><b>Charge your phone</b> and turn the screen brightness up. Mobile data or venue Wi-Fi both work.</div></li>
+        <li><div>Open <b>Guest Check-in</b>, type the <b>PIN</b>, and enter your <b>station name</b>, e.g. <i>Main Entrance – Priya</i>.
+          <div class="muted">The very first login of the day can take 10–20 seconds. That's normal.</div></div></li>
+        <li><div>Do a test search, e.g. your own last name, to see results appear. <b>Don't tap</b> anyone yet.</div></li>
+        <li><div>Leave the page open. You stay signed in until you tap <b>Sign out</b>.</div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">3</span> Checking in a guest (about 5 seconds)</h2>
+    <div class="card">
+      <ol class="steps">
+        <li><div>Ask: <b>"May I have the last 4 digits of your phone?"</b> The name works too.</div></li>
+        <li><div>Type it in the search box. Matches appear instantly.</div></li>
+        <li><div><b>Tap the guest's name.</b> The screen turns <span class="chip g">GREEN</span> and shows their <b>seat in large text</b>.</div></li>
+        <li><div>Show the guest the screen or tell them the seat, e.g. "You're at <b>A-12</b>. Happy Diwali!"</div></li>
+        <li><div>The screen goes back to search by itself after 4 seconds. On to the next guest.</div></li>
+      </ol>
+      <p class="muted" style="margin-top:10px">Tip: when only one guest matches, pressing <b>Enter</b> checks them in too.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">4</span> If something's different</h2>
+    <div class="sit">
+      <div class="row"><div class="k">Screen turns amber <span class="chip a">ALREADY CHECKED IN</span></div>
+        <div>They (or someone with the same details) were already checked in. The screen shows when and at which station. Show them their seat and let them in. If it looks wrong, send them to the help desk.</div></div>
+      <div class="row"><div class="k">"No seat assigned"<small>shown instead of a seat</small></div>
+        <div>They're checked in, but no seat is assigned. Send them to the <b>help desk</b> for a seat.</div></div>
+      <div class="row"><div class="k">Two people with the same name</div>
+        <div>Ask for the <b>last 4 digits of their phone</b> or their email and match it to the grey line under the name.</div></div>
+      <div class="row"><div class="k">Guest not on the list</div>
+        <div>Try another spelling, their phone number, or their partner's name (couples often RSVP once). Still nothing? Tap <b>+ Walk-in</b>, enter their name (phone if they'll share it), and tap <b>Check in</b>. Send them to the help desk for a seat.</div></div>
+      <div class="row"><div class="k">Tapped the wrong person</div>
+        <div>On the green screen, tap <b>Undo check-in</b> straight away, then check in the right guest.</div></div>
+      <div class="row"><div class="k">"Offline" or "waiting to sync"<small>at the top</small></div>
+        <div><b>Keep checking guests in.</b> They're saved on your phone and sent automatically when the connection returns. <b>Don't sign out</b> until it says <i>Synced</i>.</div></div>
+      <div class="row"><div class="k"><span class="chip r">Google is responding slowly</span></div>
+        <div>Wait a few seconds and try again. Your saved check-ins are not lost.</div></div>
+      <div class="row"><div class="k">"Wrong PIN"</div>
+        <div>Re-type the 6 digits carefully. If it still fails, ask your coordinator. Too many wrong tries locks it for 10 minutes.</div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">5</span> Good habits</h2>
+    <div class="two">
+      <div class="card">
+        <ul class="ticks">
+          <li>Greet first, then search: "Happy Diwali! Last 4 of your phone?"</li>
+          <li>Search by phone digits. It's the fastest and avoids spelling issues.</li>
+          <li>Keep the line moving. Send unusual cases to the help desk.</li>
+          <li>Tap <b>Refresh</b> if the coordinator says the guest list was updated.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <ul class="ticks cross">
+          <li>Don't read guests' phone numbers or emails out loud.</li>
+          <li>Don't hand your phone to guests or leave it unlocked unattended.</li>
+          <li>Don't open the Attendance Report on a screen guests can see (it lists contact details).</li>
+          <li>Don't sign out while it says "waiting to sync".</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">6</span> At the end (8:00 PM)</h2>
+    <div class="card">
+      <ol class="steps">
+        <li><div>Check the top of your screen says <b>Synced</b>.</div></li>
+        <li><div>Tap <b>Sign out</b>.</div></li>
+        <li><div>Thank you! Every check-in is recorded automatically. No paperwork needed. 🪔</div></li>
+      </ol>
+    </div>
+  </section>
+</main>
+
+<footer><img src="hdfw-logo-192.webp" alt="" width="26" height="26">Hosted by Hindus of DFW · Thank you for volunteering · Happy Diwali! 🪔</footer>
+</body>
+</html>

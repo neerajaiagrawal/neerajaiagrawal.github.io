@@ -92,7 +92,8 @@
   h1.event { font-size: clamp(1.4rem, 3.6vw, 2.4rem); font-weight: 800; line-height: 1.15; text-shadow: 0 2px 12px rgba(0,0,0,.6); }
   .live { font-size: .85rem; color: rgba(255,255,255,.85); margin-top: 6px; display: flex; gap: 12px; flex-wrap: wrap; align-items: center; text-shadow: 0 1px 6px rgba(0,0,0,.6); }
   .hero .linkbtn { color: #FFD27A; }
-  a.linkbtn { text-decoration: none; }
+  a.linkbtn { text-decoration: none; display: inline-flex; align-items: center; gap: 5px; }
+  .linkbtn .ico { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
   a.linkbtn:hover { text-decoration: underline; }
   .dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: var(--ok); margin-right: 5px; vertical-align: middle; }
   .dot.pulse { animation: pulse 1s ease-out; }
@@ -176,7 +177,7 @@
           <div class="live">
             <span id="liveState"><span class="dot"></span>Live</span>
             <button class="linkbtn" type="button" id="fsBtn">Full screen</button>
-            <a class="linkbtn" href="attendance-report.html" id="reportLink">📊 Attendance report</a>
+            <a class="linkbtn" href="attendance-report.html" id="reportLink"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h6a1 1 0 0 1 1 1v1h2a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h2V4a1 1 0 0 1 1-1z"/><path d="M9 3.5v2.5h6V3.5"/><path d="M9 17v-3M12 17v-6M15 17v-4"/></svg>Attendance report</a>
             <button class="linkbtn" type="button" id="logoutBtn">Sign out</button>
           </div>
         </div>
