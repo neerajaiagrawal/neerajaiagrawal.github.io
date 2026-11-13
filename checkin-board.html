@@ -4,24 +4,31 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
-<meta name="theme-color" content="#0078D4">
-<title>Live Arrivals</title>
+<meta name="theme-color" content="#5A1046">
+<title>Live Arrivals · Diwali Celebration – Sparkle of Joy</title>
 <style>
   :root {
-    --accent: #0078D4; --accent-dark: #005A9E; --accent-pale: #EFF6FC;
+    --accent: #B4380C; --accent-dark: #8C2A08; --accent-pale: #FFF0E0;
     --ok: #107C10; --ok-bg: #DFF6DD; --warn: #8A5300; --warn-bg: #FFF4CE; --err: #A4262C;
-    --text: #1B1B1B; --text-2: #505050; --muted: #767676;
-    --bg: #F8F9FA; --card: #FFFFFF; --border: #E1E1E1; --row-alt: #FAFAFA;
+    --text: #23140F; --text-2: #5A463C; --muted: #7D6A60;
+    --bg: #FFF9F2; --card: #FFFFFF; --border: #F0DFCF; --row-alt: #FFFBF6;
     --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --accent: #50ABF1; --accent-dark: #2B88D8; --accent-pale: #0F2A40;
+      --accent: #FFA45C; --accent-dark: #FF8A3D; --accent-pale: #3A1E10;
       --ok: #6CCB5F; --ok-bg: #12351A; --warn: #FCE100; --warn-bg: #3A3000; --err: #F1707B;
-      --text: #F3F3F3; --text-2: #C8C8C8; --muted: #9E9E9E;
-      --bg: #121212; --card: #1E1E1E; --border: #333; --row-alt: #232323;
+      --text: #FBF1E8; --text-2: #D9C6B8; --muted: #A8968A;
+      --bg: #170C12; --card: #23151C; --border: #3D2A30; --row-alt: #281920;
     }
+    .btn-primary { color: #1E0B12 !important; }
   }
+  /* Diwali banner */
+  .hero { position: relative; background: #2A0B3A url('diwali-banner.svg') center/cover no-repeat; color: #fff; }
+  .hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(20,6,30,.65), rgba(20,6,30,.2) 55%, rgba(20,6,30,.55)); }
+  .hero > * { position: relative; z-index: 1; }
+  .ev-sub { color: #FFD27A; }
+  .ev-meta { font-size: .9rem; opacity: .95; text-shadow: 0 1px 6px rgba(0,0,0,.6); }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { height: 100%; }
   body { font-family: var(--font); background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; }
@@ -31,9 +38,18 @@
 
   /* login */
   #login { min-height: 100%; display: grid; place-items: center; padding: 24px 16px; }
-  .login-card { width: 100%; max-width: 380px; background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 28px 24px; }
-  .login-card h1 { font-size: 1.5rem; margin-bottom: 4px; }
-  .login-card p { color: var(--text-2); margin-bottom: 18px; font-size: .95rem; }
+  .login-card { width: 100%; max-width: 400px; background: var(--card); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; box-shadow: 0 10px 40px rgba(90,16,70,.12); }
+  .login-card .hero { padding: 34px 20px 22px; min-height: 190px; display: flex; flex-direction: column; justify-content: flex-end; text-align: center; }
+  .login-card .hero::after { background: linear-gradient(180deg, rgba(20,6,30,.15), rgba(20,6,30,.55)); }
+  .login-card .hero h1 { font-size: 1.45rem; line-height: 1.2; font-weight: 800; text-shadow: 0 2px 10px rgba(0,0,0,.55); }
+  .login-card .ev-meta { margin-top: 8px; line-height: 1.45; font-size: .85rem; }
+  .login-body { padding: 20px 24px 24px; }
+  .login-body h2 { font-size: 1.15rem; margin-bottom: 2px; }
+  .login-body p { color: var(--text-2); margin-bottom: 6px; font-size: .92rem; }
+  #pin { font-size: 1.6rem; letter-spacing: .5em; text-align: center; padding: 10px 14px; font-variant-numeric: tabular-nums; }
+  #pin::placeholder { letter-spacing: .35em; color: var(--muted); opacity: .6; }
+  .pin-help { font-size: .8rem; color: var(--muted); margin-top: 6px; }
+  .btn-primary:disabled { opacity: .55; cursor: not-allowed; }
   label { display: block; font-weight: 600; font-size: .9rem; margin: 12px 0 6px; }
   .field { width: 100%; padding: 12px 14px; border: 1.5px solid var(--border); border-radius: 10px; background: var(--card); color: var(--text); font-size: 1.05rem; }
   .field:focus { outline: none; border-color: var(--accent); }
@@ -44,11 +60,15 @@
   /* board */
   .demo-banner { background: var(--warn-bg); color: var(--warn); text-align: center; font-size: .8rem; font-weight: 600; padding: 4px 16px; }
   .demo-banner button { background: none; color: inherit; text-decoration: underline; font-weight: 700; margin-left: 6px; }
-  header { background: var(--card); border-bottom: 1px solid var(--border); padding: 16px; }
+  header { background: var(--card); border-bottom: 1px solid var(--border); }
+  header .hero { padding: 56px 16px 20px; }
+  .bar-area { padding: 0 16px 16px; }
   .wrap { max-width: 1100px; margin: 0 auto; }
   .top { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
-  h1.event { font-size: clamp(1.2rem, 3vw, 1.8rem); font-weight: 700; }
-  .live { font-size: .85rem; color: var(--muted); margin-top: 2px; display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+  .kicker { font-size: .78rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #FFD27A; text-shadow: 0 1px 6px rgba(0,0,0,.6); }
+  h1.event { font-size: clamp(1.4rem, 3.6vw, 2.4rem); font-weight: 800; line-height: 1.15; text-shadow: 0 2px 12px rgba(0,0,0,.6); }
+  .live { font-size: .85rem; color: rgba(255,255,255,.85); margin-top: 6px; display: flex; gap: 12px; flex-wrap: wrap; align-items: center; text-shadow: 0 1px 6px rgba(0,0,0,.6); }
+  .hero .linkbtn { color: #FFD27A; }
   .dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: var(--ok); margin-right: 5px; vertical-align: middle; }
   .dot.pulse { animation: pulse 1s ease-out; }
   .dot.stale { background: #F7A000; } .dot.down { background: var(--err); }
@@ -56,11 +76,12 @@
   .linkbtn { background: none; color: var(--accent); font-size: .85rem; padding: 0; }
   .stats { display: flex; gap: 28px; align-items: flex-end; }
   .stat { text-align: right; }
-  .stat b { display: block; font-size: clamp(2rem, 6vw, 3.4rem); line-height: 1; font-weight: 800; font-variant-numeric: tabular-nums; color: var(--accent); }
-  .stat.pending b { color: var(--text-2); }
-  .stat span { font-size: .8rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+  .stat { background: rgba(20,6,30,.45); border: 1px solid rgba(255,210,122,.35); border-radius: 14px; padding: 10px 14px; backdrop-filter: blur(3px); }
+  .stat b { display: block; font-size: clamp(2rem, 6vw, 3.4rem); line-height: 1; font-weight: 800; font-variant-numeric: tabular-nums; color: #FFD27A; text-shadow: 0 2px 10px rgba(0,0,0,.5); }
+  .stat.pending b { color: #fff; }
+  .stat span { font-size: .75rem; color: rgba(255,255,255,.85); text-transform: uppercase; letter-spacing: .06em; }
   .progress { height: 8px; background: var(--border); border-radius: 4px; margin-top: 14px; overflow: hidden; }
-  .progress i { display: block; height: 100%; width: 0; background: var(--accent); transition: width .5s; }
+  .progress i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, #FB8500, #FFB703); transition: width .5s; }
 
   .controls { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
   .tabs { display: inline-flex; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 3px; }
@@ -88,30 +109,41 @@
   @media (max-width: 640px) {
     th.by, td.by, th.n, td.n { display: none; }
     th, td { padding: 10px; }
-    .stats { gap: 18px; width: 100%; justify-content: space-between; }
-    .stat { text-align: left; }
+    .stats { gap: 8px; width: 100%; }
+    .stat { text-align: left; flex: 1; padding: 8px 10px; }
+    header .hero { padding-top: 44px; }
   }
 </style>
 </head>
 <body>
 
 <section id="login">
-  <form class="login-card" id="loginForm" autocomplete="off">
-    <h1>Live Arrivals</h1>
-    <p>Shows checked-in guests as they arrive. Enter the event PIN.</p>
-    <label for="pin">Event PIN</label>
-    <input class="field" id="pin" type="password" inputmode="numeric" required>
-    <button class="btn btn-primary" id="loginBtn" type="submit">Open board</button>
-    <div class="err-msg" id="loginErr"></div>
+  <form class="login-card" id="loginForm" autocomplete="off" novalidate>
+    <div class="hero">
+      <h1>Diwali Celebration<br><span class="ev-sub">Sparkle of Joy</span></h1>
+      <div class="ev-meta">Wed, 18 Nov 2026 · 5:00 – 8:00 PM CST<br>7750 LBJ Freeway, Dallas, TX 75251</div>
+    </div>
+    <div class="login-body">
+      <h2>Live Arrivals Board</h2>
+      <p>Shows guests as they check in. Enter the event PIN.</p>
+      <label for="pin">Event PIN</label>
+      <input class="field" id="pin" type="password" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" autocomplete="off" placeholder="••••••" aria-describedby="pinHelp" required>
+      <div class="pin-help" id="pinHelp">6 digits, numbers only</div>
+      <button class="btn btn-primary" id="loginBtn" type="submit" disabled>Open board</button>
+      <div class="err-msg" id="loginErr"></div>
+    </div>
   </form>
 </section>
 
 <section id="board" class="hidden">
   <header>
+    <div class="hero">
     <div class="wrap">
       <div class="top">
         <div>
-          <h1 class="event" id="eventName">Live Arrivals</h1>
+          <div class="kicker">🪔 Live Arrivals</div>
+          <h1 class="event">Diwali Celebration – <span class="ev-sub">Sparkle of Joy</span></h1>
+          <div class="ev-meta">Wed, 18 Nov 2026 · 5:00 – 8:00 PM CST · 7750 LBJ Freeway, Dallas, TX 75251</div>
           <div class="live">
             <span id="liveState"><span class="dot"></span>Live</span>
             <button class="linkbtn" type="button" id="fsBtn">Full screen</button>
@@ -124,6 +156,10 @@
           <div class="stat pending"><b id="sPct">0%</b><span>of <span id="sTotal">0</span></span></div>
         </div>
       </div>
+    </div>
+    </div>
+    <div class="bar-area">
+    <div class="wrap">
       <div class="progress"><i id="bar"></i></div>
       <div class="controls">
         <div class="tabs" role="tablist">
@@ -132,6 +168,7 @@
         </div>
         <input class="field" id="filter" type="search" placeholder="Filter by name or seat" autocomplete="off">
       </div>
+    </div>
     </div>
   </header>
   <main><div class="wrap" id="list"></div></main>
@@ -175,22 +212,32 @@ async function api(action) {
 }
 
 /* ---------------------------- login ---------------------------- */
+const PIN_LEN = 6;
+const pinOk = () => /^\d{6}$/.test($('pin').value);
+$('pin').addEventListener('input', () => {
+  const el = $('pin'), clean = el.value.replace(/\D/g, '').slice(0, PIN_LEN);
+  if (el.value !== clean) el.value = clean;   // digits only, max 6
+  $('loginErr').textContent = '';
+  $('loginBtn').disabled = !pinOk();
+});
+$('pin').addEventListener('keydown', e => {
+  if (e.key.length === 1 && !/\d/.test(e.key) && !e.ctrlKey && !e.metaKey) e.preventDefault();
+});
 $('loginForm').addEventListener('submit', async e => {
   e.preventDefault();
-  PIN = $('pin').value.trim();
-  $('loginBtn').disabled = true; $('loginErr').textContent = '';
+  if (!pinOk()) { $('loginErr').textContent = 'The PIN is 6 digits.'; return; }
+  PIN = $('pin').value;
+  $('loginBtn').disabled = true; $('loginBtn').textContent = 'Opening…'; $('loginErr').textContent = '';
   try { await loadAll(); ss.set('ci_pin', PIN); start(); }
   catch (err) { $('loginErr').textContent = err.message; PIN = ''; }
-  finally { $('loginBtn').disabled = false; }
+  finally { $('loginBtn').textContent = 'Open board'; $('loginBtn').disabled = !pinOk(); }
 });
-$('logoutBtn').onclick = () => { stop(); ss.set('ci_pin', null); PIN = ''; $('board').classList.add('hidden'); $('login').classList.remove('hidden'); $('pin').value = ''; };
+$('logoutBtn').onclick = () => { stop(); ss.set('ci_pin', null); PIN = ''; $('board').classList.add('hidden'); $('login').classList.remove('hidden'); $('pin').value = ''; $('loginBtn').disabled = true; };
 $('fsBtn').onclick = () => { if (document.fullscreenElement) document.exitFullscreen(); else document.documentElement.requestFullscreen?.(); };
 
 /* --------------------------- data ------------------------------ */
 async function loadAll() {
   const d = await api('load');
-  $('eventName').textContent = d.event || 'Live Arrivals';
-  document.title = (d.event || 'Live') + ' – Arrivals';
   guests = new Map((d.guests || []).map(g => [g.id, g]));
   applyCheckins(d.checkins || {});
   lastFull = lastOk = Date.now();
