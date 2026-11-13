@@ -92,6 +92,8 @@
   h1.event { font-size: clamp(1.4rem, 3.6vw, 2.4rem); font-weight: 800; line-height: 1.15; text-shadow: 0 2px 12px rgba(0,0,0,.6); }
   .live { font-size: .85rem; color: rgba(255,255,255,.85); margin-top: 6px; display: flex; gap: 12px; flex-wrap: wrap; align-items: center; text-shadow: 0 1px 6px rgba(0,0,0,.6); }
   .hero .linkbtn { color: #FFD27A; }
+  a.linkbtn { text-decoration: none; }
+  a.linkbtn:hover { text-decoration: underline; }
   .dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: var(--ok); margin-right: 5px; vertical-align: middle; }
   .dot.pulse { animation: pulse 1s ease-out; }
   .dot.stale { background: #F7A000; } .dot.down { background: var(--err); }
@@ -174,6 +176,7 @@
           <div class="live">
             <span id="liveState"><span class="dot"></span>Live</span>
             <button class="linkbtn" type="button" id="fsBtn">Full screen</button>
+            <a class="linkbtn" href="attendance-report.html" id="reportLink">📊 Attendance report</a>
             <button class="linkbtn" type="button" id="logoutBtn">Sign out</button>
           </div>
         </div>
