@@ -213,13 +213,24 @@ let lastFull = 0;
 
 /* --------------------------------- API ---------------------------------- */
 async function api(action, payload = {}) {
-  const res = await fetch(SCRIPT_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'text/plain;charset=utf-8' },   // simple request: no CORS preflight
-    body: JSON.stringify({ action, pin: PIN, ...payload }),
-    redirect: 'follow'
-  });
-  if (!res.ok) throw new Error('Network error ' + res.status);
+  const ctrl = new AbortController();
+  const limit = action === 'load' ? 30000 : 20000;
+  const t = setTimeout(() => ctrl.abort(), limit);
+  let res;
+  try {
+    res = await fetch(SCRIPT_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },   // simple request: no CORS preflight
+      body: JSON.stringify({ action, pin: PIN, ...payload }),
+      redirect: 'follow',
+      signal: ctrl.signal
+    });
+  } catch (e) {
+    throw new Error(e.name === 'AbortError'
+      ? 'Google is responding slowly. Please try again in a moment.'
+      : 'No connection to the server. Check Wi-Fi / mobile data and try again.');
+  } finally { clearTimeout(t); }
+  if (!res.ok) throw new Error('Server error ' + res.status + '. Please try again.');
   const data = await res.json();
   if (!data.ok) { const e = new Error(data.error || 'Server error'); e.auth = !!data.auth; throw e; }
   return data;

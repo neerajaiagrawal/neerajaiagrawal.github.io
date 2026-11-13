@@ -158,9 +158,17 @@ const FRESH_MS = 6000;
 let tab = 'in', lastOk = 0, lastFull = 0, timer = null, running = false, lastSig = '';
 
 async function api(action) {
-  const res = await fetch(SCRIPT_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-    body: JSON.stringify({ action, pin: PIN }), redirect: 'follow' });
-  if (!res.ok) throw new Error('Network error ' + res.status);
+  const ctrl = new AbortController();
+  const t = setTimeout(() => ctrl.abort(), action === 'load' ? 30000 : 15000);
+  let res;
+  try {
+    res = await fetch(SCRIPT_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({ action, pin: PIN }), redirect: 'follow', signal: ctrl.signal });
+  } catch (e) {
+    throw new Error(e.name === 'AbortError' ? 'Google is responding slowly. Please try again in a moment.'
+      : 'No connection to the server. Check the internet connection and try again.');
+  } finally { clearTimeout(t); }
+  if (!res.ok) throw new Error('Server error ' + res.status + '. Please try again.');
   const d = await res.json();
   if (!d.ok) throw Object.assign(new Error(d.error || 'Server error'), { auth: !!d.auth });
   return d;
