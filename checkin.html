@@ -184,6 +184,7 @@
 
 <div class="toast hidden" id="toast"></div>
 
+<script src="checkin-demo.js"></script>
 <script>
 /* =====================================================================
    CONFIG – paste your Apps Script Web App URL here (ends with /exec).
@@ -506,32 +507,7 @@ let toastT;
 function toast(msg, ms = 3000) { const t = $('toast'); t.textContent = msg; t.classList.remove('hidden'); clearTimeout(toastT); toastT = setTimeout(() => t.classList.add('hidden'), ms); }
 
 /* ------------------------------ demo backend ---------------------------- */
-let demoDb = null;
-function demoApi(action, p) {
-  if (!demoDb) {
-    const first = ['Aarav','Priya','Rohan','Ananya','Vikram','Sneha','Arjun','Kavya','Rahul','Meera','Sanjay','Pooja','Amit','Neha','Karan','Divya','Ravi','Isha','Suresh','Lakshmi','John','Emily','Michael','Sarah','David','Maria','James','Linda','Robert','Jennifer'];
-    const last = ['Sharma','Patel','Agrawal','Gupta','Iyer','Reddy','Mehta','Shah','Nair','Kapoor','Smith','Johnson','Brown','Garcia','Miller'];
-    const list = [];
-    for (let i = 0; i < 60; i++) {
-      const fn = first[i % first.length], ln = last[(i * 7) % last.length];
-      const phone = '(555) ' + String(200 + i * 13).slice(-3) + '-' + String(1000 + i * 137).slice(-4);
-      list.push({ id: 'e:' + (fn + '.' + ln + i).toLowerCase() + '@example.com', name: fn + ' ' + ln, email: (fn + '.' + ln + i).toLowerCase() + '@example.com', phone,
-        seat: i === 5 ? '' : 'Table ' + (Math.floor(i / 8) + 1) + ' · Seat ' + (i % 8 + 1) });
-    }
-    demoDb = { guests: list, checkins: {}, walkins: [] };
-    demoDb.checkins[list[2].id] = { at: new Date(Date.now() - 600000).toISOString(), by: 'Door 2 – Demo' };
-  }
-  return new Promise((resolve, reject) => setTimeout(() => {
-    if (PIN !== '1234') return reject(Object.assign(new Error('Wrong PIN (demo PIN is 1234)'), { auth: true }));
-    const db = demoDb;
-    if (action === 'load') return resolve({ ok: true, event: 'Demo Gala 2026', guests: db.guests.concat(db.walkins), checkins: { ...db.checkins } });
-    if (action === 'status') return resolve({ ok: true, checkins: { ...db.checkins }, walkins: db.walkins });
-    if (action === 'checkin') { if (db.checkins[p.id]) return resolve({ ok: true, already: true, ...db.checkins[p.id] }); db.checkins[p.id] = { at: p.at, by: p.device }; return resolve({ ok: true }); }
-    if (action === 'undo') { delete db.checkins[p.id]; return resolve({ ok: true }); }
-    if (action === 'walkin') { db.walkins.push({ id: p.id, name: p.name, phone: p.phone, email: p.email, seat: p.seat, walkin: true }); db.checkins[p.id] = { at: p.at, by: p.device }; return resolve({ ok: true }); }
-    reject(new Error('Unknown action'));
-  }, 150));
-}
+function demoApi(action, p) { return window.CheckinDemo.api(action, p, PIN); }
 
 /* ------------------------------ auto resume ----------------------------- */
 if (DEMO) $('pin').placeholder = 'Demo PIN: 1234';

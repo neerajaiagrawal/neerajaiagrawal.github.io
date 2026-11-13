@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0078D4">
+<title>Live Arrivals</title>
+<style>
+  :root {
+    --accent: #0078D4; --accent-dark: #005A9E; --accent-pale: #EFF6FC;
+    --ok: #107C10; --ok-bg: #DFF6DD; --warn: #8A5300; --warn-bg: #FFF4CE; --err: #A4262C;
+    --text: #1B1B1B; --text-2: #505050; --muted: #767676;
+    --bg: #F8F9FA; --card: #FFFFFF; --border: #E1E1E1; --row-alt: #FAFAFA;
+    --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --accent: #50ABF1; --accent-dark: #2B88D8; --accent-pale: #0F2A40;
+      --ok: #6CCB5F; --ok-bg: #12351A; --warn: #FCE100; --warn-bg: #3A3000; --err: #F1707B;
+      --text: #F3F3F3; --text-2: #C8C8C8; --muted: #9E9E9E;
+      --bg: #121212; --card: #1E1E1E; --border: #333; --row-alt: #232323;
+    }
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body { font-family: var(--font); background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; }
+  button, input { font: inherit; }
+  button { cursor: pointer; border: 0; }
+  .hidden { display: none !important; }
+
+  /* login */
+  #login { min-height: 100%; display: grid; place-items: center; padding: 24px 16px; }
+  .login-card { width: 100%; max-width: 380px; background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 28px 24px; }
+  .login-card h1 { font-size: 1.5rem; margin-bottom: 4px; }
+  .login-card p { color: var(--text-2); margin-bottom: 18px; font-size: .95rem; }
+  label { display: block; font-weight: 600; font-size: .9rem; margin: 12px 0 6px; }
+  .field { width: 100%; padding: 12px 14px; border: 1.5px solid var(--border); border-radius: 10px; background: var(--card); color: var(--text); font-size: 1.05rem; }
+  .field:focus { outline: none; border-color: var(--accent); }
+  .btn { display: inline-flex; align-items: center; justify-content: center; padding: 12px 18px; border-radius: 10px; font-weight: 600; }
+  .btn-primary { background: var(--accent); color: #fff; width: 100%; margin-top: 20px; }
+  .err-msg { color: var(--err); margin-top: 12px; font-size: .9rem; min-height: 1.2em; }
+
+  /* board */
+  .demo-banner { background: var(--warn-bg); color: var(--warn); text-align: center; font-size: .8rem; font-weight: 600; padding: 4px 16px; }
+  .demo-banner button { background: none; color: inherit; text-decoration: underline; font-weight: 700; margin-left: 6px; }
+  header { background: var(--card); border-bottom: 1px solid var(--border); padding: 16px; }
+  .wrap { max-width: 1100px; margin: 0 auto; }
+  .top { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  h1.event { font-size: clamp(1.2rem, 3vw, 1.8rem); font-weight: 700; }
+  .live { font-size: .85rem; color: var(--muted); margin-top: 2px; display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+  .dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: var(--ok); margin-right: 5px; vertical-align: middle; }
+  .dot.pulse { animation: pulse 1s ease-out; }
+  .dot.stale { background: #F7A000; } .dot.down { background: var(--err); }
+  @keyframes pulse { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--ok) 60%, transparent); } 100% { box-shadow: 0 0 0 8px transparent; } }
+  .linkbtn { background: none; color: var(--accent); font-size: .85rem; padding: 0; }
+  .stats { display: flex; gap: 28px; align-items: flex-end; }
+  .stat { text-align: right; }
+  .stat b { display: block; font-size: clamp(2rem, 6vw, 3.4rem); line-height: 1; font-weight: 800; font-variant-numeric: tabular-nums; color: var(--accent); }
+  .stat.pending b { color: var(--text-2); }
+  .stat span { font-size: .8rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+  .progress { height: 8px; background: var(--border); border-radius: 4px; margin-top: 14px; overflow: hidden; }
+  .progress i { display: block; height: 100%; width: 0; background: var(--accent); transition: width .5s; }
+
+  .controls { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+  .tabs { display: inline-flex; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 3px; }
+  .tab { background: none; color: var(--text-2); padding: 8px 14px; border-radius: 8px; font-weight: 600; font-size: .92rem; }
+  .tab.on { background: var(--card); color: var(--accent); box-shadow: 0 1px 3px rgba(0,0,0,.12); }
+  #filter { flex: 1; min-width: 160px; padding: 9px 12px; font-size: .95rem; }
+
+  main { padding: 12px 16px 40px; }
+  table { width: 100%; border-collapse: collapse; background: var(--card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+  th, td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--border); font-size: clamp(.95rem, 1.6vw, 1.15rem); }
+  th { font-size: .78rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); background: var(--bg); position: sticky; top: 0; }
+  tbody tr:nth-child(even) { background: var(--row-alt); }
+  tbody tr:last-child td { border-bottom: 0; }
+  td.n { color: var(--muted); width: 3.5em; font-variant-numeric: tabular-nums; }
+  td.name { font-weight: 600; }
+  td.seat b { color: var(--accent); }
+  td.seat .none { color: var(--warn); font-size: .85em; font-weight: 600; }
+  td.time { white-space: nowrap; font-variant-numeric: tabular-nums; }
+  td.by { color: var(--text-2); }
+  .walk { display: inline-block; margin-left: 6px; font-size: .7rem; font-weight: 700; color: var(--accent); background: var(--accent-pale); padding: 2px 6px; border-radius: 6px; vertical-align: middle; }
+  tbody tr.fresh { background: var(--ok-bg); }
+  tbody tr.fresh td.name::after { content: ' NEW'; font-size: .7rem; font-weight: 700; color: var(--ok); vertical-align: middle; }
+  .empty { text-align: center; color: var(--muted); padding: 48px 12px; background: var(--card); border: 1px solid var(--border); border-radius: 12px; }
+
+  @media (max-width: 640px) {
+    th.by, td.by, th.n, td.n { display: none; }
+    th, td { padding: 10px; }
+    .stats { gap: 18px; width: 100%; justify-content: space-between; }
+    .stat { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<section id="login">
+  <form class="login-card" id="loginForm" autocomplete="off">
+    <h1>Live Arrivals</h1>
+    <p>Shows checked-in guests as they arrive. Enter the event PIN.</p>
+    <label for="pin">Event PIN</label>
+    <input class="field" id="pin" type="password" inputmode="numeric" required>
+    <button class="btn btn-primary" id="loginBtn" type="submit">Open board</button>
+    <div class="err-msg" id="loginErr"></div>
+  </form>
+</section>
+
+<section id="board" class="hidden">
+  <div class="demo-banner hidden" id="demoBanner">DEMO MODE – sample guests. Check people in on checkin.html?demo=1 in another tab of this browser.<button type="button" id="resetDemo">Reset demo</button></div>
+  <header>
+    <div class="wrap">
+      <div class="top">
+        <div>
+          <h1 class="event" id="eventName">Live Arrivals</h1>
+          <div class="live">
+            <span id="liveState"><span class="dot"></span>Live</span>
+            <button class="linkbtn" type="button" id="fsBtn">Full screen</button>
+            <button class="linkbtn" type="button" id="logoutBtn">Sign out</button>
+          </div>
+        </div>
+        <div class="stats">
+          <div class="stat"><b id="sIn">0</b><span>Checked in</span></div>
+          <div class="stat pending"><b id="sOut">0</b><span>Not arrived</span></div>
+          <div class="stat pending"><b id="sPct">0%</b><span>of <span id="sTotal">0</span></span></div>
+        </div>
+      </div>
+      <div class="progress"><i id="bar"></i></div>
+      <div class="controls">
+        <div class="tabs" role="tablist">
+          <button class="tab on" data-tab="in" type="button">Checked in</button>
+          <button class="tab" data-tab="out" type="button">Not arrived</button>
+        </div>
+        <input class="field" id="filter" type="search" placeholder="Filter by name or seat" autocomplete="off">
+      </div>
+    </div>
+  </header>
+  <main><div class="wrap" id="list"></div></main>
+</section>
+
+<script src="checkin-demo.js"></script>
+<script>
+/* =====================================================================
+   CONFIG – the same Apps Script Web App URL as in checkin.html.
+   Leave empty, or open checkin-board.html?demo=1, for sample data.
+   ===================================================================== */
+const SCRIPT_URL = '';
+
+const REFRESH_MS = 1000;            // pull new check-ins every second
+const FULL_RELOAD_MS = 5 * 60000;   // re-read the guest list (new RSVPs, seat edits)
+
+const $ = id => document.getElementById(id);
+const DEMO = !SCRIPT_URL || new URLSearchParams(location.search).has('demo');
+const ss = { get(k) { try { return sessionStorage.getItem(k); } catch { return null; } },
+             set(k, v) { try { v == null ? sessionStorage.removeItem(k) : sessionStorage.setItem(k, v); } catch {} } };
+
+let PIN = ss.get('ci_pin') || '';
+let guests = new Map();     // id -> guest
+let checkins = {};          // id -> {at, by}
+let seen = null;            // ids already shown (to highlight new arrivals)
+let freshUntil = new Map(); // id -> time until which the row is highlighted
+const FRESH_MS = 6000;
+let tab = 'in', lastOk = 0, lastFull = 0, timer = null, running = false, lastSig = '';
+
+async function api(action) {
+  if (DEMO) return window.CheckinDemo.api(action, {}, PIN);
+  const res = await fetch(SCRIPT_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    body: JSON.stringify({ action, pin: PIN }), redirect: 'follow' });
+  if (!res.ok) throw new Error('Network error ' + res.status);
+  const d = await res.json();
+  if (!d.ok) throw Object.assign(new Error(d.error || 'Server error'), { auth: !!d.auth });
+  return d;
+}
+
+/* ---------------------------- login ---------------------------- */
+$('loginForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  PIN = $('pin').value.trim();
+  $('loginBtn').disabled = true; $('loginErr').textContent = '';
+  try { await loadAll(); ss.set('ci_pin', PIN); start(); }
+  catch (err) { $('loginErr').textContent = err.message; PIN = ''; }
+  finally { $('loginBtn').disabled = false; }
+});
+$('logoutBtn').onclick = () => { stop(); ss.set('ci_pin', null); PIN = ''; $('board').classList.add('hidden'); $('login').classList.remove('hidden'); $('pin').value = ''; };
+$('fsBtn').onclick = () => { if (document.fullscreenElement) document.exitFullscreen(); else document.documentElement.requestFullscreen?.(); };
+$('resetDemo').onclick = () => { if (confirm('Reset the demo guest list and clear all demo check-ins?')) { window.CheckinDemo.reset(); seen = null; loadAll().then(render); } };
+if (DEMO) $('pin').placeholder = 'Demo PIN: 1234';
+
+/* --------------------------- data ------------------------------ */
+async function loadAll() {
+  const d = await api('load');
+  $('eventName').textContent = d.event || 'Live Arrivals';
+  document.title = (d.event || 'Live') + ' – Arrivals';
+  guests = new Map((d.guests || []).map(g => [g.id, g]));
+  applyCheckins(d.checkins || {});
+  lastFull = lastOk = Date.now();
+}
+function applyCheckins(c) {
+  if (seen) Object.keys(c).forEach(id => { if (!seen.has(id)) freshUntil.set(id, Date.now() + FRESH_MS); });
+  seen = new Set(Object.keys(c));
+  checkins = c;
+}
+
+async function tick() {
+  if (!running) return;
+  if (!document.hidden) {
+    try {
+      if (Date.now() - lastFull > FULL_RELOAD_MS) await loadAll();
+      else {
+        const d = await api('status');
+        (d.walkins || []).forEach(w => guests.set(w.id, w));
+        applyCheckins(d.checkins || {});
+        lastOk = Date.now();
+      }
+      render();
+      const dot = document.querySelector('#liveState .dot'); dot.classList.remove('pulse'); void dot.offsetWidth; dot.classList.add('pulse');
+    } catch (e) {
+      if (e.auth) { $('logoutBtn').onclick(); $('loginErr').textContent = e.message; return; }
+    }
+    liveState();
+  }
+  timer = setTimeout(tick, REFRESH_MS);   // next pull starts 1s after this one finishes
+}
+function start() {
+  $('login').classList.add('hidden'); $('board').classList.remove('hidden');
+  $('demoBanner').classList.toggle('hidden', !DEMO);
+  running = true; render(); clearTimeout(timer); timer = setTimeout(tick, REFRESH_MS);
+}
+function stop() { running = false; clearTimeout(timer); }
+function liveState() {
+  const age = (Date.now() - lastOk) / 1000;
+  const cls = age < 10 ? '' : age < 60 ? 'stale' : 'down';
+  const txt = age < 10 ? 'Live · updated just now' : 'Reconnecting · last update ' + fmtAgo(age);
+  const el = $('liveState');
+  el.lastChild.nodeType === 3 ? (el.lastChild.textContent = txt) : el.append(txt);
+  el.querySelector('.dot').className = 'dot ' + cls;
+}
+setInterval(() => running && liveState(), 1000);
+document.addEventListener('visibilitychange', () => { if (!document.hidden && running) { clearTimeout(timer); tick(); } });
+
+/* -------------------------- render ----------------------------- */
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const fmtTime = iso => { const d = new Date(iso); return isNaN(d) ? '' : d.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }); };
+const fmtAgo = s => s < 60 ? Math.round(s) + 's ago' : Math.round(s / 60) + ' min ago';
+const seatCell = g => g && g.seat ? `<b>${esc(g.seat)}</b>` : `<span class="none">No seat</span>`;
+
+function render() {
+  const all = [...guests.values()];
+  const inIds = Object.keys(checkins).filter(id => guests.has(id));
+  const total = all.length, nIn = inIds.length;
+  $('sIn').textContent = nIn; $('sOut').textContent = total - nIn; $('sTotal').textContent = total;
+  $('sPct').textContent = total ? Math.round(nIn / total * 100) + '%' : '0%';
+  $('bar').style.width = total ? (nIn / total * 100) + '%' : '0';
+
+  const f = $('filter').value.trim().toLowerCase();
+  const match = g => !f || (g.name || '').toLowerCase().includes(f) || (g.seat || '').toLowerCase().includes(f);
+
+  // skip DOM work when nothing changed (keeps scroll position steady)
+  const now = Date.now();
+  for (const [id, t] of freshUntil) if (t < now) freshUntil.delete(id);
+  const isFresh = id => freshUntil.has(id);
+  const sig = tab + '|' + f + '|' + nIn + '|' + total + '|' + inIds.map(id => id + checkins[id].at).join(',') + '|' + [...freshUntil.keys()].join(',');
+  if (sig === lastSig) return;
+  lastSig = sig;
+
+  let html;
+  if (tab === 'in') {
+    const rows = inIds.map(id => ({ g: guests.get(id), c: checkins[id], id }))
+      .filter(r => match(r.g))
+      .sort((a, b) => String(b.c.at).localeCompare(String(a.c.at)));
+    html = rows.length ? `<table><thead><tr><th class="n">#</th><th>Name</th><th>Seat</th><th>Arrived</th><th class="by">Checked in by</th></tr></thead><tbody>` +
+      rows.map((r, i) => `<tr class="${isFresh(r.id) ? 'fresh' : ''}"><td class="n">${rows.length - i}</td>
+        <td class="name">${esc(r.g.name)}${r.g.walkin ? '<span class="walk">WALK-IN</span>' : ''}</td>
+        <td class="seat">${seatCell(r.g)}</td><td class="time">${fmtTime(r.c.at)}</td><td class="by">${esc(r.c.by)}</td></tr>`).join('') +
+      `</tbody></table>` : `<div class="empty">${f ? 'No checked-in guest matches “' + esc(f) + '”.' : 'No one has checked in yet.'}</div>`;
+  } else {
+    const rows = all.filter(g => !checkins[g.id] && match(g)).sort((a, b) => a.name.localeCompare(b.name));
+    html = rows.length ? `<table><thead><tr><th class="n">#</th><th>Name</th><th>Seat</th></tr></thead><tbody>` +
+      rows.map((g, i) => `<tr><td class="n">${i + 1}</td><td class="name">${esc(g.name)}</td><td class="seat">${seatCell(g)}</td></tr>`).join('') +
+      `</tbody></table>` : `<div class="empty">${f ? 'No match for “' + esc(f) + '”.' : 'Everyone has arrived! 🎉'}</div>`;
+  }
+  $('list').innerHTML = html;
+}
+
+document.querySelectorAll('.tab').forEach(b => b.onclick = () => {
+  tab = b.dataset.tab; document.querySelectorAll('.tab').forEach(x => x.classList.toggle('on', x === b)); lastSig = ''; render();
+});
+$('filter').addEventListener('input', () => { lastSig = ''; render(); });
+
+/* ------------------------- auto resume ------------------------- */
+if (PIN) loadAll().then(start).catch(err => { $('loginErr').textContent = err.message; PIN = ''; ss.set('ci_pin', null); });
+</script>
+</body>
+</html>
