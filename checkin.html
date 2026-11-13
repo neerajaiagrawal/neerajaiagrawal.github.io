@@ -126,7 +126,6 @@
 
 <!-- ============ APP ============ -->
 <section id="app" class="hidden">
-  <div class="demo-banner hidden" id="demoBanner">DEMO MODE – sample guests, nothing is saved to Google Sheets</div>
   <header>
     <div class="topbar">
       <div style="min-width:0">
@@ -184,13 +183,9 @@
 
 <div class="toast hidden" id="toast"></div>
 
-<script src="checkin-demo.js"></script>
 <script>
-/* =====================================================================
-   CONFIG – paste your Apps Script Web App URL here (ends with /exec).
-   Leave empty, or open checkin.html?demo=1, to try it with sample data.
-   ===================================================================== */
-const SCRIPT_URL = '';
+/* CONFIG – Apps Script Web App URL (ends with /exec). */
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz7xI6ig_f3PvgI7gkpCJQtvfmb6_6WimK4tKDhqCSzAS5Tfs7CILkLyF6nGnRfbyTDWQ/exec';
 
 const POLL_MS = 15000;       // how often to pull other stations' check-ins
 const OVERLAY_MS = 4000;     // auto-close the green "checked in" screen
@@ -203,7 +198,8 @@ const store = {
   sset(k, v) { try { v == null ? sessionStorage.removeItem(k) : sessionStorage.setItem(k, v); } catch {} }
 };
 const $ = id => document.getElementById(id);
-const DEMO = !SCRIPT_URL || new URLSearchParams(location.search).has('demo');
+// Clear anything left behind by the old demo version (fake check-ins must never reach the real sheet).
+try { localStorage.removeItem('ci_demo_db_v1'); localStorage.removeItem('ci_queue'); } catch {}
 
 /* ------------------------------- state --------------------------------- */
 let PIN = store.sget('ci_pin') || '';
@@ -211,13 +207,12 @@ let DEVICE = store.get('ci_device', '');
 let guests = [];                 // [{id,name,email,phone,seat,walkin}]
 let byId = new Map();
 let checkins = {};               // id -> {at, by}
-let queue = store.get('ci_queue', []);   // pending ops [{op,id,at,device,...}]
+let queue = store.get('ci_queue_live', []);   // pending ops [{op,id,at,device,...}]
 let flushing = false, online = navigator.onLine, pollTimer = null;
 let lastFull = 0;
 
 /* --------------------------------- API ---------------------------------- */
 async function api(action, payload = {}) {
-  if (DEMO) return demoApi(action, payload);
   const res = await fetch(SCRIPT_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'text/plain;charset=utf-8' },   // simple request: no CORS preflight
@@ -259,7 +254,6 @@ $('logoutBtn').onclick = () => {
 
 function showApp() {
   $('login').classList.add('hidden'); $('app').classList.remove('hidden');
-  $('demoBanner').classList.toggle('hidden', !DEMO);
   $('stationName').textContent = DEVICE;
   render(); focusSearch();
   clearInterval(pollTimer); pollTimer = setInterval(poll, POLL_MS);
@@ -314,7 +308,7 @@ async function poll() {
 $('refreshBtn').onclick = async () => { toast('Refreshing…'); try { await loadAll(); render(); toast('Guest list refreshed'); } catch (e) { handleErr(e); } };
 
 /* ---------------------------- sync queue -------------------------------- */
-function enqueue(op) { queue.push(op); store.set('ci_queue', queue); updateSync(); flush(); }
+function enqueue(op) { queue.push(op); store.set('ci_queue_live', queue); updateSync(); flush(); }
 async function flush() {
   if (flushing || !queue.length || !PIN) return updateSync();
   flushing = true;
@@ -327,7 +321,7 @@ async function flush() {
         toast(`Note: ${g ? g.name : 'Guest'} was already checked in at ${fmtTime(res.at)} by ${res.by}`, 6000);
         checkins[op.id] = { at: res.at, by: res.by };
       }
-      queue.shift(); store.set('ci_queue', queue);
+      queue.shift(); store.set('ci_queue_live', queue);
     }
     online = true;
   } catch (e) { handleErr(e); }
@@ -506,11 +500,7 @@ $('walkinForm').addEventListener('submit', e => {
 let toastT;
 function toast(msg, ms = 3000) { const t = $('toast'); t.textContent = msg; t.classList.remove('hidden'); clearTimeout(toastT); toastT = setTimeout(() => t.classList.add('hidden'), ms); }
 
-/* ------------------------------ demo backend ---------------------------- */
-function demoApi(action, p) { return window.CheckinDemo.api(action, p, PIN); }
-
 /* ------------------------------ auto resume ----------------------------- */
-if (DEMO) $('pin').placeholder = 'Demo PIN: 1234';
 if (PIN && DEVICE) {
   loadAll().then(showApp).catch(err => { $('loginErr').textContent = err.message; PIN = ''; store.sset('ci_pin', null); });
 }

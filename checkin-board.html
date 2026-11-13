@@ -107,7 +107,6 @@
 </section>
 
 <section id="board" class="hidden">
-  <div class="demo-banner hidden" id="demoBanner">DEMO MODE – sample guests. Check people in on checkin.html?demo=1 in another tab of this browser.<button type="button" id="resetDemo">Reset demo</button></div>
   <header>
     <div class="wrap">
       <div class="top">
@@ -138,19 +137,15 @@
   <main><div class="wrap" id="list"></div></main>
 </section>
 
-<script src="checkin-demo.js"></script>
 <script>
-/* =====================================================================
-   CONFIG – the same Apps Script Web App URL as in checkin.html.
-   Leave empty, or open checkin-board.html?demo=1, for sample data.
-   ===================================================================== */
-const SCRIPT_URL = '';
+/* CONFIG – the same Apps Script Web App URL as in checkin.html. */
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz7xI6ig_f3PvgI7gkpCJQtvfmb6_6WimK4tKDhqCSzAS5Tfs7CILkLyF6nGnRfbyTDWQ/exec';
 
 const REFRESH_MS = 1000;            // pull new check-ins every second
 const FULL_RELOAD_MS = 5 * 60000;   // re-read the guest list (new RSVPs, seat edits)
 
 const $ = id => document.getElementById(id);
-const DEMO = !SCRIPT_URL || new URLSearchParams(location.search).has('demo');
+try { localStorage.removeItem('ci_demo_db_v1'); } catch {}
 const ss = { get(k) { try { return sessionStorage.getItem(k); } catch { return null; } },
              set(k, v) { try { v == null ? sessionStorage.removeItem(k) : sessionStorage.setItem(k, v); } catch {} } };
 
@@ -163,7 +158,6 @@ const FRESH_MS = 6000;
 let tab = 'in', lastOk = 0, lastFull = 0, timer = null, running = false, lastSig = '';
 
 async function api(action) {
-  if (DEMO) return window.CheckinDemo.api(action, {}, PIN);
   const res = await fetch(SCRIPT_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' },
     body: JSON.stringify({ action, pin: PIN }), redirect: 'follow' });
   if (!res.ok) throw new Error('Network error ' + res.status);
@@ -183,8 +177,6 @@ $('loginForm').addEventListener('submit', async e => {
 });
 $('logoutBtn').onclick = () => { stop(); ss.set('ci_pin', null); PIN = ''; $('board').classList.add('hidden'); $('login').classList.remove('hidden'); $('pin').value = ''; };
 $('fsBtn').onclick = () => { if (document.fullscreenElement) document.exitFullscreen(); else document.documentElement.requestFullscreen?.(); };
-$('resetDemo').onclick = () => { if (confirm('Reset the demo guest list and clear all demo check-ins?')) { window.CheckinDemo.reset(); seen = null; loadAll().then(render); } };
-if (DEMO) $('pin').placeholder = 'Demo PIN: 1234';
 
 /* --------------------------- data ------------------------------ */
 async function loadAll() {
@@ -223,7 +215,6 @@ async function tick() {
 }
 function start() {
   $('login').classList.add('hidden'); $('board').classList.remove('hidden');
-  $('demoBanner').classList.toggle('hidden', !DEMO);
   running = true; render(); clearTimeout(timer); timer = setTimeout(tick, REFRESH_MS);
 }
 function stop() { running = false; clearTimeout(timer); }
