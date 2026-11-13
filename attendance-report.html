@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#5A1046">
+<link rel="icon" type="image/png" href="hdfw-logo-192.png">
+<link rel="apple-touch-icon" href="hdfw-logo-192.png">
+<title>Attendance Report · Diwali Celebration – Sparkle of Joy</title>
+<style>
+  :root {
+    --accent: #B4380C; --accent-pale: #FFF0E0; --bar: #C2410C; --bar-soft: #F4C9A8;
+    --ok: #107C10; --warn: #8A5300; --warn-bg: #FFF4CE; --err: #A4262C;
+    --text: #23140F; --text-2: #5A463C; --muted: #7D6A60;
+    --bg: #FFF9F2; --card: #FFFFFF; --border: #F0DFCF; --grid: #F1E6DC; --row-alt: #FFFBF6;
+    --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --accent: #FFA45C; --accent-pale: #3A1E10; --bar: #FF9F5A; --bar-soft: #6B3A20;
+      --ok: #6CCB5F; --warn: #FCE100; --warn-bg: #3A3000; --err: #F1707B;
+      --text: #FBF1E8; --text-2: #D9C6B8; --muted: #A8968A;
+      --bg: #170C12; --card: #23151C; --border: #3D2A30; --grid: #33232A; --row-alt: #281920;
+    }
+    .btn-primary { color: #1E0B12 !important; }
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { min-height: 100%; }
+  body { font-family: var(--font); background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; }
+  button, input { font: inherit; }
+  button { cursor: pointer; border: 0; }
+  .hidden { display: none !important; }
+  .wrap { max-width: 1100px; margin: 0 auto; }
+
+  /* banner + logo (shared look with check-in pages) */
+  .hero { position: relative; background: #2A0B3A url('diwali-banner.svg') center/cover no-repeat; color: #fff; }
+  .hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(20,6,30,.7), rgba(20,6,30,.25) 60%, rgba(20,6,30,.5)); }
+  .hero > * { position: relative; z-index: 1; }
+  .ev-sub { color: #FFD27A; }
+  .ev-meta { font-size: .9rem; opacity: .95; text-shadow: 0 1px 6px rgba(0,0,0,.6); }
+  .host { font-size: .8rem; letter-spacing: .04em; color: #FFE7B0; text-shadow: 0 1px 6px rgba(0,0,0,.6); }
+  .logo-wrap { position: relative; display: inline-block; width: var(--logo, 90px); height: var(--logo, 90px); flex-shrink: 0; }
+  .logo-wrap img { position: relative; z-index: 2; width: 100%; height: 100%; border-radius: 50%; display: block; box-shadow: 0 4px 18px rgba(0,0,0,.45); }
+  .logo-wrap.glow::before { content: ''; position: absolute; inset: -22%; border-radius: 50%; z-index: 0;
+    background: radial-gradient(circle, rgba(255,200,90,.85) 0%, rgba(255,140,0,.35) 45%, transparent 70%); animation: halo 3.2s ease-in-out infinite; }
+  .logo-wrap.orbit::after { content: ''; position: absolute; inset: -9%; border-radius: 50%; z-index: 1;
+    border: 2px dashed rgba(255,214,130,.85); animation: spin 22s linear infinite; }
+  .logo-wrap.enter img { animation: logoIn 1.2s cubic-bezier(.2,.9,.25,1) both; }
+  @keyframes halo { 0%, 100% { opacity: .45; transform: scale(.94); } 50% { opacity: 1; transform: scale(1.08); } }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes logoIn { from { opacity: 0; transform: scale(.5) rotate(-140deg); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .logo-wrap *, .logo-wrap::before, .logo-wrap::after { animation: none !important; } }
+
+  /* login */
+  #login { min-height: 100vh; display: grid; place-items: center; padding: 24px 16px; }
+  .login-card { width: 100%; max-width: 400px; background: var(--card); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; box-shadow: 0 10px 40px rgba(90,16,70,.12); }
+  .login-card .hero { padding: 26px 20px 20px; min-height: 190px; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; text-align: center; }
+  .login-card .hero::after { background: linear-gradient(180deg, rgba(20,6,30,.15), rgba(20,6,30,.55)); }
+  .login-card .hero .logo-wrap { --logo: 96px; margin-bottom: 14px; }
+  .login-card .hero h1 { font-size: 1.45rem; line-height: 1.2; font-weight: 800; text-shadow: 0 2px 10px rgba(0,0,0,.55); }
+  .login-card .ev-meta { margin-top: 8px; line-height: 1.45; font-size: .85rem; }
+  .login-card .host { margin-top: 8px; }
+  .login-body { padding: 20px 24px 24px; }
+  .login-body h2 { font-size: 1.15rem; margin-bottom: 2px; }
+  .login-body p { color: var(--text-2); margin-bottom: 6px; font-size: .92rem; }
+  label { display: block; font-weight: 600; font-size: .9rem; margin: 12px 0 6px; }
+  .field { width: 100%; padding: 12px 14px; border: 1.5px solid var(--border); border-radius: 10px; background: var(--card); color: var(--text); font-size: 1.05rem; }
+  .field:focus { outline: none; border-color: var(--accent); }
+  #pin { font-size: 1.6rem; letter-spacing: .5em; text-align: center; padding: 10px 14px; font-variant-numeric: tabular-nums; }
+  #pin::placeholder { letter-spacing: .35em; color: var(--muted); opacity: .6; }
+  .pin-help { font-size: .8rem; color: var(--muted); margin-top: 6px; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 10px 16px; border-radius: 10px; font-weight: 600; font-size: .92rem; }
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-primary:disabled { opacity: .55; cursor: not-allowed; }
+  .btn-ghost { background: var(--card); color: var(--accent); border: 1.5px solid var(--border); }
+  .login-body .btn-primary { width: 100%; margin-top: 20px; padding: 12px 18px; font-size: 1rem; }
+  .err-msg { color: var(--err); margin-top: 12px; font-size: .9rem; min-height: 1.2em; }
+
+  /* report */
+  header.report-hero { padding: 40px 16px 26px; }
+  .brand { display: flex; align-items: center; gap: 22px; }
+  .brand .logo-wrap { --logo: clamp(76px, 9vw, 112px); }
+  .kicker { font-size: .78rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #FFD27A; text-shadow: 0 1px 6px rgba(0,0,0,.6); }
+  h1.event { font-size: clamp(1.4rem, 3.4vw, 2.2rem); font-weight: 800; line-height: 1.15; text-shadow: 0 2px 12px rgba(0,0,0,.6); }
+  .toolbar { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; justify-content: space-between; padding: 14px 16px; }
+  .toolbar .stamp { color: var(--muted); font-size: .85rem; }
+  .toolbar .actions { display: flex; gap: 8px; flex-wrap: wrap; }
+  main { padding: 0 16px 40px; }
+
+  .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+  .kpi { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 14px 16px; }
+  .kpi .v { font-size: clamp(1.6rem, 3.2vw, 2.2rem); font-weight: 800; line-height: 1.1; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .kpi .l { font-size: .78rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin-top: 2px; }
+  .kpi .s { font-size: .82rem; color: var(--text-2); margin-top: 4px; }
+  .kpi.hero-kpi { background: linear-gradient(135deg, #5A1046, #8E2A12); border: 0; color: #fff; }
+  .kpi.hero-kpi .l, .kpi.hero-kpi .s { color: rgba(255,255,255,.85); }
+  .kpi.hero-kpi .v { color: #FFD27A; }
+
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+  @media (max-width: 760px) { .grid2 { grid-template-columns: 1fr; } }
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 16px; margin-top: 12px; }
+  .grid2 .card { margin-top: 0; }
+  .card h2 { font-size: 1rem; font-weight: 700; }
+  .card .sub { color: var(--muted); font-size: .85rem; margin-top: 2px; }
+  .empty-note { color: var(--muted); font-size: .9rem; padding: 24px 0; text-align: center; }
+
+  /* column chart */
+  .chart { position: relative; margin-top: 12px; }
+  .chart svg { width: 100%; height: auto; display: block; overflow: visible; }
+  .chart .grid line { stroke: var(--grid); stroke-width: 1; }
+  .chart .axis text { fill: var(--muted); font-size: 11px; font-family: var(--font); }
+  .chart .lbl { fill: var(--text); font-size: 12px; font-weight: 700; font-family: var(--font); }
+  .chart .bar { fill: var(--bar); }
+  .chart .hit { fill: transparent; cursor: default; }
+  .chart .bar.on { fill: var(--accent); opacity: .8; }
+  .chart .lbl { pointer-events: none; }
+  .tip { position: absolute; pointer-events: none; background: #2B1A22; color: #fff; font-size: .82rem; padding: 6px 10px; border-radius: 8px; white-space: nowrap; transform: translate(-50%, -110%); box-shadow: 0 4px 14px rgba(0,0,0,.25); }
+
+  /* horizontal bars (HTML) */
+  .hbars { margin-top: 12px; display: grid; gap: 10px; }
+  .hrow { display: grid; grid-template-columns: minmax(70px, 30%) 1fr auto; gap: 10px; align-items: center; font-size: .9rem; }
+  .hrow .k { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--text-2); }
+  .track { height: 14px; background: var(--grid); border-radius: 0 4px 4px 0; overflow: hidden; }
+  .track i { display: block; height: 100%; background: var(--bar); border-radius: 0 4px 4px 0; min-width: 2px; }
+  .hrow .val { font-variant-numeric: tabular-nums; font-weight: 600; white-space: nowrap; }
+  .hrow .val small { color: var(--muted); font-weight: 400; }
+
+  /* tables */
+  details.card summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+  details.card summary::-webkit-details-marker { display: none; }
+  details.card summary::after { content: '▾'; color: var(--muted); transition: transform .2s; }
+  details.card:not([open]) summary::after { transform: rotate(-90deg); }
+  .count-pill { background: var(--accent-pale); color: var(--accent); font-weight: 700; font-size: .8rem; padding: 2px 8px; border-radius: 999px; margin-left: 6px; }
+  .tbl-wrap { overflow-x: auto; margin-top: 12px; }
+  table { width: 100%; border-collapse: collapse; font-size: .92rem; }
+  th, td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--border); white-space: nowrap; }
+  th { font-size: .75rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+  tbody tr:nth-child(even) { background: var(--row-alt); }
+  td.n { color: var(--muted); font-variant-numeric: tabular-nums; width: 3em; }
+  td.seat { font-weight: 700; color: var(--accent); }
+  .walk { display: inline-block; margin-left: 6px; font-size: .7rem; font-weight: 700; color: var(--accent); background: var(--accent-pale); padding: 1px 6px; border-radius: 6px; }
+
+  footer.hostline { text-align: center; color: var(--muted); font-size: .85rem; padding: 8px 16px 28px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+  footer.hostline img { width: 26px; height: 26px; border-radius: 50%; }
+
+  /* print / save as PDF */
+  @media print {
+    :root { --bg: #fff; --card: #fff; --text: #000; --text-2: #333; --muted: #555; --border: #ddd; --grid: #eee; --row-alt: #fafafa; --bar: #C2410C; --accent: #B4380C; }
+    body { background: #fff; }
+    .toolbar .actions, #login { display: none !important; }
+    .hero, .kpi.hero-kpi { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .logo-wrap::before, .logo-wrap::after { display: none; }
+    .logo-wrap img { animation: none !important; box-shadow: none; }
+    header.report-hero { padding: 20px 16px; }
+    .card, .kpi { break-inside: avoid; }
+    details.card { break-inside: auto; }
+    details.card > summary::after { display: none; }
+    th, td { white-space: normal; }
+    @page { margin: 12mm; }
+  }
+</style>
+</head>
+<body>
+
+<section id="login">
+  <form class="login-card" id="loginForm" autocomplete="off" novalidate>
+    <div class="hero">
+      <span class="logo-wrap glow orbit enter"><img src="hdfw-logo-192.webp" alt="Hindus of DFW logo" width="96" height="96"></span>
+      <h1>Diwali Celebration<br><span class="ev-sub">Sparkle of Joy</span></h1>
+      <div class="ev-meta">Wed, 18 Nov 2026 · 5:00 – 8:00 PM CST<br>7750 LBJ Freeway, Dallas, TX 75251</div>
+      <div class="host">Hosted by Hindus of DFW</div>
+    </div>
+    <div class="login-body">
+      <h2>Attendance Report</h2>
+      <p>Summary of who attended, for organisers. Enter the event PIN.</p>
+      <label for="pin">Event PIN</label>
+      <input class="field" id="pin" type="password" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" autocomplete="off" placeholder="••••••" aria-describedby="pinHelp" required>
+      <div class="pin-help" id="pinHelp">6 digits, numbers only</div>
+      <button class="btn btn-primary" id="loginBtn" type="submit" disabled>Open report</button>
+      <div class="err-msg" id="loginErr"></div>
+    </div>
+  </form>
+</section>
+
+<section id="report" class="hidden">
+  <header class="hero report-hero">
+    <div class="wrap brand">
+      <span class="logo-wrap glow orbit enter"><img src="hdfw-logo-512.webp" alt="Hindus of DFW logo" width="112" height="112"></span>
+      <div style="min-width:0">
+        <div class="kicker">Attendance Report · Hindus of DFW</div>
+        <h1 class="event">Diwali Celebration – <span class="ev-sub">Sparkle of Joy</span></h1>
+        <div class="ev-meta">Wed, 18 Nov 2026 · 5:00 – 8:00 PM CST · 7750 LBJ Freeway, Dallas, TX 75251</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap toolbar">
+    <div class="stamp" id="stamp">Loading…</div>
+    <div class="actions">
+      <button class="btn btn-ghost" type="button" id="refreshBtn">↻ Refresh</button>
+      <button class="btn btn-ghost" type="button" id="csvBtn">⬇ Download CSV</button>
+      <button class="btn btn-primary" type="button" id="printBtn">🖨 Print / Save PDF</button>
+      <button class="btn btn-ghost" type="button" id="logoutBtn">Sign out</button>
+    </div>
+  </div>
+
+  <main class="wrap">
+    <div class="kpis" id="kpis"></div>
+
+    <div class="card">
+      <h2>Arrivals over time</h2>
+      <div class="sub" id="arrSub">Check-ins per 15 minutes (Central Time)</div>
+      <div class="chart" id="arrChart"></div>
+    </div>
+
+    <div class="grid2">
+      <div class="card">
+        <h2>Attendance by section</h2>
+        <div class="sub">Share of invited guests who arrived, by seat section</div>
+        <div class="hbars" id="secBars"></div>
+      </div>
+      <div class="card">
+        <h2>Check-ins by station</h2>
+        <div class="sub">Guests checked in at each entrance / volunteer</div>
+        <div class="hbars" id="stnBars"></div>
+      </div>
+    </div>
+
+    <details class="card" open>
+      <summary><h2>Attended <span class="count-pill" id="cAtt">0</span></h2></summary>
+      <div class="tbl-wrap" id="tAtt"></div>
+    </details>
+    <details class="card" open>
+      <summary><h2>Did not arrive <span class="count-pill" id="cNo">0</span></h2></summary>
+      <div class="tbl-wrap" id="tNo"></div>
+    </details>
+  </main>
+
+  <footer class="hostline"><img src="hdfw-logo-192.webp" alt="" width="26" height="26">Hosted by Hindus of DFW · Happy Diwali! 🪔</footer>
+</section>
+
+<script>
+/* CONFIG – the same Apps Script Web App URL as in checkin.html. */
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz7xI6ig_f3PvgI7gkpCJQtvfmb6_6WimK4tKDhqCSzAS5Tfs7CILkLyF6nGnRfbyTDWQ/exec';
+const TZ = 'America/Chicago';
+const BUCKET_MIN = 15;
+
+const $ = id => document.getElementById(id);
+const ss = { get(k) { try { return sessionStorage.getItem(k); } catch { return null; } },
+             set(k, v) { try { v == null ? sessionStorage.removeItem(k) : sessionStorage.setItem(k, v); } catch {} } };
+let PIN = ss.get('ci_pin') || '';
+let data = null;   // { guests, checkins, loadedAt }
+
+async function api(action) {
+  const ctrl = new AbortController();
+  const t = setTimeout(() => ctrl.abort(), 30000);
+  let res;
+  try {
+    res = await fetch(SCRIPT_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({ action, pin: PIN }), redirect: 'follow', signal: ctrl.signal });
+  } catch (e) {
+    throw new Error(e.name === 'AbortError' ? 'Google is responding slowly. Please try again in a moment.'
+      : 'No connection to the server. Check the internet connection and try again.');
+  } finally { clearTimeout(t); }
+  if (!res.ok) throw new Error('Server error ' + res.status + '. Please try again.');
+  const d = await res.json();
+  if (!d.ok) throw Object.assign(new Error(d.error || 'Server error'), { auth: !!d.auth });
+  return d;
+}
+
+/* ------------------------------ login ------------------------------ */
+const pinOk = () => /^\d{6}$/.test($('pin').value);
+$('pin').addEventListener('input', () => {
+  const el = $('pin'), clean = el.value.replace(/\D/g, '').slice(0, 6);
+  if (el.value !== clean) el.value = clean;
+  $('loginErr').textContent = ''; $('loginBtn').disabled = !pinOk();
+});
+$('pin').addEventListener('keydown', e => { if (e.key.length === 1 && !/\d/.test(e.key) && !e.ctrlKey && !e.metaKey) e.preventDefault(); });
+$('loginForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  if (!pinOk()) { $('loginErr').textContent = 'The PIN is 6 digits.'; return; }
+  PIN = $('pin').value;
+  $('loginBtn').disabled = true; $('loginBtn').textContent = 'Building report…'; $('loginErr').textContent = '';
+  try { await load(); ss.set('ci_pin', PIN); show(); }
+  catch (err) { $('loginErr').textContent = err.message; PIN = ''; }
+  finally { $('loginBtn').textContent = 'Open report'; $('loginBtn').disabled = !pinOk(); }
+});
+$('logoutBtn').onclick = () => { ss.set('ci_pin', null); PIN = ''; data = null; $('report').classList.add('hidden'); $('login').classList.remove('hidden'); $('pin').value = ''; $('loginBtn').disabled = true; };
+$('refreshBtn').onclick = async () => {
+  $('refreshBtn').disabled = true; $('stamp').textContent = 'Refreshing…';
+  try { await load(); render(); } catch (e) { $('stamp').textContent = e.message; if (e.auth) $('logoutBtn').onclick(); }
+  finally { $('refreshBtn').disabled = false; }
+};
+$('printBtn').onclick = () => window.print();
+$('csvBtn').onclick = downloadCsv;
+
+async function load() {
+  const d = await api('load');
+  data = { guests: d.guests || [], checkins: d.checkins || {}, loadedAt: new Date() };
+}
+function show() { $('login').classList.add('hidden'); $('report').classList.remove('hidden'); render(); }
+
+/* ----------------------------- helpers ----------------------------- */
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const fmtTime = d => d.toLocaleTimeString('en-US', { timeZone: TZ, hour: 'numeric', minute: '2-digit' });
+const fmtDateTime = d => d.toLocaleString('en-US', { timeZone: TZ, weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
+const pct = (a, b) => b ? Math.round(a / b * 100) : 0;
+function section(seat) {
+  const s = String(seat || '').trim();
+  if (!s) return 'No seat';
+  const m = s.match(/^([A-Za-z]+)/) || s.match(/^(.+?)[-\s·]/);
+  return m ? m[1].toUpperCase() : s;
+}
+
+function compute() {
+  const { guests, checkins } = data;
+  const invited = guests.filter(g => !g.walkin);
+  const walkins = guests.filter(g => g.walkin && checkins[g.id]);
+  const attended = guests.filter(g => checkins[g.id]).map(g => ({ ...g, at: new Date(checkins[g.id].at), by: checkins[g.id].by || '—' }))
+    .sort((a, b) => a.at - b.at);
+  const attendedInvited = attended.filter(g => !g.walkin);
+  const noShows = invited.filter(g => !checkins[g.id]).sort((a, b) => String(a.seat).localeCompare(String(b.seat), undefined, { numeric: true }) || a.name.localeCompare(b.name));
+  return { invited, walkins, attended, attendedInvited, noShows };
+}
+
+/* ------------------------------ render ----------------------------- */
+function render() {
+  const c = compute();
+  $('stamp').textContent = 'Data as of ' + fmtDateTime(data.loadedAt) + ' CT';
+
+  const rate = pct(c.attendedInvited.length, c.invited.length);
+  const first = c.attended[0], last = c.attended[c.attended.length - 1];
+  $('kpis').innerHTML = [
+    kpi(c.attended.length, 'Total present', `${c.attendedInvited.length} RSVP + ${c.walkins.length} walk-in`, true),
+    kpi(rate + '%', 'Attendance rate', `${c.attendedInvited.length} of ${c.invited.length} invited`),
+    kpi(c.invited.length, 'Invited (RSVP)', 'on the guest list'),
+    kpi(c.noShows.length, 'Did not arrive', c.invited.length ? pct(c.noShows.length, c.invited.length) + '% of invited' : ''),
+    kpi(c.walkins.length, 'Walk-ins', 'not on the RSVP list'),
+    kpi(first ? fmtTime(first.at) : '—', 'First arrival', last ? 'Last: ' + fmtTime(last.at) : '')
+  ].join('');
+
+  renderArrivals(c.attended);
+  renderSections(c.invited, data.checkins);
+  renderStations(c.attended);
+  renderTables(c);
+}
+function kpi(v, l, s, hero) {
+  return `<div class="kpi${hero ? ' hero-kpi' : ''}"><div class="v">${esc(v)}</div><div class="l">${esc(l)}</div>${s ? `<div class="s">${esc(s)}</div>` : ''}</div>`;
+}
+
+/* Column chart: check-ins per 15 minutes. Single series -> one hue, no legend. */
+function renderArrivals(att) {
+  const box = $('arrChart');
+  if (!att.length) { box.innerHTML = '<div class="empty-note">No check-ins yet.</div>'; $('arrSub').textContent = 'Check-ins per 15 minutes (Central Time)'; return; }
+  const ms = BUCKET_MIN * 60000;
+  const start = Math.floor(att[0].at / ms) * ms, end = Math.floor(att[att.length - 1].at / ms) * ms;
+  const n = Math.max(1, Math.round((end - start) / ms) + 1);
+  const buckets = Array.from({ length: n }, (_, i) => ({ t: new Date(start + i * ms), v: 0 }));
+  att.forEach(g => buckets[Math.round((Math.floor(g.at / ms) * ms - start) / ms)].v++);
+  const peak = buckets.reduce((a, b) => b.v > a.v ? b : a);
+  $('arrSub').textContent = `Check-ins per ${BUCKET_MIN} minutes (Central Time) · busiest: ${fmtTime(peak.t)} with ${peak.v}`;
+
+  const W = 760, H = 230, m = { t: 22, r: 8, b: 30, l: 34 };
+  const pw = W - m.l - m.r, ph = H - m.t - m.b;
+  const maxV = Math.max(...buckets.map(b => b.v));
+  const step = maxV <= 5 ? 1 : maxV <= 10 ? 2 : maxV <= 25 ? 5 : maxV <= 50 ? 10 : Math.ceil(maxV / 5 / 10) * 10;
+  const top = Math.ceil(maxV / step) * step || 1;
+  const band = pw / n, bw = Math.max(2, Math.min(24, band - 2));
+  const y = v => m.t + ph - (v / top) * ph;
+  const every = Math.max(1, Math.ceil(n / 8));   // keep x labels from colliding
+
+  let g = `<g class="grid">`;
+  for (let v = 0; v <= top; v += step) g += `<line x1="${m.l}" x2="${W - m.r}" y1="${y(v)}" y2="${y(v)}"/>`;
+  g += `</g><g class="axis">`;
+  for (let v = 0; v <= top; v += step) g += `<text x="${m.l - 6}" y="${y(v) + 4}" text-anchor="end">${v}</text>`;
+  buckets.forEach((b, i) => { if (i % every === 0) g += `<text x="${m.l + band * i + band / 2}" y="${H - 8}" text-anchor="middle">${fmtTime(b.t)}</text>`; });
+  g += `</g><g>`;
+  buckets.forEach((b, i) => {
+    const x = m.l + band * i + (band - bw) / 2, h = Math.max(0, m.t + ph - y(b.v)), yy = y(b.v), r = Math.min(4, h, bw / 2);
+    // 4px rounded data-end, square at the baseline
+    const path = h > 0 ? `M${x},${m.t + ph} V${yy + r} Q${x},${yy} ${x + r},${yy} H${x + bw - r} Q${x + bw},${yy} ${x + bw},${yy + r} V${m.t + ph} Z` : '';
+    if (path) g += `<path class="bar" d="${path}" data-i="${i}"/>`;
+  });
+  // transparent hover targets on top of the bars (full column height, bigger than the mark)
+  buckets.forEach((b, i) => { g += `<rect class="hit" x="${m.l + band * i}" y="${m.t}" width="${band}" height="${ph}" data-i="${i}"/>`; });
+  g += `</g><text class="lbl" x="${m.l + band * buckets.indexOf(peak) + band / 2}" y="${y(peak.v) - 6}" text-anchor="middle">${peak.v}</text>`;
+  box.innerHTML = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Column chart of check-ins per ${BUCKET_MIN} minutes; busiest ${fmtTime(peak.t)} with ${peak.v}">${g}</svg><div class="tip hidden" id="tip"></div>`;
+
+  const svg = box.querySelector('svg'), tip = $('tip');
+  svg.addEventListener('mousemove', e => {
+    const hit = e.target.closest('.hit'); if (!hit) { tip.classList.add('hidden'); return; }
+    const i = +hit.dataset.i, b = buckets[i], to = new Date(b.t.getTime() + ms);
+    svg.querySelectorAll('.bar.on').forEach(x => x.classList.remove('on'));
+    svg.querySelector(`.bar[data-i="${i}"]`)?.classList.add('on');
+    const r = box.getBoundingClientRect(), sr = svg.getBoundingClientRect(), k = sr.width / W;
+    tip.innerHTML = `<b>${b.v}</b> check-in${b.v === 1 ? '' : 's'} · ${fmtTime(b.t)}–${fmtTime(to)}`;
+    tip.style.left = (sr.left - r.left + (m.l + band * i + band / 2) * k) + 'px';
+    tip.style.top = (sr.top - r.top + y(b.v) * k - 4) + 'px';
+    tip.classList.remove('hidden');
+  });
+  svg.addEventListener('mouseleave', () => { tip.classList.add('hidden'); svg.querySelectorAll('.bar.on').forEach(x => x.classList.remove('on')); });
+}
+
+function hbars(rows, fmt) {
+  if (!rows.length) return '<div class="empty-note">No data yet.</div>';
+  return rows.map(r => `<div class="hrow" title="${esc(r.title || '')}"><div class="k">${esc(r.k)}</div>
+    <div class="track" role="img" aria-label="${esc(r.k)}: ${esc(r.title || '')}"><i style="width:${Math.max(0, Math.min(100, r.w))}%"></i></div>
+    <div class="val">${fmt(r)}</div></div>`).join('');
+}
+function renderSections(invited, checkins) {
+  const map = {};
+  invited.forEach(g => { const s = section(g.seat); (map[s] = map[s] || { k: s, total: 0, in: 0 }); map[s].total++; if (checkins[g.id]) map[s].in++; });
+  const rows = Object.values(map).sort((a, b) => a.k.localeCompare(b.k, undefined, { numeric: true }))
+    .map(r => ({ ...r, k: r.k === 'No seat' ? r.k : 'Section ' + r.k, w: pct(r.in, r.total), title: `${r.in} of ${r.total} arrived` }));
+  $('secBars').innerHTML = hbars(rows, r => `${r.w}% <small>${r.in}/${r.total}</small>`);
+}
+function renderStations(att) {
+  const map = {};
+  att.forEach(g => map[g.by] = (map[g.by] || 0) + 1);
+  const max = Math.max(1, ...Object.values(map));
+  const rows = Object.entries(map).sort((a, b) => b[1] - a[1]).map(([k, v]) => ({ k, v, w: v / max * 100, title: `${v} check-ins` }));
+  $('stnBars').innerHTML = hbars(rows, r => `${r.v}`);
+}
+function renderTables(c) {
+  $('cAtt').textContent = c.attended.length; $('cNo').textContent = c.noShows.length;
+  $('tAtt').innerHTML = c.attended.length ? `<table><thead><tr><th>#</th><th>Name</th><th>Seat</th><th>Arrived</th><th>Checked in by</th></tr></thead><tbody>` +
+    c.attended.map((g, i) => `<tr><td class="n">${i + 1}</td><td>${esc(g.name)}${g.walkin ? '<span class="walk">WALK-IN</span>' : ''}</td><td class="seat">${esc(g.seat || '—')}</td><td>${fmtTime(g.at)}</td><td>${esc(g.by)}</td></tr>`).join('') +
+    `</tbody></table>` : '<div class="empty-note">No one has checked in yet.</div>';
+  $('tNo').innerHTML = c.noShows.length ? `<table><thead><tr><th>#</th><th>Name</th><th>Seat</th><th>Phone</th><th>Email</th></tr></thead><tbody>` +
+    c.noShows.map((g, i) => `<tr><td class="n">${i + 1}</td><td>${esc(g.name)}</td><td class="seat">${esc(g.seat || '—')}</td><td>${esc(g.phone || '')}</td><td>${esc(g.email || '')}</td></tr>`).join('') +
+    `</tbody></table>` : '<div class="empty-note">Everyone on the list arrived! 🎉</div>';
+}
+
+/* ------------------------------- CSV ------------------------------- */
+function downloadCsv() {
+  if (!data) return;
+  const c = compute();
+  const q = v => { const s = String(v ?? ''); return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; };
+  const rows = [['Name', 'Status', 'Seat', 'Arrived (CT)', 'Checked in by', 'Phone', 'Email']];
+  c.attended.forEach(g => rows.push([g.name, g.walkin ? 'Walk-in' : 'Attended', g.seat, fmtTime(g.at), g.by, g.phone, g.email]));
+  c.noShows.forEach(g => rows.push([g.name, 'Did not arrive', g.seat, '', '', g.phone, g.email]));
+  const blob = new Blob(['﻿' + rows.map(r => r.map(q).join(',')).join('\r\n')], { type: 'text/csv;charset=utf-8' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob); a.download = 'diwali-2026-attendance.csv';
+  document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+}
+
+/* ---------------------------- auto resume -------------------------- */
+if (PIN) load().then(show).catch(err => { $('loginErr').textContent = err.message; PIN = ''; ss.set('ci_pin', null); });
+</script>
+</body>
+</html>
