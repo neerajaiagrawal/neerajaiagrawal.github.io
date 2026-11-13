@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#5A1046">
+<link rel="icon" type="image/png" href="hdfw-logo-192.png">
+<link rel="apple-touch-icon" href="hdfw-logo-192.png">
 <title>Live Arrivals · Diwali Celebration – Sparkle of Joy</title>
 <style>
   :root {
@@ -28,6 +30,25 @@
   .hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(20,6,30,.65), rgba(20,6,30,.2) 55%, rgba(20,6,30,.55)); }
   .hero > * { position: relative; z-index: 1; }
   .ev-sub { color: #FFD27A; }
+  .host { font-size: .8rem; letter-spacing: .04em; color: #FFE7B0; text-shadow: 0 1px 6px rgba(0,0,0,.6); }
+
+  /* Host logo (Hindus of DFW) + animation */
+  .logo-wrap { position: relative; display: inline-block; width: var(--logo, 90px); height: var(--logo, 90px); flex-shrink: 0; }
+  .logo-wrap img { position: relative; z-index: 2; width: 100%; height: 100%; border-radius: 50%; display: block; box-shadow: 0 4px 18px rgba(0,0,0,.45); }
+  .logo-wrap.glow::before { content: ''; position: absolute; inset: -22%; border-radius: 50%; z-index: 0;
+    background: radial-gradient(circle, rgba(255,200,90,.85) 0%, rgba(255,140,0,.35) 45%, transparent 70%); animation: halo 3.2s ease-in-out infinite; }
+  .logo-wrap.orbit::after { content: ''; position: absolute; inset: -9%; border-radius: 50%; z-index: 1;
+    border: 2px dashed rgba(255,214,130,.85); animation: spin 22s linear infinite; }
+  .logo-wrap.enter img { animation: logoIn 1.2s cubic-bezier(.2,.9,.25,1) both; }
+  @keyframes halo { 0%, 100% { opacity: .45; transform: scale(.94); } 50% { opacity: 1; transform: scale(1.08); } }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes logoIn { from { opacity: 0; transform: scale(.5) rotate(-140deg); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .logo-wrap *, .logo-wrap::before, .logo-wrap::after { animation: none !important; } }
+  .brand { display: flex; align-items: center; gap: 22px; min-width: 0; flex: 1 1 420px; }
+  .stats { flex-shrink: 0; }
+  .brand .logo-wrap { --logo: clamp(76px, 9vw, 120px); }
+  footer.hostline { text-align: center; color: var(--muted); font-size: .85rem; padding: 0 16px 28px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+  footer.hostline img { width: 26px; height: 26px; border-radius: 50%; }
   .ev-meta { font-size: .9rem; opacity: .95; text-shadow: 0 1px 6px rgba(0,0,0,.6); }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { height: 100%; }
@@ -39,7 +60,9 @@
   /* login */
   #login { min-height: 100%; display: grid; place-items: center; padding: 24px 16px; }
   .login-card { width: 100%; max-width: 400px; background: var(--card); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; box-shadow: 0 10px 40px rgba(90,16,70,.12); }
-  .login-card .hero { padding: 34px 20px 22px; min-height: 190px; display: flex; flex-direction: column; justify-content: flex-end; text-align: center; }
+  .login-card .hero { padding: 26px 20px 20px; min-height: 190px; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; text-align: center; }
+  .login-card .hero .logo-wrap { --logo: 96px; margin-bottom: 14px; }
+  .login-card .hero .host { margin-top: 8px; }
   .login-card .hero::after { background: linear-gradient(180deg, rgba(20,6,30,.15), rgba(20,6,30,.55)); }
   .login-card .hero h1 { font-size: 1.45rem; line-height: 1.2; font-weight: 800; text-shadow: 0 2px 10px rgba(0,0,0,.55); }
   .login-card .ev-meta { margin-top: 8px; line-height: 1.45; font-size: .85rem; }
@@ -120,8 +143,10 @@
 <section id="login">
   <form class="login-card" id="loginForm" autocomplete="off" novalidate>
     <div class="hero">
+      <span class="logo-wrap glow orbit enter"><img src="hdfw-logo-192.webp" alt="Hindus of DFW logo" width="96" height="96"></span>
       <h1>Diwali Celebration<br><span class="ev-sub">Sparkle of Joy</span></h1>
       <div class="ev-meta">Wed, 18 Nov 2026 · 5:00 – 8:00 PM CST<br>7750 LBJ Freeway, Dallas, TX 75251</div>
+      <div class="host">Hosted by Hindus of DFW</div>
     </div>
     <div class="login-body">
       <h2>Live Arrivals Board</h2>
@@ -140,8 +165,10 @@
     <div class="hero">
     <div class="wrap">
       <div class="top">
-        <div>
-          <div class="kicker">🪔 Live Arrivals</div>
+        <div class="brand">
+        <span class="logo-wrap glow orbit enter" id="boardLogo"><img src="hdfw-logo-512.webp" alt="Hindus of DFW logo" width="120" height="120"></span>
+        <div style="min-width:0">
+          <div class="kicker">🪔 Live Arrivals · Hindus of DFW</div>
           <h1 class="event">Diwali Celebration – <span class="ev-sub">Sparkle of Joy</span></h1>
           <div class="ev-meta">Wed, 18 Nov 2026 · 5:00 – 8:00 PM CST · 7750 LBJ Freeway, Dallas, TX 75251</div>
           <div class="live">
@@ -149,6 +176,7 @@
             <button class="linkbtn" type="button" id="fsBtn">Full screen</button>
             <button class="linkbtn" type="button" id="logoutBtn">Sign out</button>
           </div>
+        </div>
         </div>
         <div class="stats">
           <div class="stat"><b id="sIn">0</b><span>Checked in</span></div>
@@ -172,6 +200,7 @@
     </div>
   </header>
   <main><div class="wrap" id="list"></div></main>
+  <footer class="hostline"><img src="hdfw-logo-192.webp" alt="" width="26" height="26">Hosted by Hindus of DFW · Happy Diwali! 🪔</footer>
 </section>
 
 <script>
