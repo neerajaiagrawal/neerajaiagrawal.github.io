@@ -217,7 +217,7 @@
   <div class="ov-sub" id="ovSub"></div>
   <div class="ov-seat-label">Serial No.</div>
   <div class="ov-seat" id="ovSeat"></div>
-  <div class="ov-hint" id="ovHint">Please collect your badge at the badge table.<br>Your seat number is on the badge.</div>
+  <div class="ov-hint" id="ovHint">Please collect the badge for your group at the badge table.<br>Your seat number is on the badge.</div>
   <div class="ov-actions">
     <button class="btn btn-primary" id="ovNext" type="button">Next guest</button>
     <button class="btn btn-undo" id="ovUndo" type="button">Undo check-in</button>
@@ -549,7 +549,7 @@ function showOverlay(g, kind, ci) {
   s.textContent = serial || 'No serial no. – send to help desk';
   s.className = 'ov-seat' + (serial ? '' : ' none');
   s.style.fontSize = serial.length > 6 ? 'clamp(2.4rem, 13vw, 5.5rem)' : '';
-  $('ovHint').innerHTML = `Please collect badge <b>${esc(serial)}</b> at the badge table.<br>Your seat number is on the badge.`;
+  $('ovHint').innerHTML = `Please collect the badge for Group <b>${esc(serial)}</b> at the badge table.<br>Your seat number is on the badge.`;
   $('ovHint').classList.toggle('hidden', !serial);
   $('ovNext').textContent = kind === 'ok' ? 'Next guest' : 'Close';
   clearTimeout(ovTimer);
