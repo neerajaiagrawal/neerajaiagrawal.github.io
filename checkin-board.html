@@ -198,7 +198,7 @@
           <button class="tab on" data-tab="in" type="button">Checked in</button>
           <button class="tab" data-tab="out" type="button">Not arrived</button>
         </div>
-        <input class="field" id="filter" type="search" placeholder="Filter by name or seat" autocomplete="off">
+        <input class="field" id="filter" type="search" placeholder="Filter by name or serial no." autocomplete="off">
       </div>
     </div>
     </div>
@@ -321,7 +321,10 @@ document.addEventListener('visibilitychange', () => { if (!document.hidden && ru
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const fmtTime = iso => { const d = new Date(iso); return isNaN(d) ? '' : d.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }); };
 const fmtAgo = s => s < 60 ? Math.round(s) + 's ago' : Math.round(s / 60) + ' min ago';
-const seatCell = g => g && g.seat ? `<b>${esc(g.seat)}</b>` : `<span class="none">No seat</span>`;
+// The sheet's "Seat No" column now holds each guest's serial number (printed on their badge).
+const serialKey = s => String(s ?? '').trim().replace(/^#\s*/, '').replace(/^0+(?=\d)/, '');
+const serialLabel = s => { const k = serialKey(s); return /^\d+$/.test(k) ? '#' + k : String(s ?? '').trim(); };
+const seatCell = g => g && g.seat ? `<b>${esc(serialLabel(g.seat))}</b>` : `<span class="none">No serial</span>`;
 
 function render() {
   const all = [...guests.values()];
@@ -332,7 +335,8 @@ function render() {
   $('bar').style.width = total ? (nIn / total * 100) + '%' : '0';
 
   const f = $('filter').value.trim().toLowerCase();
-  const match = g => !f || (g.name || '').toLowerCase().includes(f) || (g.seat || '').toLowerCase().includes(f);
+  const fk = serialKey(f);
+  const match = g => !f || (g.name || '').toLowerCase().includes(f) || (/^\d+$/.test(fk) ? serialKey(g.seat) === fk : (g.seat || '').toLowerCase().includes(f));
 
   // skip DOM work when nothing changed (keeps scroll position steady)
   const now = Date.now();
@@ -347,14 +351,14 @@ function render() {
     const rows = inIds.map(id => ({ g: guests.get(id), c: checkins[id], id }))
       .filter(r => match(r.g))
       .sort((a, b) => String(b.c.at).localeCompare(String(a.c.at)));
-    html = rows.length ? `<table><thead><tr><th class="n">#</th><th>Name</th><th>Seat</th><th>Arrived</th><th class="by">Checked in by</th></tr></thead><tbody>` +
+    html = rows.length ? `<table><thead><tr><th class="n">#</th><th>Name</th><th>Serial No.</th><th>Arrived</th><th class="by">Checked in by</th></tr></thead><tbody>` +
       rows.map((r, i) => `<tr class="${isFresh(r.id) ? 'fresh' : ''}"><td class="n">${rows.length - i}</td>
         <td class="name">${esc(r.g.name)}${r.g.walkin ? '<span class="walk">WALK-IN</span>' : ''}</td>
         <td class="seat">${seatCell(r.g)}</td><td class="time">${fmtTime(r.c.at)}</td><td class="by">${esc(r.c.by)}</td></tr>`).join('') +
       `</tbody></table>` : `<div class="empty">${f ? 'No checked-in guest matches “' + esc(f) + '”.' : 'No one has checked in yet.'}</div>`;
   } else {
     const rows = all.filter(g => !checkins[g.id] && match(g)).sort((a, b) => a.name.localeCompare(b.name));
-    html = rows.length ? `<table><thead><tr><th class="n">#</th><th>Name</th><th>Seat</th></tr></thead><tbody>` +
+    html = rows.length ? `<table><thead><tr><th class="n">#</th><th>Name</th><th>Serial No.</th></tr></thead><tbody>` +
       rows.map((g, i) => `<tr><td class="n">${i + 1}</td><td class="name">${esc(g.name)}</td><td class="seat">${seatCell(g)}</td></tr>`).join('') +
       `</tbody></table>` : `<div class="empty">${f ? 'No match for “' + esc(f) + '”.' : 'Everyone has arrived! 🎉'}</div>`;
   }

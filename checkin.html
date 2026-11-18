@@ -133,6 +133,7 @@
   .ov-seat-label { margin-top: 28px; font-size: .9rem; text-transform: uppercase; letter-spacing: .1em; color: var(--text-2); }
   .ov-seat { font-size: clamp(3.5rem, 22vw, 8rem); font-weight: 800; line-height: 1; color: var(--text); word-break: break-word; max-width: 100%; }
   .ov-seat.none { font-size: clamp(1.6rem, 8vw, 2.4rem); color: var(--warn); }
+  .ov-hint { margin-top: 12px; font-size: 1rem; font-weight: 600; color: var(--text-2); line-height: 1.4; }
   .ov-actions { margin-top: 36px; display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
   .ov-actions .btn { min-width: 140px; padding: 14px 20px; }
   .btn-undo { background: transparent; color: var(--text-2); border: 1.5px solid currentColor; }
@@ -214,8 +215,9 @@
   <div class="ov-status" id="ovStatus"></div>
   <div class="ov-name" id="ovName"></div>
   <div class="ov-sub" id="ovSub"></div>
-  <div class="ov-seat-label">Seat</div>
+  <div class="ov-seat-label">Serial No.</div>
   <div class="ov-seat" id="ovSeat"></div>
+  <div class="ov-hint" id="ovHint">Please collect your badge at the badge table.<br>Your seat number is on the badge.</div>
   <div class="ov-actions">
     <button class="btn btn-primary" id="ovNext" type="button">Next guest</button>
     <button class="btn btn-undo" id="ovUndo" type="button">Undo check-in</button>
@@ -233,7 +235,7 @@
     <input class="field" id="wPhone" type="tel" maxlength="20">
     <label for="wEmail">Email</label>
     <input class="field" id="wEmail" type="email" maxlength="80">
-    <label for="wSeat">Seat (if assigning one)</label>
+    <label for="wSeat">Serial no. (if giving a badge)</label>
     <input class="field" id="wSeat" maxlength="20">
     <div class="row">
       <button class="btn btn-ghost" type="button" id="wCancel">Cancel</button>
@@ -437,11 +439,13 @@ function search(qRaw) {
   const q = norm(qRaw);
   if (!q) return [];
   const qd = digits(qRaw);
-  if (qd.length >= 3 && qd.length === q.replace(/\s/g, '').length) {
-    // numbers only -> phone search (last digits first)
-    const ends = guests.filter(g => g._p.endsWith(qd));
-    const has = guests.filter(g => !g._p.endsWith(qd) && g._p.includes(qd));
-    return ends.concat(has);
+  if (qd && qd.length === q.replace(/\s/g, '').length) {
+    // numbers only -> exact serial no. first, then phone (last digits first, 3+ digits)
+    const ser = guests.filter(g => serialKey(g.seat) === qd);
+    if (qd.length < 3) return ser;
+    const ends = guests.filter(g => !ser.includes(g) && g._p.endsWith(qd));
+    const has = guests.filter(g => !ser.includes(g) && !g._p.endsWith(qd) && g._p.includes(qd));
+    return ser.concat(ends, has);
   }
   if (q.includes('@')) return guests.filter(g => g._e.includes(q));
   const toks = q.split(' ');
@@ -466,9 +470,13 @@ function hl(text, q) {
 function maskPhone(p) { const d = digits(p); return d ? '•••' + d.slice(-4) : ''; }
 function fmtTime(iso) { const d = new Date(iso); return isNaN(d) ? '' : d.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }); }
 
+/* The sheet's "Seat No" column now holds each guest's SERIAL NUMBER (printed on their badge). */
+function serialKey(s) { return String(s ?? '').trim().replace(/^#\s*/, '').replace(/^0+(?=\d)/, ''); }
+function serialLabel(s) { const k = serialKey(s); return /^\d+$/.test(k) ? '#' + k : String(s ?? '').trim(); }
+
 function guestCard(g, q) {
   const ci = checkins[g.id];
-  const seat = g.seat ? `<div class="seat-pill">${esc(g.seat)}</div>` : `<div class="seat-pill none">No seat</div>`;
+  const seat = g.seat ? `<div class="seat-pill" title="Serial no.">${esc(serialLabel(g.seat))}</div>` : `<div class="seat-pill none">No serial</div>`;
   const subBits = [maskPhone(g.phone), g.email ? esc(g.email) : ''].filter(Boolean).join(' · ');
   const tag = ci ? `<div class="tag">✓ Checked in ${fmtTime(ci.at)}${ci.by ? ' · ' + esc(ci.by) : ''}</div>` : g.walkin ? `<div class="tag w">Walk-in</div>` : '';
   return `<button class="guest${ci ? ' done' : ''}" data-id="${esc(g.id)}" type="button">
@@ -537,9 +545,12 @@ function showOverlay(g, kind, ci) {
     ? (g.walkin ? 'Walk-in guest · Happy Diwali! 🪔' : 'Happy Diwali! 🪔')
     : `at ${fmtTime(ci.at)}${ci.by ? ' by ' + ci.by : ''}`;
   const s = $('ovSeat');
-  s.textContent = g.seat || 'No seat assigned – send to help desk';
-  s.className = 'ov-seat' + (g.seat ? '' : ' none');
-  s.style.fontSize = g.seat && g.seat.length > 6 ? 'clamp(2.4rem, 13vw, 5.5rem)' : '';
+  const serial = g.seat ? serialLabel(g.seat) : '';
+  s.textContent = serial || 'No serial no. – send to help desk';
+  s.className = 'ov-seat' + (serial ? '' : ' none');
+  s.style.fontSize = serial.length > 6 ? 'clamp(2.4rem, 13vw, 5.5rem)' : '';
+  $('ovHint').innerHTML = `Please collect badge <b>${esc(serial)}</b> at the badge table.<br>Your seat number is on the badge.`;
+  $('ovHint').classList.toggle('hidden', !serial);
   $('ovNext').textContent = kind === 'ok' ? 'Next guest' : 'Close';
   clearTimeout(ovTimer);
   const t = $('ovTimer');

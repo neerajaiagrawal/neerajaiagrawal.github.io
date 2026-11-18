@@ -120,7 +120,7 @@
     <div class="links">
       <a class="link main" href="checkin.html">
         <div class="t"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.7 2.7L16 9.8"/></svg>Guest Check-in</div>
-        <div class="d">Door volunteers: look up guests, check them in, see their seat</div>
+        <div class="d">Door volunteers: look up guests, check them in, see their serial no.</div>
         <div class="u">neerajagrawal.org/checkin.html</div>
       </a>
       <a class="link" href="checkin-board.html">
@@ -157,8 +157,8 @@
       <ol class="steps">
         <li><div>Ask: <b>"May I have the last 4 digits of your phone?"</b> The name works too.</div></li>
         <li><div>Type it in the search box. Matches appear instantly.</div></li>
-        <li><div><b>Tap the guest's name.</b> The screen turns <span class="chip g">GREEN</span> and shows their <b>seat in large text</b>.</div></li>
-        <li><div>Show the guest the screen or tell them the seat, e.g. "You're at <b>A-12</b>. Happy Diwali!"</div></li>
+        <li><div><b>Tap the guest's name.</b> The screen turns <span class="chip g">GREEN</span> and shows their <b>serial number in large text</b>.</div></li>
+        <li><div>Tell the guest their serial number and send them to the <b>badge table</b>: "You're number <b>27</b>. Please pick up badge 27 at the next table. Your seat is on the badge. Happy Diwali!"</div></li>
         <li><div>The screen goes back to search by itself after 4 seconds. On to the next guest.</div></li>
       </ol>
       <p class="muted" style="margin-top:10px">Tip: when only one guest matches, pressing <b>Enter</b> checks them in too.</p>
@@ -169,13 +169,15 @@
     <h2><span class="num">4</span> If something's different</h2>
     <div class="sit">
       <div class="row"><div class="k">Screen turns amber <span class="chip a">ALREADY CHECKED IN</span></div>
-        <div>They (or someone with the same details) were already checked in. The screen shows when and at which station. Show them their seat and let them in. If it looks wrong, send them to the help desk.</div></div>
-      <div class="row"><div class="k">"No seat assigned"<small>shown instead of a seat</small></div>
-        <div>They're checked in, but no seat is assigned. Send them to the <b>help desk</b> for a seat.</div></div>
+        <div>They (or someone with the same details) were already checked in. The screen shows when and at which station, plus their serial number. If they haven't collected their badge yet, send them to the badge table. If it looks wrong, send them to the help desk.</div></div>
+      <div class="row"><div class="k">"No serial no."<small>shown instead of a number</small></div>
+        <div>They're checked in, but have no badge number on the list. Send them to the <b>help desk</b> for a badge and seat.</div></div>
       <div class="row"><div class="k">Two people with the same name</div>
         <div>Ask for the <b>last 4 digits of their phone</b> or their email and match it to the grey line under the name.</div></div>
       <div class="row"><div class="k">Guest not on the list</div>
-        <div>Try another spelling, their phone number, or their partner's name (couples often RSVP once). Still nothing? Tap <b>+ Walk-in</b>, enter their name (phone if they'll share it), and tap <b>Check in</b>. Send them to the help desk for a seat.</div></div>
+        <div>Try another spelling, their phone number, or their partner's name (couples often RSVP once). Still nothing? Tap <b>+ Walk-in</b>, enter their name (phone if they'll share it), and tap <b>Check in</b>. Send them to the help desk for a badge and seat.</div></div>
+      <div class="row"><div class="k">Badge table needs to look someone up</div>
+        <div>On the check-in page, type the <b>serial number</b> (e.g. <i>27</i>) to see whose badge it is. <b>Don't tap</b> the name unless you mean to check them in.</div></div>
       <div class="row"><div class="k">Tapped the wrong person</div>
         <div>On the green screen, tap <b>Undo check-in</b> straight away, then check in the right guest.</div></div>
       <div class="row"><div class="k">"Offline" or "waiting to sync"<small>at the top</small></div>

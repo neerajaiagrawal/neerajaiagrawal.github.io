@@ -215,17 +215,10 @@
       <div class="chart" id="arrChart"></div>
     </div>
 
-    <div class="grid2">
-      <div class="card">
-        <h2>Attendance by section</h2>
-        <div class="sub">Share of invited guests who arrived, by seat section</div>
-        <div class="hbars" id="secBars"></div>
-      </div>
-      <div class="card">
-        <h2>Check-ins by station</h2>
-        <div class="sub">Guests checked in at each entrance / volunteer</div>
-        <div class="hbars" id="stnBars"></div>
-      </div>
+    <div class="card">
+      <h2>Check-ins by station</h2>
+      <div class="sub">Guests checked in at each entrance / volunteer</div>
+      <div class="hbars" id="stnBars"></div>
     </div>
 
     <details class="card" open>
@@ -307,12 +300,9 @@ const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': 
 const fmtTime = d => d.toLocaleTimeString('en-US', { timeZone: TZ, hour: 'numeric', minute: '2-digit' });
 const fmtDateTime = d => d.toLocaleString('en-US', { timeZone: TZ, weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
 const pct = (a, b) => b ? Math.round(a / b * 100) : 0;
-function section(seat) {
-  const s = String(seat || '').trim();
-  if (!s) return 'No seat';
-  const m = s.match(/^([A-Za-z]+)/) || s.match(/^(.+?)[-\s·]/);
-  return m ? m[1].toUpperCase() : s;
-}
+// The sheet's "Seat No" column now holds each guest's serial number (printed on their badge).
+const serialKey = s => String(s ?? '').trim().replace(/^#\s*/, '').replace(/^0+(?=\d)/, '');
+const serialLabel = s => { const k = serialKey(s); return /^\d+$/.test(k) ? '#' + k : (String(s ?? '').trim() || '—'); };
 
 function compute() {
   const { guests, checkins } = data;
@@ -321,7 +311,7 @@ function compute() {
   const attended = guests.filter(g => checkins[g.id]).map(g => ({ ...g, at: new Date(checkins[g.id].at), by: checkins[g.id].by || '—' }))
     .sort((a, b) => a.at - b.at);
   const attendedInvited = attended.filter(g => !g.walkin);
-  const noShows = invited.filter(g => !checkins[g.id]).sort((a, b) => String(a.seat).localeCompare(String(b.seat), undefined, { numeric: true }) || a.name.localeCompare(b.name));
+  const noShows = invited.filter(g => !checkins[g.id]).sort((a, b) => serialKey(a.seat).localeCompare(serialKey(b.seat), undefined, { numeric: true }) || a.name.localeCompare(b.name));
   return { invited, walkins, attended, attendedInvited, noShows };
 }
 
@@ -342,7 +332,6 @@ function render() {
   ].join('');
 
   renderArrivals(c.attended);
-  renderSections(c.invited, data.checkins);
   renderStations(c.attended);
   renderTables(c);
 }
@@ -409,13 +398,6 @@ function hbars(rows, fmt) {
     <div class="track" role="img" aria-label="${esc(r.k)}: ${esc(r.title || '')}"><i style="width:${Math.max(0, Math.min(100, r.w))}%"></i></div>
     <div class="val">${fmt(r)}</div></div>`).join('');
 }
-function renderSections(invited, checkins) {
-  const map = {};
-  invited.forEach(g => { const s = section(g.seat); (map[s] = map[s] || { k: s, total: 0, in: 0 }); map[s].total++; if (checkins[g.id]) map[s].in++; });
-  const rows = Object.values(map).sort((a, b) => a.k.localeCompare(b.k, undefined, { numeric: true }))
-    .map(r => ({ ...r, k: r.k === 'No seat' ? r.k : 'Section ' + r.k, w: pct(r.in, r.total), title: `${r.in} of ${r.total} arrived` }));
-  $('secBars').innerHTML = hbars(rows, r => `${r.w}% <small>${r.in}/${r.total}</small>`);
-}
 function renderStations(att) {
   const map = {};
   att.forEach(g => map[g.by] = (map[g.by] || 0) + 1);
@@ -425,11 +407,11 @@ function renderStations(att) {
 }
 function renderTables(c) {
   $('cAtt').textContent = c.attended.length; $('cNo').textContent = c.noShows.length;
-  $('tAtt').innerHTML = c.attended.length ? `<table><thead><tr><th>#</th><th>Name</th><th>Seat</th><th>Arrived</th><th>Checked in by</th></tr></thead><tbody>` +
-    c.attended.map((g, i) => `<tr><td class="n">${i + 1}</td><td>${esc(g.name)}${g.walkin ? '<span class="walk">WALK-IN</span>' : ''}</td><td class="seat">${esc(g.seat || '—')}</td><td>${fmtTime(g.at)}</td><td>${esc(g.by)}</td></tr>`).join('') +
+  $('tAtt').innerHTML = c.attended.length ? `<table><thead><tr><th>#</th><th>Name</th><th>Serial No.</th><th>Arrived</th><th>Checked in by</th></tr></thead><tbody>` +
+    c.attended.map((g, i) => `<tr><td class="n">${i + 1}</td><td>${esc(g.name)}${g.walkin ? '<span class="walk">WALK-IN</span>' : ''}</td><td class="seat">${esc(serialLabel(g.seat))}</td><td>${fmtTime(g.at)}</td><td>${esc(g.by)}</td></tr>`).join('') +
     `</tbody></table>` : '<div class="empty-note">No one has checked in yet.</div>';
-  $('tNo').innerHTML = c.noShows.length ? `<table><thead><tr><th>#</th><th>Name</th><th>Seat</th><th>Phone</th><th>Email</th></tr></thead><tbody>` +
-    c.noShows.map((g, i) => `<tr><td class="n">${i + 1}</td><td>${esc(g.name)}</td><td class="seat">${esc(g.seat || '—')}</td><td>${esc(g.phone || '')}</td><td>${esc(g.email || '')}</td></tr>`).join('') +
+  $('tNo').innerHTML = c.noShows.length ? `<table><thead><tr><th>#</th><th>Name</th><th>Serial No.</th><th>Phone</th><th>Email</th></tr></thead><tbody>` +
+    c.noShows.map((g, i) => `<tr><td class="n">${i + 1}</td><td>${esc(g.name)}</td><td class="seat">${esc(serialLabel(g.seat))}</td><td>${esc(g.phone || '')}</td><td>${esc(g.email || '')}</td></tr>`).join('') +
     `</tbody></table>` : '<div class="empty-note">Everyone on the list arrived! 🎉</div>';
 }
 
@@ -438,7 +420,7 @@ function downloadCsv() {
   if (!data) return;
   const c = compute();
   const q = v => { const s = String(v ?? ''); return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; };
-  const rows = [['Name', 'Status', 'Seat', 'Arrived (CT)', 'Checked in by', 'Phone', 'Email']];
+  const rows = [['Name', 'Status', 'Serial No.', 'Arrived (CT)', 'Checked in by', 'Phone', 'Email']];
   c.attended.forEach(g => rows.push([g.name, g.walkin ? 'Walk-in' : 'Attended', g.seat, fmtTime(g.at), g.by, g.phone, g.email]));
   c.noShows.forEach(g => rows.push([g.name, 'Did not arrive', g.seat, '', '', g.phone, g.email]));
   const blob = new Blob(['﻿' + rows.map(r => r.map(q).join(',')).join('\r\n')], { type: 'text/csv;charset=utf-8' });
